@@ -24,15 +24,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             width: 300px;
         }
-        .ad-image {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .ad-image img {
-            width: 100%;
-            border-radius: 10px;
-        }
         .container h1 {
             font-size: 20px;
             color: green;
@@ -134,12 +125,12 @@
     </style>
 </head>
 <body>
+    <div class="ad-image">
+        <img src="https://drive.google.com/uc?export=view&id=1bHJr0hv71bSWKIkvGII64s_8S7agHgPT" 
+             alt="Ad Banner" style="width: 100%; height: auto;">
+    </div>
+    
     <div class="container">
-        <!-- Ad Image Section -->
-        <div class="https://drive.google.com/uc?export=view&id=1bHJr0hv71bSWKIkvGII64s_8S7agHgPT">
-            <img src="https://drive.google.com/uc?export=view&id=1bHJr0hv71bSWKIkvGII64s_8S7agHgPT" alt="Ad Banner">
-        </div>
-
         <h1>Watch Ads and Earn Reward</h1>
         <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer by Habib Sikdar</div>
         
@@ -182,6 +173,8 @@
 
     <script>
         const MIN_WITHDRAW_POINTS = 50;
+        const ADMIN_USER_ID = 6140196943;
+        const BOT_TOKEN = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
         let autoAdInterval;
