@@ -79,6 +79,7 @@
             background-color: #2a2a2a;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: none;
         }
         .withdraw-section input, .withdraw-section select {
             width: 100%;
@@ -110,6 +111,17 @@
             font-size: 14px;
             margin-top: 10px;
         }
+        .show-withdraw-button {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .show-withdraw-button:hover {
+            background-color: darkorange;
+        }
     </style>
 </head>
 <body>
@@ -134,6 +146,10 @@
             <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
         </div>
 
+        <!-- Show Withdraw Button -->
+        <div class="show-withdraw-button" onclick="showWithdrawForm()">Withdraw Points</div>
+
+        <!-- Withdraw Section -->
         <div class="withdraw-section" id="withdraw-section">
             <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
             <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
@@ -185,6 +201,11 @@
 
         function stopAutoAds() {
             clearInterval(autoAdInterval);
+        }
+
+        function showWithdrawForm() {
+            const withdrawSection = document.getElementById('withdraw-section');
+            withdrawSection.style.display = withdrawSection.style.display === 'none' || withdrawSection.style.display === '' ? 'block' : 'none';
         }
 
         function withdrawPoints() {
