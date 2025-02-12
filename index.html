@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ad Reward System</title>
@@ -77,7 +75,6 @@
         }
         .withdraw-section {
             margin-top: 20px;
-            display: none;
             padding: 20px;
             background-color: #2a2a2a;
             border-radius: 10px;
@@ -121,17 +118,19 @@
             margin: 5px 0;
         }
     </style>
-<link rel="me" href="https://t.me/earningbyhabib" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
-<link rel="me" href="https:///profile/" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+    <link rel="me" href="https://t.me/earningbyhabib" />
+    <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+    <meta name='google-adsense-platform-domain' content='blogspot.com'/>
+    <link rel="me" href="https:///profile/" />
+    <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+    <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 </head>
 <body>
     <div class="container">
         <h1>Watch Ads and Earn Reward</h1>
-        <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer by Habib Sikdar</div>
+        <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">
+            Developer by Habib Sikdar
+        </div>
         
         <!-- Display User Info -->
         <div class="user-info">
@@ -149,17 +148,16 @@
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
             <button id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
             <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
-        
         </div>
 
-        <!-- Withdraw Section -->
+        <!-- Withdraw Section (সর্বদা দৃশ্যমান) -->
         <div class="withdraw-section" id="withdraw-section">
             <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
             <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
             <select id="payment-method">
                 <option value="bkash">Bkash</option>
                 <option value="nagad">Nagad</option>
-                <option value="manual">Manual</option>
+                <option value="rocket">Manual</option>
             </select>
             <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
             <button onclick="withdrawPoints()">Withdraw</button>
@@ -177,9 +175,12 @@
         let earnedPoints = 0.00;
         let autoAdInterval;
 
-        // Simulate user name from Telegram User ID (replace with actual logic to get user info)
-        const telegramUserName = "@earningbyhabib"; // Replace this line with the actual logic to fetch username
+        // Simulate user name from Telegram User ID (replace with actual logic if needed)
+        const telegramUserName = "@earningbyhabib"; 
         document.getElementById("user-name").textContent = telegramUserName;
+
+        // Initialize auto ad buttons state
+        document.getElementById('stop-auto-btn').disabled = true;
 
         // Check if user data is saved in localStorage
         if (localStorage.getItem('watchedAdsCount')) {
@@ -187,35 +188,44 @@
             earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
             document.getElementById('watched-ads').textContent = watchedAdsCount;
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+            updateProgressCircle();
         }
 
         // Function to watch an ad and update stats
         function watchAd() {
             if (typeof show_8929853 === 'function') {
                 show_8929853().then(() => {
-                    // When the ad is shown, we add points
+                    // Ad প্রদর্শনের পর পয়েন্ট যোগ করা হচ্ছে
                     watchedAdsCount++;
                     document.getElementById('watched-ads').textContent = watchedAdsCount;
-                    earnedPoints += 0.50; // Add 0.50 points per ad watched
+                    earnedPoints += 0.50; // প্রতি ad দেখালে 0.50 পয়েন্ট যোগ হবে
                     document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
                     localStorage.setItem('watchedAdsCount', watchedAdsCount);
                     localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
 
-                    // Update progress circle
                     updateProgressCircle();
                 });
+            } else {
+                // Fallback: যদি show_8929853() পাওয়া না যায়
+                watchedAdsCount++;
+                document.getElementById('watched-ads').textContent = watchedAdsCount;
+                earnedPoints += 0.50;
+                document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+                localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+                updateProgressCircle();
             }
         }
 
-        // Update progress circle based on watched ads
+        // Update progress circle based on watched ads count
         function updateProgressCircle() {
-            const percentage = (watchedAdsCount / 10) * 100;
+            const percentage = Math.min((watchedAdsCount / 10) * 100, 100);
             document.getElementById('ads-progress').textContent = `${percentage}%`;
         }
 
         // Function to start auto showing ads
         function startAutoAds() {
-            autoAdInterval = setInterval(watchAd, 5000); // Auto show ad every 5 seconds
+            autoAdInterval = setInterval(watchAd, 5000); // প্রতি ৫ সেকেন্ডে ad দেখাবে
             document.getElementById('auto-ad-btn').disabled = true;
             document.getElementById('stop-auto-btn').disabled = false;
         }
@@ -227,53 +237,53 @@
             document.getElementById('stop-auto-btn').disabled = true;
         }
 
-        // Function to show withdraw form
-        function showWithdrawForm() {
-            document.getElementById('withdraw-section').style.display = 'block';
-        }
-
         // Function to handle withdrawal
         function withdrawPoints() {
-            const amount = document.getElementById('withdraw-amount').value;
+            const withdrawAmount = parseFloat(document.getElementById('withdraw-amount').value);
             const paymentMethod = document.getElementById('payment-method').value;
             const phoneNumber = document.getElementById('withdraw-phone').value;
+            const statusEl = document.getElementById('withdraw-status');
 
-            if (amount < MIN_WITHDRAW_POINTS) {
-                document.getElementById('withdraw-status').textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
+            if (isNaN(withdrawAmount)) {
+                statusEl.textContent = 'Please enter a valid withdrawal amount.';
                 return;
             }
 
-            if (amount > earnedPoints) {
-                document.getElementById('withdraw-status').textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
+            if (withdrawAmount < MIN_WITHDRAW_POINTS) {
+                statusEl.textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
                 return;
             }
 
-            // Subtract points from earnedPoints after successful withdrawal
-            earnedPoints -= parseFloat(amount);
+            if (withdrawAmount > earnedPoints) {
+                statusEl.textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
+                return;
+            }
+
+            // Successful withdrawal: পয়েন্ট কেটে নেওয়া হচ্ছে
+            earnedPoints -= withdrawAmount;
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-
-            // Save the updated balance in localStorage
             localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
 
-            // Send withdrawal request to admin via Telegram
-            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${amount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
+            // Admin-কে Telegram এর মাধ্যমে withdrawal request পাঠানো
+            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${withdrawAmount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
             sendWithdrawRequestToAdmin(message);
 
-            // Show success message
-            document.getElementById('withdraw-status').textContent = 'Withdrawal request sent successfully!';
+            statusEl.textContent = 'Withdrawal request sent successfully!';
 
-            // Clear form
+            // ইনপুট ফিল্ডগুলো ক্লিয়ার করা হচ্ছে
             document.getElementById('withdraw-amount').value = '';
             document.getElementById('withdraw-phone').value = '';
         }
 
-        // Function to send withdrawal request to admin
+        // Function to send withdrawal request to admin via Telegram
         function sendWithdrawRequestToAdmin(message) {
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${encodeURIComponent(message)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
                         console.log('Message sent to admin');
+                    } else {
+                        console.error('Failed to send message', data);
                     }
                 })
                 .catch(error => console.error('Error sending message:', error));
