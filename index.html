@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ad Reward System</title>
@@ -29,8 +31,21 @@
             color: green;
             margin-bottom: 10px;
         }
-        .stats, .user-info {
+        .developer {
+            font-size: 12px;
+            background-color: green;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .stats {
             margin: 10px 0;
+        }
+        .stats p {
+            margin: 5px 0;
+            font-size: 14px;
         }
         .progress-circle {
             width: 80px;
@@ -42,7 +57,11 @@
             align-items: center;
             margin: 10px auto;
         }
-        .buttons button, .withdraw-button {
+        .progress-circle span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .buttons button {
             width: 90%;
             margin: 5px 0;
             padding: 10px;
@@ -53,7 +72,7 @@
             background: green;
             cursor: pointer;
         }
-        .buttons button:hover, .withdraw-button:hover {
+        .buttons button:hover {
             background: darkorange;
         }
         .withdraw-section {
@@ -77,17 +96,44 @@
             border-color: green;
             outline: none;
         }
+        .withdraw-section button {
+            background-color: green;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .withdraw-section button:hover {
+            background-color: #006400;
+        }
         #withdraw-status {
             color: red;
             font-size: 14px;
             margin-top: 10px;
         }
+        .user-info {
+            margin: 10px 0;
+        }
+        .user-info p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
     </style>
+<link rel="me" href="https://t.me/earningbyhabib" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<link rel="me" href="https:///profile/" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
 </head>
 <body>
     <div class="container">
         <h1>Watch Ads and Earn Reward</h1>
+        <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer by Habib Sikdar</div>
         
+        <!-- Display User Info -->
         <div class="user-info">
             <p>Welcome, <span id="user-name"></span></p>
         </div>
@@ -103,10 +149,8 @@
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
             <button id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
             <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
+        
         </div>
-
-        <!-- Always Visible Withdraw Button -->
-        <button class="withdraw-button" onclick="toggleWithdrawSection()">Withdraw</button>
 
         <!-- Withdraw Section -->
         <div class="withdraw-section" id="withdraw-section">
@@ -123,12 +167,21 @@
         </div>
     </div>
 
+    <script src='//jagnaimsee.net/vignette.min.js' data-zone='8929853' data-sdk='show_8929853'></script>
+
     <script>
+        const MIN_WITHDRAW_POINTS = 50;
+        const ADMIN_USER_ID = 6140196943;
+        const BOT_TOKEN = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
-        const MIN_WITHDRAW_POINTS = 50;
+        let autoAdInterval;
 
-        // Check local storage for user data
+        // Simulate user name from Telegram User ID (replace with actual logic to get user info)
+        const telegramUserName = "@earningbyhabib"; // Replace this line with the actual logic to fetch username
+        document.getElementById("user-name").textContent = telegramUserName;
+
+        // Check if user data is saved in localStorage
         if (localStorage.getItem('watchedAdsCount')) {
             watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
             earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
@@ -136,48 +189,94 @@
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
         }
 
+        // Function to watch an ad and update stats
         function watchAd() {
-            watchedAdsCount++;
-            document.getElementById('watched-ads').textContent = watchedAdsCount;
-            earnedPoints += 0.50;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-            localStorage.setItem('watchedAdsCount', watchedAdsCount);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
-            updateProgressCircle();
+            if (typeof show_8929853 === 'function') {
+                show_8929853().then(() => {
+                    // When the ad is shown, we add points
+                    watchedAdsCount++;
+                    document.getElementById('watched-ads').textContent = watchedAdsCount;
+                    earnedPoints += 0.50; // Add 0.50 points per ad watched
+                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+
+                    // Update progress circle
+                    updateProgressCircle();
+                });
+            }
         }
 
+        // Update progress circle based on watched ads
         function updateProgressCircle() {
-            const percentage = Math.min((watchedAdsCount / 10) * 100, 100);
+            const percentage = (watchedAdsCount / 10) * 100;
             document.getElementById('ads-progress').textContent = `${percentage}%`;
         }
 
-        function toggleWithdrawSection() {
-            let section = document.getElementById("withdraw-section");
-            section.style.display = section.style.display === "none" ? "block" : "none";
+        // Function to start auto showing ads
+        function startAutoAds() {
+            autoAdInterval = setInterval(watchAd, 5000); // Auto show ad every 5 seconds
+            document.getElementById('auto-ad-btn').disabled = true;
+            document.getElementById('stop-auto-btn').disabled = false;
         }
 
-        function withdrawPoints() {
-            let amount = parseFloat(document.getElementById('withdraw-amount').value);
-            let phoneNumber = document.getElementById('withdraw-phone').value;
-            let statusText = document.getElementById('withdraw-status');
+        // Function to stop auto ads
+        function stopAutoAds() {
+            clearInterval(autoAdInterval);
+            document.getElementById('auto-ad-btn').disabled = false;
+            document.getElementById('stop-auto-btn').disabled = true;
+        }
 
-            if (isNaN(amount) || amount < MIN_WITHDRAW_POINTS) {
-                statusText.textContent = `Minimum withdrawal is ${MIN_WITHDRAW_POINTS} points.`;
+        // Function to show withdraw form
+        function showWithdrawForm() {
+            document.getElementById('withdraw-section').style.display = 'block';
+        }
+
+        // Function to handle withdrawal
+        function withdrawPoints() {
+            const amount = document.getElementById('withdraw-amount').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+            const phoneNumber = document.getElementById('withdraw-phone').value;
+
+            if (amount < MIN_WITHDRAW_POINTS) {
+                document.getElementById('withdraw-status').textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
                 return;
             }
 
             if (amount > earnedPoints) {
-                statusText.textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
+                document.getElementById('withdraw-status').textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
                 return;
             }
 
-            earnedPoints -= amount;
+            // Subtract points from earnedPoints after successful withdrawal
+            earnedPoints -= parseFloat(amount);
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+
+            // Save the updated balance in localStorage
             localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
 
-            statusText.textContent = 'Withdrawal request sent successfully!';
+            // Send withdrawal request to admin via Telegram
+            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${amount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
+            sendWithdrawRequestToAdmin(message);
+
+            // Show success message
+            document.getElementById('withdraw-status').textContent = 'Withdrawal request sent successfully!';
+
+            // Clear form
             document.getElementById('withdraw-amount').value = '';
             document.getElementById('withdraw-phone').value = '';
+        }
+
+        // Function to send withdrawal request to admin
+        function sendWithdrawRequestToAdmin(message) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log('Message sent to admin');
+                    }
+                })
+                .catch(error => console.error('Error sending message:', error));
         }
     </script>
 </body>
