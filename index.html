@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ad Reward System</title>
   <style>
       body {
@@ -80,15 +80,33 @@
       .buttons button:hover {
           background: darkorange;
       }
-      /* Withdraw section সব সময় দৃশ্যমান থাকবে */
+      /* Withdraw toggle button styling */
+      #toggle-withdraw-btn {
+          width: 90%;
+          margin: 15px 0;
+          padding: 10px;
+          font-size: 14px;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          background: green;
+          cursor: pointer;
+      }
+      #toggle-withdraw-btn:hover {
+          background: darkorange;
+      }
+      /* Withdraw section: প্রাথমিক অবস্থায় লুকানো থাকবে */
       .withdraw-section {
+          display: none;
           margin-top: 20px;
           padding: 20px;
           background-color: #2a2a2a;
           border-radius: 10px;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+          text-align: left;
       }
-      .withdraw-section input, .withdraw-section select {
+      .withdraw-section input,
+      .withdraw-section select {
           width: 100%;
           padding: 12px;
           margin: 8px 0;
@@ -97,11 +115,12 @@
           background-color: #333;
           color: #fff;
       }
-      .withdraw-section input:focus, .withdraw-section select:focus {
+      .withdraw-section input:focus,
+      .withdraw-section select:focus {
           border-color: green;
           outline: none;
       }
-      .withdraw-section button {
+      .withdraw-section button.withdraw-submit {
           background-color: green;
           width: 100%;
           padding: 12px;
@@ -110,21 +129,32 @@
           border-radius: 5px;
           cursor: pointer;
       }
-      .withdraw-section button:hover {
+      .withdraw-section button.withdraw-submit:hover {
           background-color: #006400;
+      }
+      .withdraw-section button.close-withdraw {
+          background: red;
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          float: right;
+          width: 25px;
+          height: 25px;
+          cursor: pointer;
       }
       #withdraw-status {
           color: red;
           font-size: 14px;
           margin-top: 10px;
+          clear: both;
       }
   </style>
   <link rel="me" href="https://t.me/earningbyhabib" />
-  <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-  <meta name='google-adsense-platform-domain' content='blogspot.com'/>
+  <meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109" />
+  <meta name="google-adsense-platform-domain" content="blogspot.com" />
   <link rel="me" href="https:///profile/" />
-  <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-  <meta name='google-adsense-platform-domain' content='blogspot.com'/>
+  <meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109" />
+  <meta name="google-adsense-platform-domain" content="blogspot.com" />
 </head>
 <body>
   <div class="container">
@@ -132,7 +162,7 @@
       <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">
           Developer by Habib Sikdar
       </div>
-      
+
       <!-- User Information -->
       <div class="user-info">
           <p>Welcome, <span id="user-name"></span></p>
@@ -151,8 +181,13 @@
           <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
       </div>
 
-      <!-- Withdraw Section (সর্বদা দৃশ্যমান) -->
+      <!-- Withdraw Toggle Button (সর্বদা দৃশ্যমান) -->
+      <button id="toggle-withdraw-btn" onclick="openWithdrawSection()">Withdraw</button>
+
+      <!-- Withdraw Section (প্রাথমিক অবস্থায় লুকানো) -->
       <div class="withdraw-section" id="withdraw-section">
+          <!-- Close button for withdraw section -->
+          <button class="close-withdraw" onclick="closeWithdrawSection()">X</button>
           <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
           <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
           <select id="payment-method">
@@ -161,12 +196,12 @@
               <option value="rocket">Manual</option>
           </select>
           <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
-          <button onclick="withdrawPoints()">Withdraw</button>
+          <button class="withdraw-submit" onclick="withdrawPoints()">Withdraw</button>
           <p id="withdraw-status"></p>
       </div>
   </div>
 
-  <script src='//jagnaimsee.net/vignette.min.js' data-zone='8929853' data-sdk='show_8929853'></script>
+  <script src="//jagnaimsee.net/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
 
   <script>
       const MIN_WITHDRAW_POINTS = 50;
@@ -234,6 +269,16 @@
           clearInterval(autoAdInterval);
           document.getElementById('auto-ad-btn').disabled = false;
           document.getElementById('stop-auto-btn').disabled = true;
+      }
+
+      // Withdraw সেকশন ওপেন করার ফাংশন
+      function openWithdrawSection() {
+          document.getElementById('withdraw-section').style.display = "block";
+      }
+
+      // Withdraw সেকশন বন্ধ করার ফাংশন
+      function closeWithdrawSection() {
+          document.getElementById('withdraw-section').style.display = "none";
       }
 
       // Withdrawal Request হ্যান্ডেল করার ফাংশন
