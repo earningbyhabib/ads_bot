@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ad Reward System</title>
   <style>
+      /* পূর্বের স্টাইলস (আপনার স্ক্রিপ্ট অনুযায়ী) */
       body {
           margin: 0;
           padding: 0;
@@ -38,19 +39,12 @@
           display: inline-block;
           cursor: pointer;
       }
-      .user-info {
+      .user-info, .stats {
           margin: 10px 0;
       }
-      .user-info p {
+      .stats p, .user-info p {
           font-size: 14px;
           margin: 5px 0;
-      }
-      .stats {
-          margin: 10px 0;
-      }
-      .stats p {
-          margin: 5px 0;
-          font-size: 14px;
       }
       .progress-circle {
           width: 80px;
@@ -79,74 +73,6 @@
       }
       .buttons button:hover {
           background: darkorange;
-      }
-      /* Withdraw toggle button styling */
-      #toggle-withdraw-btn {
-          width: 90%;
-          margin: 15px 0;
-          padding: 10px;
-          font-size: 14px;
-          border: none;
-          border-radius: 5px;
-          color: white;
-          background: green;
-          cursor: pointer;
-      }
-      #toggle-withdraw-btn:hover {
-          background: darkorange;
-      }
-      /* Withdraw section: প্রাথমিক অবস্থায় লুকানো থাকবে */
-      .withdraw-section {
-          display: none;
-          margin-top: 20px;
-          padding: 20px;
-          background-color: #2a2a2a;
-          border-radius: 10px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-          text-align: left;
-      }
-      .withdraw-section input,
-      .withdraw-section select {
-          width: 100%;
-          padding: 12px;
-          margin: 8px 0;
-          border-radius: 5px;
-          border: 2px solid #555;
-          background-color: #333;
-          color: #fff;
-      }
-      .withdraw-section input:focus,
-      .withdraw-section select:focus {
-          border-color: green;
-          outline: none;
-      }
-      .withdraw-section button.withdraw-submit {
-          background-color: green;
-          width: 100%;
-          padding: 12px;
-          font-size: 16px;
-          margin-top: 15px;
-          border-radius: 5px;
-          cursor: pointer;
-      }
-      .withdraw-section button.withdraw-submit:hover {
-          background-color: #006400;
-      }
-      .withdraw-section button.close-withdraw {
-          background: red;
-          color: #fff;
-          border: none;
-          border-radius: 50%;
-          float: right;
-          width: 25px;
-          height: 25px;
-          cursor: pointer;
-      }
-      #withdraw-status {
-          color: red;
-          font-size: 14px;
-          margin-top: 10px;
-          clear: both;
       }
   </style>
   <link rel="me" href="https://t.me/earningbyhabib" />
@@ -180,38 +106,25 @@
           <button id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
           <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
       </div>
+  </div>
 
-      <!-- Withdraw Toggle Button (সর্বদা দৃশ্যমান) -->
-      <button id="toggle-withdraw-btn" onclick="openWithdrawSection()">Withdraw</button>
-
-      <!-- Withdraw Section (প্রাথমিক অবস্থায় লুকানো) -->
-      <div class="withdraw-section" id="withdraw-section">
-          <!-- Close button for withdraw section -->
-          <button class="close-withdraw" onclick="closeWithdrawSection()">X</button>
-          <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
-          <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
-          <select id="payment-method">
-              <option value="bkash">Bkash</option>
-              <option value="nagad">Nagad</option>
-              <option value="rocket">Manual</option>
-          </select>
-          <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
-          <button class="withdraw-submit" onclick="withdrawPoints()">Withdraw</button>
-          <p id="withdraw-status"></p>
-      </div>
+  <!-- যদি আপনার এডের জন্য কোনো overlay/HTML থাকে, তাহলে নিচের মত ID দিন (ঐ ক্ষেত্রে ব্যবহার করবেন ক্লোজ করার জন্য) -->
+  <div id="ad-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:#fff; font-size:24px; justify-content:center; align-items:center;">
+      Advertisement...
   </div>
 
   <script src="//jagnaimsee.net/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
-
   <script>
       const MIN_WITHDRAW_POINTS = 50;
       const ADMIN_USER_ID = 6140196943;
       const BOT_TOKEN = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
       let watchedAdsCount = 0;
       let earnedPoints = 0.00;
-      let autoAdInterval;
+      
+      // For Auto Ad loop control
+      let autoAdActive = false;
 
-      // ব্যবহারকারীর নাম (প্রয়োজন অনুযায়ী পরিবর্তন করুন)
+      // User name simulation (আপনার প্রয়োজন অনুযায়ী পরিবর্তন করুন)
       const telegramUserName = "@earningbyhabib";
       document.getElementById("user-name").textContent = telegramUserName;
 
@@ -227,23 +140,23 @@
           updateProgressCircle();
       }
 
-      // একটি ad দেখানোর ফাংশন ও স্ট্যাট আপডেট
+      // Watch Ad (ম্যানুয়াল এড দেখানোর জন্য)
       function watchAd() {
           if (typeof show_8929853 === 'function') {
               show_8929853().then(() => {
                   watchedAdsCount++;
-                  document.getElementById('watched-ads').textContent = watchedAdsCount;
                   earnedPoints += 0.50;
+                  document.getElementById('watched-ads').textContent = watchedAdsCount;
                   document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
                   localStorage.setItem('watchedAdsCount', watchedAdsCount);
                   localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
                   updateProgressCircle();
               });
           } else {
-              // Fallback: যদি show_8929853() পাওয়া না যায়
+              // Fallback: যদি show_8929853() ফাংশন পাওয়া না যায়
               watchedAdsCount++;
-              document.getElementById('watched-ads').textContent = watchedAdsCount;
               earnedPoints += 0.50;
+              document.getElementById('watched-ads').textContent = watchedAdsCount;
               document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
               localStorage.setItem('watchedAdsCount', watchedAdsCount);
               localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
@@ -257,80 +170,57 @@
           document.getElementById('ads-progress').textContent = `${percentage}%`;
       }
 
-      // Auto Ads শুরু করার ফাংশন
+      /* 
+         নিচের অংশে Auto Ad Loop ফাংশন আছে:
+         - startAutoAds() চাপলে autoAdActive = true হয়ে যায় এবং autoAdLoop() কল করা শুরু হয়।
+         - autoAdLoop() ফাংশনটি এড ওপেন করবে, ৫ সেকেন্ড পরে এডটি ক্লোজ করবে (এখানে ad-overlay থাকলে সেটিকে লুকিয়ে) এবং পরবর্তী এড দেখানোর জন্য ২ সেকেন্ডের বিরতি রেখে নিজে থেকেই পুনরায় কল হবে।
+         - stopAutoAds() চাপলে autoAdActive = false হয়ে যায় যাতে লুপ থেমে যায়।
+      */
+      
+      function autoAdLoop() {
+          if (!autoAdActive) return;
+          
+          // যদি show_8929853() ফাংশন থাকে, তা ব্যবহার করে এড দেখান
+          if (typeof show_8929853 === 'function') {
+              // এড ওপেন করা
+              show_8929853();
+          } else {
+              // Fallback: ad-overlay প্রদর্শন (যদি আপনার নিজস্ব ad overlay ব্যবহার করেন)
+              document.getElementById('ad-overlay').style.display = 'flex';
+          }
+          
+          // ৫ সেকেন্ড পর এডটি ক্লোজ করে নিন
+          setTimeout(() => {
+              // ad-overlay থাকলে সেটিকে লুকিয়ে দিন
+              const adOverlay = document.getElementById('ad-overlay');
+              if (adOverlay) {
+                  adOverlay.style.display = 'none';
+              }
+              // এড দেখানোর পর স্ট্যাট আপডেট
+              watchedAdsCount++;
+              earnedPoints += 0.50;
+              document.getElementById('watched-ads').textContent = watchedAdsCount;
+              document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+              localStorage.setItem('watchedAdsCount', watchedAdsCount);
+              localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+              updateProgressCircle();
+              
+              // ২ সেকেন্ড পরে পরবর্তী এড দেখানোর জন্য পুনরায় autoAdLoop() কল করুন
+              setTimeout(autoAdLoop, 2000);
+          }, 5000);
+      }
+      
       function startAutoAds() {
-          autoAdInterval = setInterval(watchAd, 5000); // প্রতি ৫ সেকেন্ডে ad দেখাবে
+          autoAdActive = true;
           document.getElementById('auto-ad-btn').disabled = true;
           document.getElementById('stop-auto-btn').disabled = false;
+          autoAdLoop();
       }
-
-      // Auto Ads থামানোর ফাংশন
+      
       function stopAutoAds() {
-          clearInterval(autoAdInterval);
+          autoAdActive = false;
           document.getElementById('auto-ad-btn').disabled = false;
           document.getElementById('stop-auto-btn').disabled = true;
-      }
-
-      // Withdraw সেকশন ওপেন করার ফাংশন
-      function openWithdrawSection() {
-          document.getElementById('withdraw-section').style.display = "block";
-      }
-
-      // Withdraw সেকশন বন্ধ করার ফাংশন
-      function closeWithdrawSection() {
-          document.getElementById('withdraw-section').style.display = "none";
-      }
-
-      // Withdrawal Request হ্যান্ডেল করার ফাংশন
-      function withdrawPoints() {
-          const withdrawAmount = parseFloat(document.getElementById('withdraw-amount').value);
-          const paymentMethod = document.getElementById('payment-method').value;
-          const phoneNumber = document.getElementById('withdraw-phone').value;
-          const statusEl = document.getElementById('withdraw-status');
-
-          if (isNaN(withdrawAmount)) {
-              statusEl.textContent = 'Please enter a valid withdrawal amount.';
-              return;
-          }
-
-          if (withdrawAmount < MIN_WITHDRAW_POINTS) {
-              statusEl.textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
-              return;
-          }
-
-          if (withdrawAmount > earnedPoints) {
-              statusEl.textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
-              return;
-          }
-
-          // পয়েন্ট কেটে নেওয়া হচ্ছে
-          earnedPoints -= withdrawAmount;
-          document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-          localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
-
-          // Withdrawal Request টেলিগ্রাম অ্যাডমিনকে পাঠানো হচ্ছে
-          const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${withdrawAmount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
-          sendWithdrawRequestToAdmin(message);
-
-          statusEl.textContent = 'Withdrawal request sent successfully!';
-
-          // ইনপুট ফিল্ডগুলো খালি করা
-          document.getElementById('withdraw-amount').value = '';
-          document.getElementById('withdraw-phone').value = '';
-      }
-
-      // টেলিগ্রাম অ্যাডমিনকে Withdrawal Request পাঠানোর ফাংশন
-      function sendWithdrawRequestToAdmin(message) {
-          fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${encodeURIComponent(message)}`)
-              .then(response => response.json())
-              .then(data => {
-                  if (data.ok) {
-                      console.log('Message sent to admin');
-                  } else {
-                      console.error('Failed to send message', data);
-                  }
-              })
-              .catch(error => console.error('Error sending message:', error));
       }
   </script>
 </body>
