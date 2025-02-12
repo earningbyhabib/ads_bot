@@ -29,16 +29,7 @@
             color: green;
             margin-bottom: 10px;
         }
-        .developer {
-            font-size: 12px;
-            background-color: green;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .stats {
+        .stats, .user-info {
             margin: 10px 0;
         }
         .progress-circle {
@@ -51,7 +42,7 @@
             align-items: center;
             margin: 10px auto;
         }
-        .buttons button {
+        .buttons button, .withdraw-button {
             width: 90%;
             margin: 5px 0;
             padding: 10px;
@@ -62,16 +53,16 @@
             background: green;
             cursor: pointer;
         }
-        .buttons button:hover {
+        .buttons button:hover, .withdraw-button:hover {
             background: darkorange;
         }
         .withdraw-section {
             margin-top: 20px;
+            display: none;
             padding: 20px;
             background-color: #2a2a2a;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            display: none; /* Default hidden */
         }
         .withdraw-section input, .withdraw-section select {
             width: 100%;
@@ -82,43 +73,42 @@
             background-color: #333;
             color: #fff;
         }
-        .withdraw-section button {
-            background-color: green;
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            margin-top: 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        .withdraw-section input:focus, .withdraw-section select:focus {
+            border-color: green;
+            outline: none;
         }
-        .withdraw-section button:hover {
-            background-color: #006400;
+        #withdraw-status {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Watch Ads and Earn Reward</h1>
-        <div class="developer" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer by Habib Sikdar</div>
+        
+        <div class="user-info">
+            <p>Welcome, <span id="user-name"></span></p>
+        </div>
 
         <div class="stats">
-            <p>Welcome, <span id="user-name">@earningbyhabib</span></p>
             <p>Watched Ads: <span id="watched-ads">0</span></p>
             <p>Earned Points: <span id="earned-points">0</span></p>
         </div>
-
         <div class="progress-circle">
             <span id="ads-progress">0%</span>
         </div>
-
         <div class="buttons">
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
             <button id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
             <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
-            <button id="withdraw-btn" onclick="toggleWithdrawSection()">Withdraw</button>
         </div>
 
-        <!-- Withdraw Section (Initially Hidden) -->
+        <!-- Always Visible Withdraw Button -->
+        <button class="withdraw-button" onclick="toggleWithdrawSection()">Withdraw</button>
+
+        <!-- Withdraw Section -->
         <div class="withdraw-section" id="withdraw-section">
             <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
             <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
@@ -136,13 +126,23 @@
     <script>
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
-        let autoAdInterval;
+        const MIN_WITHDRAW_POINTS = 50;
+
+        // Check local storage for user data
+        if (localStorage.getItem('watchedAdsCount')) {
+            watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
+            earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
+            document.getElementById('watched-ads').textContent = watchedAdsCount;
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+        }
 
         function watchAd() {
             watchedAdsCount++;
             document.getElementById('watched-ads').textContent = watchedAdsCount;
             earnedPoints += 0.50;
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+            localStorage.setItem('watchedAdsCount', watchedAdsCount);
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
             updateProgressCircle();
         }
 
@@ -151,34 +151,33 @@
             document.getElementById('ads-progress').textContent = `${percentage}%`;
         }
 
-        function startAutoAds() {
-            autoAdInterval = setInterval(watchAd, 5000);
-            document.getElementById('auto-ad-btn').disabled = true;
-            document.getElementById('stop-auto-btn').disabled = false;
-        }
-
-        function stopAutoAds() {
-            clearInterval(autoAdInterval);
-            document.getElementById('auto-ad-btn').disabled = false;
-            document.getElementById('stop-auto-btn').disabled = true;
-        }
-
         function toggleWithdrawSection() {
-            var section = document.getElementById("withdraw-section");
+            let section = document.getElementById("withdraw-section");
             section.style.display = section.style.display === "none" ? "block" : "none";
         }
 
         function withdrawPoints() {
-            const amount = document.getElementById('withdraw-amount').value;
-            const paymentMethod = document.getElementById('payment-method').value;
-            const phoneNumber = document.getElementById('withdraw-phone').value;
+            let amount = parseFloat(document.getElementById('withdraw-amount').value);
+            let phoneNumber = document.getElementById('withdraw-phone').value;
+            let statusText = document.getElementById('withdraw-status');
 
-            if (!amount || isNaN(amount) || amount < 50) {
-                document.getElementById('withdraw-status').textContent = "Minimum 50 points required.";
+            if (isNaN(amount) || amount < MIN_WITHDRAW_POINTS) {
+                statusText.textContent = `Minimum withdrawal is ${MIN_WITHDRAW_POINTS} points.`;
                 return;
             }
 
-            document.getElementById('withdraw-status').textContent = "Withdrawal request sent!";
+            if (amount > earnedPoints) {
+                statusText.textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
+                return;
+            }
+
+            earnedPoints -= amount;
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+
+            statusText.textContent = 'Withdrawal request sent successfully!';
+            document.getElementById('withdraw-amount').value = '';
+            document.getElementById('withdraw-phone').value = '';
         }
     </script>
 </body>
