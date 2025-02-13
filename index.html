@@ -60,11 +60,8 @@
         #watch-ad-btn {
             background: #28a745;
         }
-        #auto-ad-btn {
+        #direct-link-btn {
             background: #007bff;
-        }
-        #stop-auto-btn {
-            background: #dc3545;
         }
         #withdraw-btn {
             background: #ffc107;
@@ -145,7 +142,7 @@
         <!-- Buttons -->
         <div class="buttons">
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
-            <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
+            <button id="direct-link-btn" onclick="goToDirectLink()">Direct Link</button>
             <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
         </div>
 
@@ -156,7 +153,7 @@
             <select id="payment-method">
                 <option value="bkash">Bkash</option>
                 <option value="nagad">Nagad</option>
-                <option value="nagad">Rocket</option>
+                <option value="rocket">Rocket</option>
             </select>
             <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
             <button onclick="withdrawPoints()">Withdraw</button>
@@ -168,14 +165,12 @@
     <script>
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
-        let autoAdInterval;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
-        const telegramChatId = "6140196943"; // Replace with the correct chat ID
+        const telegramChatId = "6140196943"; 
         const telegramUserName = "@earningbyhabib";
         document.getElementById("user-name").textContent = telegramUserName;
 
-        // Simulate loading saved user data
         if (localStorage.getItem('watchedAdsCount')) {
             watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
             earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
@@ -197,66 +192,17 @@
             }
         }
 
+        function goToDirectLink() {
+            window.location.href = "https://mostourigoatik.com/4/8935683";
+        }
+
         function updateProgressCircle() {
             const percentage = (watchedAdsCount / 10) * 100;
             document.getElementById('ads-progress').textContent = `${percentage}%`;
         }
 
-        function startAutoAds() {
-            autoAdInterval = setInterval(watchAd, 5000);
-            document.getElementById('auto-ad-btn').disabled = true;
-            document.getElementById('stop-auto-btn').disabled = false;
-        }
-
-        function stopAutoAds() {
-            clearInterval(autoAdInterval);
-            document.getElementById('auto-ad-btn').disabled = false;
-            document.getElementById('stop-auto-btn').disabled = true;
-        }
-
         function showWithdrawForm() {
             document.getElementById('withdraw-section').style.display = 'block';
-        }
-
-        function withdrawPoints() {
-            const amount = document.getElementById('withdraw-amount').value;
-            const paymentMethod = document.getElementById('payment-method').value;
-            const phoneNumber = document.getElementById('withdraw-phone').value;
-
-            if (amount < 50) {
-                document.getElementById('withdraw-status').textContent = 'Minimum withdrawal is 50 points.';
-                return;
-            }
-
-            if (amount > earnedPoints) {
-                document.getElementById('withdraw-status').textContent = `Insufficient balance. You have ${earnedPoints.toFixed(0.5)} points.`;
-                return;
-            }
-
-            earnedPoints -= parseFloat(amount);  // Subtract the withdrawn amount from the balance
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(10);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(0.5));
-
-            // Send withdrawal request via Telegram bot
-            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${amount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
-            sendTelegramMessage(message);
-
-            // Show withdrawal success message
-            alert('Withdrawal request successful, funds will be transferred soon!');
-            document.getElementById('withdraw-amount').value = '';
-            document.getElementById('withdraw-phone').value = '';
-        }
-
-        function sendTelegramMessage(message) {
-            const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Telegram message sent:", data);
-                })
-                .catch(error => {
-                    console.error("Error sending message to Telegram:", error);
-                });
         }
     </script>
 </body>
