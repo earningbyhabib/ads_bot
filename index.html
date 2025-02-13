@@ -6,26 +6,6 @@
     <title>Ad Reward System</title>
     <style>
         body {
-     .admin-btn {
-    background: #007bff;
-    color: white;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: yes;
-    cursor: pointer;
-}
-
-.support-btn {
-    background: #28a745;
-    color: white;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: yes;
-    cursor: pointer;
-}
-
             margin: 0;
             padding: 0;
             background-color: #121212;
@@ -59,7 +39,7 @@
         .buttons button {
             padding: 12px;
             font-size: 16px;
-            border: yes;
+            border: none;
             border-radius: 8px;
             color: white;
             cursor: pointer;
@@ -108,7 +88,7 @@
             border-radius: 5px;
             background-color: #444;
             color: #fff;
-            border: yes;
+            border: none;
         }
         .referral-box button {
             margin-top: 10px;
@@ -116,7 +96,7 @@
             border-radius: 5px;
             background: #28a745;
             color: #fff;
-            border: yes;
+            border: none;
             cursor: pointer;
         }
     </style>
@@ -124,30 +104,13 @@
 <body>
     <div class="container">
         <div class="box">
-            <h2>এড দেখে ইনকাম_প্রতি এড ১.০ পয়েন্ট</h2>
-            <h2>রেফার বোনাস ১০ পয়েন্ট</h2>
-            <h2>১০০ পয়েন্ট = ৩০ টাকা</h2>
+            <h2>ржПржб ржжрзЗржЦрзЗ ржЗржиржХрж╛ржо ржХрж░рзБржи __ржкрзНрж░рждрж┐ ржПржб рзз.рзжржкрзЯрзЗржирзНржЯ _рззрзжрзжржкрзЯрзЗржирзНржЯ=рзйрзжржЯрж╛ржХрж╛</h2>
             <div class="user-info">
                 <p>Welcome, <span id="user-name">User</span></p>
                 <p>Balance: <span id="earned-points">0.00</span> points</p>
             </div>
         </div>
-        <tr>
-    <td>
-        <a href="https://t.me/HS_SIKDAR_BD" target="_blank" style="text-decoration: none;">
-            <button style="background: #007bff; color: white; border: yes; padding: 5px 10px; font-size: 14px; border-radius: 5px; cursor: pointer;">
-                Admin Contact
-            </button>
-        </a>
-    </td>
-    <td>
-        <a href="https://t.me/earningbyhabib" target="_blank" style="text-decoration: none;">
-            <button style="background: #28a745; color: white; border: yes; padding: 5px 10px; font-size: 14px; border-radius: 5px; cursor: pointer;">
-                Support Group
-            </button>
-        </a>
-    </td>
-</tr>
+
         <div class="referral-box">
             <h3 style="color: #ff8c00;">Your Referral Link</h3>
             <input type="text" id="referral-link" value="" readonly>
@@ -158,7 +121,6 @@
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
             <button id="direct-link-btn" onclick="goToDirectLink()">Direct Link</button>
             <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
-
         </div> <!-- Withdraw Section (Initially Hidden) -->
 <div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
     <h2 style="color: #ff8c00;">Withdraw Points</h2>
@@ -171,8 +133,8 @@
         <option value="bkash">bKash</option>
     </select>
 
-    <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: yes; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
-    <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: yes; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
+    <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: none; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
+    <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
 </div>
 
 <script>
@@ -190,12 +152,12 @@
         let method = document.getElementById('withdraw-method').value;
 
         if (amount < 50) {
-            alert("মিনিমাম উইদ্র ৫০ পয়েন্ট সেটা ভুলে যাও.? ");
+            alert("Minimum withdraw amount is 50 points.");
             return;
         }
 
         if (amount > earnedPoints) {
-            alert("ওই মিয়া ফাজলামো করো একাউন্টে পয়েন্ট নাই উইদ্র দিতে আসছো কেন.?");
+            alert("You don't have enough points!");
             return;
         }
 
@@ -210,7 +172,7 @@
     }
 
     function sendTelegramNotification(phone, amount, method) {
-        let message = `🔔 New Withdraw Request\n📞 Phone: ${phone}\n💰 Amount: ${amount} Points\n💳 Method: ${method}`;
+        let message = `ЁЯФФ New Withdraw Request\nЁЯУЮ Phone: ${phone}\nЁЯТ░ Amount: ${amount} Points\nЁЯТ│ Method: ${method}`;
         let apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
         fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
     }
@@ -227,8 +189,8 @@
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
 
-        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
-        const telegramChatId = "6140196943";
+        const telegramBotToken = "YOUR_BOT_TOKEN";
+        const telegramChatId = "YOUR_CHAT_ID";
         const baseUrl = window.location.origin + window.location.pathname;
 
         function updateProgress() {
@@ -275,6 +237,12 @@
             copyText.select();
             document.execCommand("copy");
             alert("Referral Link Copied: " + copyText.value);
+        }
+
+        function sendTelegramMessage(referrer, points) {
+            const message = `╨Б╨п╨Ю╨Щ ╤А╨╢╨╕╤А╨╢╨┤╤А╨╖╨С╤А╨╢╨╕ ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢╨╗╤А╨╢тХЫ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢тЦУ!\n╨Б╨п╨б╨┤ ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢╨╗╤А╨╢тХЫ╤А╨╢тЦС╤А╨╢тХЫ╤А╨╢тЦС: ${referrer}\n╨Б╨п╨втЦС ╤А╨╢╨е╤А╨╢╨╛╤А╨╢тФР╤А╨╢тХв╤А╨╢╨╕: ${points} ╤А╨╢╨║╤А╨╖╨п╤А╨╖╨Ч╤А╨╢╨╕╤А╨╖╨Э╤А╨╢╨п`;
+            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+            fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
         }
 
         window.onload = generateReferralLink;
