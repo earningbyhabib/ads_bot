@@ -33,8 +33,18 @@
         }
         .box h2 {
             margin: 0;
-            font-size: 20px;
-            color: #ffffff;
+            font-size: 18px;
+            color: #ff8c00;
+        }
+        .box p {
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .buttons button {
             padding: 12px;
@@ -44,14 +54,58 @@
             color: white;
             cursor: pointer;
         }
+        .buttons button:hover {
+            opacity: 0.8;
+        }
         #watch-ad-btn {
             background: #28a745;
         }
-        #direct-link-btn {
+        #auto-ad-btn {
             background: #007bff;
+        }
+        #stop-auto-btn {
+            background: #dc3545;
         }
         #withdraw-btn {
             background: #ffc107;
+        }
+        .withdraw-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            display: none;
+        }
+        .withdraw-section input, .withdraw-section select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 2px solid #555;
+            background-color: #444;
+            color: #fff;
+        }
+        .withdraw-section input:focus, .withdraw-section select:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+        .withdraw-section button {
+            background-color: #28a745;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .withdraw-section button:hover {
+            background-color: #006400;
+        }
+        .user-info {
+            margin-top: 15px;
+        }
+        .user-info p {
+            font-size: 16px;
         }
         .progress-circle {
             width: 80px;
@@ -68,119 +122,79 @@
             font-weight: bold;
             color: #28a745;
         }
-        .extra-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .referral-box {
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .referral-box input {
-            width: 80%;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-        }
-        .referral-box button {
-            margin-top: 10px;
-            padding: 8px 12px;
-            border-radius: 5px;
-            background: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Top Info Box -->
         <div class="box">
-            <h2>ржПржб ржжрзЗржЦрзЗ ржЗржиржХрж╛ржо ржХрж░рзБржи __ржкрзНрж░рждрж┐ ржПржб рзз.рзжржкрзЯрзЗржирзНржЯ _рззрзжрзжржкрзЯрзЗржирзНржЯ=рзйрзжржЯрж╛ржХрж╛</h2>
+            <h2>    </h2>
             <div class="user-info">
                 <p>Welcome, <span id="user-name">User</span></p>
                 <p>Balance: <span id="earned-points">0.00</span> points</p>
+                <style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+    .admin-btn {
+        background-color: #007bff;
+    }
+    .admin-btn:hover {
+        background-color: #0056b3;
+    }
+    .support-btn {
+        background-color: #28a745;
+    }
+    .support-btn:hover {
+        background-color: #1e7e34;
+    }
+</style>
+
+<div class="button-container">
+    <a href="https://t.me/HS_SIKDAR_BD" class="btn admin-btn">Admin Contact</a>
+    <a href="https://t.me/earningbyhabib" class="btn support-btn">Support Group</a>
+</div>
+
+            </div>
+        </div>
+        <!-- Stats and Progress -->
+        <div class="box">
+            <p>Watched Ads: <span id="watched-ads">0</span></p>
+            <div class="progress-circle">
+                <span id="ads-progress">0%</span>
             </div>
         </div>
 
-        <div class="referral-box">
-            <h3 style="color: #ff8c00;">Your Referral Link</h3>
-            <input type="text" id="referral-link" value="" readonly>
-            <button onclick="copyReferralLink()">Copy</button>
-        </div>
-
+        <!-- Buttons -->
         <div class="buttons">
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
-            <button id="direct-link-btn" onclick="goToDirectLink()">Direct Link</button>
+            <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
             <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
-        </div> <!-- Withdraw Section (Initially Hidden) -->
-<div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
-    <h2 style="color: #ff8c00;">Withdraw Points</h2>
-    <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-    <input type="number" id="withdraw-amount" placeholder="Enter points (min 50)" min="50" style="width: 90%; padding: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-    
-    <select id="withdraw-method" style="width: 90%; padding: 10px; margin-top: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-        <option value="nagad">Nagad</option>
-        <option value="rocket">Rocket</option>
-        <option value="bkash">bKash</option>
-    </select>
+        </div>
 
-    <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: none; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
-    <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
-</div>
-
-<script>
-    function showWithdrawForm() {
-        document.getElementById('withdraw-section').style.display = 'block';
-    }
-
-    function closeWithdrawForm() {
-        document.getElementById('withdraw-section').style.display = 'none';
-    }
-
-    function submitWithdraw() {
-        let phone = document.getElementById('phone-number').value;
-        let amount = parseFloat(document.getElementById('withdraw-amount').value);
-        let method = document.getElementById('withdraw-method').value;
-
-        if (amount < 50) {
-            alert("Minimum withdraw amount is 50 points.");
-            return;
-        }
-
-        if (amount > earnedPoints) {
-            alert("You don't have enough points!");
-            return;
-        }
-
-        earnedPoints -= amount;
-        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-        localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-
-        sendTelegramNotification(phone, amount, method);
-        alert(`Withdraw Request Sent!\nPhone: ${phone}\nAmount: ${amount} points\nMethod: ${method}`);
-
-        closeWithdrawForm();
-    }
-
-    function sendTelegramNotification(phone, amount, method) {
-        let message = `ЁЯФФ New Withdraw Request\nЁЯУЮ Phone: ${phone}\nЁЯТ░ Amount: ${amount} Points\nЁЯТ│ Method: ${method}`;
-        let apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-        fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
-    }
-</script>
-
-
-        <div class="progress-circle">
-            <span id="ads-progress">0%</span>
+        <!-- Withdraw Section -->
+        <div class="withdraw-section" id="withdraw-section">
+            <h3 style="color: orange;">Withdrawal Request</h3>
+            <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
+            <select id="payment-method">
+                <option value="bkash">Bkash</option>
+            </select>
+            <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
+            <button onclick="withdrawPoints()">Withdraw</button>
+            <p id="withdraw-status"></p>
         </div>
     </div>
 
@@ -188,65 +202,96 @@
     <script>
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
+        let autoAdInterval;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
-        const telegramChatId = "6140196943";
-        const baseUrl = window.location.origin + window.location.pathname;
+        const telegramChatId = "6140196943"; // Replace with the correct chat ID
+        const telegramUserName = "@earningbyhabib";
+        document.getElementById("user-name").textContent = telegramUserName;
 
-        function updateProgress() {
-            let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
-            document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
+        // Simulate loading saved user data
+        if (localStorage.getItem('watchedAdsCount')) {
+            watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
+            earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
+            document.getElementById('watched-ads').textContent = watchedAdsCount;
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
         }
 
-        function showRewardedAd() {
-            if (typeof show_8929856 === 'function') {
-                show_8929856().then(() => {
-                    alert('Ad shown successfully!');
-                    tokens += 5;
-                    localStorage.setItem('tokens', tokens);
-                    document.getElementById('tokenCount').innerText = `Tokens: ${tokens}`;
-                }).catch(error => {
-                    console.error('Ad failed to load or display:', error);
+        function watchAd() {
+            if (typeof show_8928905 === 'function') {
+                show_8928905().then(() => {
+                    watchedAdsCount++;
+                    document.getElementById('watched-ads').textContent = watchedAdsCount;
+                    earnedPoints += 1;
+                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+                    updateProgressCircle();
                 });
-            } else {
-                console.error('Ad script is not loaded or available.');
-                setTimeout(showRewardedAd, 100); // Retry after 1 second
             }
         }
 
+        function updateProgressCircle() {
+            const percentage = (watchedAdsCount / 10) * 100;
+            document.getElementById('ads-progress').textContent = `${percentage}%`;
+        }
 
-        function generateReferralLink() {
-            let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
-            const ref = new URLSearchParams(window.location.search).get('ref');
-            const referralLink = `${baseUrl}?ref=${userId}`;
-            document.getElementById("referral-link").value = referralLink;
+        function startAutoAds() {
+            autoAdInterval = setInterval(watchAd, 5000);
+            document.getElementById('auto-ad-btn').disabled = true;
+            document.getElementById('stop-auto-btn').disabled = false;
+        }
 
-            if (!localStorage.getItem('userId')) {
-                localStorage.setItem('userId', userId);
+        function stopAutoAds() {
+            clearInterval(autoAdInterval);
+            document.getElementById('auto-ad-btn').disabled = false;
+            document.getElementById('stop-auto-btn').disabled = true;
+        }
+
+        function showWithdrawForm() {
+            document.getElementById('withdraw-section').style.display = 'block';
+        }
+
+        function withdrawPoints() {
+            const amount = document.getElementById('withdraw-amount').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+            const phoneNumber = document.getElementById('withdraw-phone').value;
+
+            if (amount < 50) {
+                document.getElementById('withdraw-status').textContent = 'Minimum withdrawal is 50 points.';
+                return;
             }
 
-            if (ref && ref !== userId) {
-                let referrerPoints = parseFloat(localStorage.getItem(ref)) || 0;
-                referrerPoints += 10;
-                localStorage.setItem(ref, referrerPoints.toFixed(2));
-                sendTelegramMessage(ref, referrerPoints);
+            if (amount > earnedPoints) {
+                document.getElementById('withdraw-status').textContent = `Insufficient balance. You have ${earnedPoints.toFixed(0.5)} points.`;
+                return;
             }
+
+            earnedPoints -= parseFloat(amount);  // Subtract the withdrawn amount from the balance
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(10);
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(0.5));
+
+            // Send withdrawal request via Telegram bot
+            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${amount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
+            sendTelegramMessage(message);
+
+            // Show withdrawal success message
+            alert('Withdrawal request successful, funds will be transferred soon!');
+            document.getElementById('withdraw-amount').value = '';
+            document.getElementById('withdraw-phone').value = '';
         }
 
-        function copyReferralLink() {
-            const copyText = document.getElementById("referral-link");
-            copyText.select();
-            document.execCommand("copy");
-            alert("Referral Link Copied: " + copyText.value);
+        function sendTelegramMessage(message) {
+            const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Telegram message sent:", data);
+                })
+                .catch(error => {
+                    console.error("Error sending message to Telegram:", error);
+                });
         }
-
-        function sendTelegramMessage(referrer, points) {
-            const message = `╨Б╨п╨Ю╨Щ ╤А╨╢╨╕╤А╨╢╨┤╤А╨╖╨С╤А╨╢╨╕ ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢╨╗╤А╨╢тХЫ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢тЦУ!\n╨Б╨п╨б╨┤ ╤А╨╢тЦС╤А╨╖╨Ч╤А╨╢╨╗╤А╨╢тХЫ╤А╨╢тЦС╤А╨╢тХЫ╤А╨╢тЦС: ${referrer}\n╨Б╨п╨втЦС ╤А╨╢╨е╤А╨╢╨╛╤А╨╢тФР╤А╨╢тХв╤А╨╢╨╕: ${points} ╤А╨╢╨║╤А╨╖╨п╤А╨╖╨Ч╤А╨╢╨╕╤А╨╖╨Э╤А╨╢╨п`;
-            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-            fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
-        }
-
-        window.onload = generateReferralLink;
     </script>
 </body>
 </html>
