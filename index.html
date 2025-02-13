@@ -6,6 +6,26 @@
     <title>Ad Reward System</title>
     <style>
         body {
+     .admin-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: yes;
+    cursor: pointer;
+}
+
+.support-btn {
+    background: #28a745;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: yes;
+    cursor: pointer;
+}
+
             margin: 0;
             padding: 0;
             background-color: #121212;
@@ -33,29 +53,16 @@
         }
         .box h2 {
             margin: 0;
-            font-size: 18px;
-            color: #ff8c00;
-        }
-        .box p {
-            font-size: 14px;
-            color: #fff;
-            margin-top: 5px;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            font-size: 20px;
+            color: #ffffff;
         }
         .buttons button {
             padding: 12px;
             font-size: 16px;
-            border: none;
+            border: yes;
             border-radius: 8px;
             color: white;
             cursor: pointer;
-        }
-        .buttons button:hover {
-            opacity: 0.8;
         }
         #watch-ad-btn {
             background: #28a745;
@@ -65,54 +72,6 @@
         }
         #withdraw-btn {
             background: #ffc107;
-        }
-        #admin-contact-btn {
-            background: #dc3545;
-            font-size: 14px;
-            padding: 8px;
-        }
-        #support-group-btn {
-            background: #6c757d;
-            font-size: 14px;
-            padding: 8px;
-        }
-        .withdraw-section {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-            display: none;
-        }
-        .withdraw-section input, .withdraw-section select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border: 2px solid #555;
-            background-color: #444;
-            color: #fff;
-        }
-        .withdraw-section input:focus, .withdraw-section select:focus {
-            border-color: #28a745;
-            outline: none;
-        }
-        .withdraw-section button {
-            background-color: #28a745;
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            margin-top: 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .withdraw-section button:hover {
-            background-color: #006400;
-        }
-        .user-info {
-            margin-top: 15px;
-        }
-        .user-info p {
-            font-size: 16px;
         }
         .progress-circle {
             width: 80px;
@@ -135,52 +94,131 @@
             gap: 10px;
             margin-top: 10px;
         }
+        .referral-box {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .referral-box input {
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: yes;
+        }
+        .referral-box button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            border: yes;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Top Info Box -->
         <div class="box">
-            <h2>এড দেখে ইনকাম করো</h2>
+            <h2>এড দেখে ইনকাম_প্রতি এড ১.০ পয়েন্ট</h2>
+            <h2>রেফার বোনাস ১০ পয়েন্ট</h2>
+            <h2>১০০ পয়েন্ট = ৩০ টাকা</h2>
             <div class="user-info">
                 <p>Welcome, <span id="user-name">User</span></p>
                 <p>Balance: <span id="earned-points">0.00</span> points</p>
             </div>
         </div>
-        
-        <!-- New Buttons Section -->
-        <div class="extra-buttons">
-            <button id="admin-contact-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Admin Contact</button>
-            <button id="support-group-btn" onclick="window.location.href='https://t.me/earningbyhabib'">Support Group</button>
+        <tr>
+    <td>
+        <a href="https://t.me/HS_SIKDAR_BD" target="_blank" style="text-decoration: none;">
+            <button style="background: #007bff; color: white; border: yes; padding: 5px 10px; font-size: 14px; border-radius: 5px; cursor: pointer;">
+                Admin Contact
+            </button>
+        </a>
+    </td>
+    <td>
+        <a href="https://t.me/earningbyhabib" target="_blank" style="text-decoration: none;">
+            <button style="background: #28a745; color: white; border: yes; padding: 5px 10px; font-size: 14px; border-radius: 5px; cursor: pointer;">
+                Support Group
+            </button>
+        </a>
+    </td>
+</tr>
+        <div class="referral-box">
+            <h3 style="color: #ff8c00;">Your Referral Link</h3>
+            <input type="text" id="referral-link" value="" readonly>
+            <button onclick="copyReferralLink()">Copy</button>
         </div>
 
-        <!-- Stats and Progress -->
-        <div class="box">
-            <p>Watched Ads: <span id="watched-ads">0</span></p>
-            <div class="progress-circle">
-                <span id="ads-progress">0%</span>
-            </div>
-        </div>
-
-        <!-- Buttons -->
         <div class="buttons">
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
             <button id="direct-link-btn" onclick="goToDirectLink()">Direct Link</button>
             <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
-        </div>
 
-        <!-- Withdraw Section -->
-        <div class="withdraw-section" id="withdraw-section">
-            <h3 style="color: orange;">Withdrawal Request</h3>
-            <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw" />
-            <select id="payment-method">
-                <option value="bkash">Bkash</option>
-                <option value="nagad">Nagad</option>
-                <option value="rocket">Rocket</option>
-            </select>
-            <input type="text" id="withdraw-phone" placeholder="Enter Phone Number" />
-            <button onclick="withdrawPoints()">Withdraw</button>
-            <p id="withdraw-status"></p>
+        </div> <!-- Withdraw Section (Initially Hidden) -->
+<div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
+    <h2 style="color: #ff8c00;">Withdraw Points</h2>
+    <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
+    <input type="number" id="withdraw-amount" placeholder="Enter points (min 50)" min="50" style="width: 90%; padding: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
+    
+    <select id="withdraw-method" style="width: 90%; padding: 10px; margin-top: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
+        <option value="nagad">Nagad</option>
+        <option value="rocket">Rocket</option>
+        <option value="bkash">bKash</option>
+    </select>
+
+    <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: yes; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
+    <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: yes; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
+</div>
+
+<script>
+    function showWithdrawForm() {
+        document.getElementById('withdraw-section').style.display = 'block';
+    }
+
+    function closeWithdrawForm() {
+        document.getElementById('withdraw-section').style.display = 'none';
+    }
+
+    function submitWithdraw() {
+        let phone = document.getElementById('phone-number').value;
+        let amount = parseFloat(document.getElementById('withdraw-amount').value);
+        let method = document.getElementById('withdraw-method').value;
+
+        if (amount < 50) {
+            alert("মিনিমাম উইদ্র ৫০ পয়েন্ট সেটা ভুলে যাও.? ");
+            return;
+        }
+
+        if (amount > earnedPoints) {
+            alert("ওই মিয়া ফাজলামো করো একাউন্টে পয়েন্ট নাই উইদ্র দিতে আসছো কেন.?");
+            return;
+        }
+
+        earnedPoints -= amount;
+        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+        localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+
+        sendTelegramNotification(phone, amount, method);
+        alert(`Withdraw Request Sent!\nPhone: ${phone}\nAmount: ${amount} points\nMethod: ${method}`);
+
+        closeWithdrawForm();
+    }
+
+    function sendTelegramNotification(phone, amount, method) {
+        let message = `🔔 New Withdraw Request\n📞 Phone: ${phone}\n💰 Amount: ${amount} Points\n💳 Method: ${method}`;
+        let apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+        fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
+    }
+</script>
+
+
+        <div class="progress-circle">
+            <span id="ads-progress">0%</span>
         </div>
     </div>
 
@@ -190,27 +228,22 @@
         let earnedPoints = 0.00;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
-        const telegramChatId = "6140196943"; 
-        const telegramUserName = "@earningbyhabib";
-        document.getElementById("user-name").textContent = telegramUserName;
+        const telegramChatId = "6140196943";
+        const baseUrl = window.location.origin + window.location.pathname;
 
-        if (localStorage.getItem('watchedAdsCount')) {
-            watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
-            earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
-            document.getElementById('watched-ads').textContent = watchedAdsCount;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+        function updateProgress() {
+            let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
+            document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
         }
 
         function watchAd() {
             if (typeof show_8928905 === 'function') {
                 show_8928905().then(() => {
                     watchedAdsCount++;
-                    document.getElementById('watched-ads').textContent = watchedAdsCount;
                     earnedPoints += 1;
                     document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    updateProgress();
                     localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-                    updateProgressCircle();
                 });
             }
         }
@@ -219,9 +252,38 @@
             window.location.href = "https://mostourigoatik.com/4/8935683";
         }
 
-        function showWithdrawForm() {
-            document.getElementById('withdraw-section').style.display = 'block';
+        function generateReferralLink() {
+            let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
+            const ref = new URLSearchParams(window.location.search).get('ref');
+            const referralLink = `${baseUrl}?ref=${userId}`;
+            document.getElementById("referral-link").value = referralLink;
+
+            if (!localStorage.getItem('userId')) {
+                localStorage.setItem('userId', userId);
+            }
+
+            if (ref && ref !== userId) {
+                let referrerPoints = parseFloat(localStorage.getItem(ref)) || 0;
+                referrerPoints += 10;
+                localStorage.setItem(ref, referrerPoints.toFixed(2));
+                sendTelegramMessage(ref, referrerPoints);
+            }
         }
+
+        function copyReferralLink() {
+            const copyText = document.getElementById("referral-link");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Referral Link Copied: " + copyText.value);
+        }
+
+        function sendTelegramMessage(referrer, points) {
+            const message = `ЁЯОЙ ржирждрзБржи рж░рзЗржлрж╛рж░рзЗрж▓!\nЁЯСд рж░рзЗржлрж╛рж░рж╛рж░: ${referrer}\nЁЯТ░ ржХржорж┐рж╢ржи: ${points} ржкрзЯрзЗржирзНржЯ`;
+            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+            fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
+        }
+
+        window.onload = generateReferralLink;
     </script>
 </body>
 </html>
