@@ -277,12 +277,6 @@
             alert("Referral Link Copied: " + copyText.value);
         }
 
-        function sendTelegramMessage(referrer, points) {
-            const message = `ЁЯОЙ ржирждрзБржи рж░рзЗржлрж╛рж░рзЗрж▓!\nЁЯСд рж░рзЗржлрж╛рж░рж╛рж░: ${referrer}\nЁЯТ░ ржХржорж┐рж╢ржи: ${points} ржкрзЯрзЗржирзНржЯ`;
-            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-            fetch(apiUrl).catch(error => console.error("Telegram API Error:", error));
-        }
-
         window.onload = generateReferralLink;
     </script>
 </body>
