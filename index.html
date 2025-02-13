@@ -189,8 +189,8 @@
         let watchedAdsCount = 0;
         let earnedPoints = 0.00;
 
-        const telegramBotToken = "YOUR_BOT_TOKEN";
-        const telegramChatId = "YOUR_CHAT_ID";
+        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
+        const telegramChatId = "6140196943";
         const baseUrl = window.location.origin + window.location.pathname;
 
         function updateProgress() {
@@ -198,21 +198,22 @@
             document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
         }
 
-        function watchAd() {
-            if (typeof show_8928905 === 'function') {
-                show_8928905().then(() => {
-                    watchedAdsCount++;
-                    earnedPoints += 1;
-                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-                    updateProgress();
-                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+        function showRewardedAd() {
+            if (typeof show_8929856 === 'function') {
+                show_8929856().then(() => {
+                    alert('Ad shown successfully!');
+                    tokens += 5;
+                    localStorage.setItem('tokens', tokens);
+                    document.getElementById('tokenCount').innerText = `Tokens: ${tokens}`;
+                }).catch(error => {
+                    console.error('Ad failed to load or display:', error);
                 });
+            } else {
+                console.error('Ad script is not loaded or available.');
+                setTimeout(showRewardedAd, 100); // Retry after 1 second
             }
         }
 
-        function goToDirectLink() {
-            window.location.href = "https://mostourigoatik.com/4/8935683";
-        }
 
         function generateReferralLink() {
             let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
