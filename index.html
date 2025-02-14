@@ -113,6 +113,21 @@
         .referral-box button:hover {
             background: #218838;
         }
+        .small-btn {
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .admin-btn {
+            background: #dc3545;
+        }
+        .support-btn {
+            background: #007bff;
+        }
     </style>
 </head>
 <body>
@@ -163,11 +178,14 @@
     <script src="https://whephiwums.com/vignette.min.js" data-zone="8928905" data-sdk="show_8928905"></script>
     <script>
         let watchedAdsCount = 0;
-        let earnedPoints = 0.00;
+        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         const telegramChatId = "6140196943";
         const baseUrl = window.location.origin + window.location.pathname;
+
+        // Load balance on page load
+        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
 
         function updateProgress() {
             let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
