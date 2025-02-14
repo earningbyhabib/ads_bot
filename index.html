@@ -15,6 +15,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
+        }
+        .developer-btn {
+            background: red;
+            color: white;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: yes;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 10px 10px rgba(0, 0, 0, 0.6);
+            transition: background 0.3s ease;
+            width: 180px; /* Adjust width to make it longer */
+        }
+        .developer-btn:hover {
+            background: #0056b3;
         }
         .container {
             text-align: center;
@@ -23,6 +39,7 @@
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
             width: 350px;
+            margin-top: 80px; /* Adjust margin to avoid overlap */
         }
         .box {
             background: #222;
@@ -131,6 +148,12 @@
     </style>
 </head>
 <body>
+    <!-- Developer Button -->
+    <div class="button-container" style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); display: flex; gap: 70px;">
+        <button class="developer-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer: <span style="color: white;">Habib Sikdar</span></button>
+     
+    </div>
+
     <div class="container">
         <div class="box">
             <h2>💝আসসালামু আলাইকুম💝</h2>
@@ -293,6 +316,7 @@
                 return;
             }
 
+            // Minimum withdrawal amount validation
             if (amount < 500) {
                 alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! 🧑‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? 🎩💸🤦‍♂️'");
                 return;
