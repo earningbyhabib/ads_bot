@@ -5,33 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>আসসালামু আলাইকুম</title>
     <style>
-        body {
+        /* Reset default margin and padding */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #121212;
-            color: #fff;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #fff;
             flex-direction: column;
+            position: relative;
         }
+
+        /* RGB Border Container */
+        .rgb-border-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* RGB Border */
+        .rgb-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                #ff0000, #ff7300, #fffb00, #48ff00, 
+                #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400% 400%;
+            animation: rgb-animation 10s linear infinite;
+        }
+
+        /* RGB Animation */
+        @keyframes rgb-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Developer Button */
         .developer-btn {
             background: red;
             color: white;
             padding: 8px 12px;
-            font-size: 14px;
-            border: yes;
+            font-size: 10px;
+            border: none;
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 10px 10px rgba(0, 0, 0, 0.6);
             transition: background 0.3s ease;
-            width: 180px; /* Adjust width to make it longer */
+            width: 130px;
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
         }
+
         .developer-btn:hover {
             background: #0056b3;
         }
+
+        /* Container */
         .container {
             text-align: center;
             background: #1f1f1f;
@@ -39,8 +94,11 @@
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
             width: 350px;
-            margin-top: 80px; /* Adjust margin to avoid overlap */
+            margin-top: 80px;
+            z-index: 1;
         }
+
+        /* Box */
         .box {
             background: #222;
             padding: 15px;
@@ -48,11 +106,14 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
+
         .box h2 {
             margin: 0;
             font-size: 20px;
             color: #ffffff;
         }
+
+        /* Buttons */
         .buttons button {
             padding: 12px;
             font-size: 16px;
@@ -62,24 +123,32 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         #watch-ad-btn {
             background: #28a745;
         }
+
         #watch-ad-btn:hover {
             background: #218838;
         }
+
         #direct-link-btn {
             background: #007bff;
         }
+
         #direct-link-btn:hover {
             background: #0056b3;
         }
+
         #withdraw-btn {
             background: #ffc107;
         }
+
         #withdraw-btn:hover {
             background: #e0a800;
         }
+
+        /* Progress Circle */
         .progress-circle {
             width: 80px;
             height: 80px;
@@ -90,17 +159,14 @@
             align-items: center;
             margin: 20px auto;
         }
+
         .progress-circle span {
             font-size: 18px;
             font-weight: bold;
             color: #28a745;
         }
-        .extra-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
+
+        /* Referral Box */
         .referral-box {
             background: #333;
             padding: 15px;
@@ -108,6 +174,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
         .referral-box input {
             width: 80%;
             padding: 10px;
@@ -117,6 +184,7 @@
             color: #fff;
             border: none;
         }
+
         .referral-box button {
             margin-top: 10px;
             padding: 8px 12px;
@@ -127,9 +195,12 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         .referral-box button:hover {
             background: #218838;
         }
+
+        /* Small Buttons */
         .small-btn {
             padding: 8px 12px;
             border-radius: 5px;
@@ -139,21 +210,41 @@
             margin: 5px;
             display: inline-block;
         }
+
         .admin-btn {
             background: #dc3545;
         }
+
         .support-btn {
             background: #007bff;
+        }
+
+        /* Withdraw Section */
+        #withdraw-section {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
     <!-- Developer Button -->
-    <div class="button-container" style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); display: flex; gap: 70px;">
-        <button class="developer-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer: <span style="color: white;">Habib Sikdar</span></button>
-     
+    <button class="developer-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer: <span style="color: white;">Habib Sikdar</span></button>
+
+    <!-- RGB Border Container -->
+    <div class="rgb-border-container">
+        <div class="rgb-border"></div>
     </div>
 
+    <!-- Main Container -->
     <div class="container">
         <div class="box">
             <h2>💝আসসালামু আলাইকুম💝</h2>
@@ -182,17 +273,17 @@
         </div>
 
         <!-- Withdraw Section (Initially Hidden) -->
-        <div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
+        <div id="withdraw-section">
             <h2 style="color: #ff8c00;">Withdraw Points</h2>
-            <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-            <input type="number" id="withdraw-amount" placeholder="Enter points (min 500)" min="500" style="width: 90%; padding: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-            <select id="withdraw-method" style="width: 90%; padding: 10px; margin-top: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
+            <input type="text" id="phone-number" placeholder="Enter your phone number">
+            <input type="number" id="withdraw-amount" placeholder="Enter points (min 500)" min="500">
+            <select id="withdraw-method">
                 <option value="nagad">Nagad</option>
                 <option value="rocket">Rocket</option>
                 <option value="bkash">bKash</option>
             </select>
-            <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: none; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
-            <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
+            <button id="withdraw-submit" onclick="submitWithdraw()">Withdraw</button>
+            <button id="withdraw-cancel" onclick="closeWithdrawForm()">Cancel</button>
         </div>
 
         <div class="progress-circle">
@@ -204,14 +295,13 @@
     <script>
         let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
-        let isAdWatching = false; // Track if an ad is being watched
-        let lastAdClickTime = 0; // Track the last time the ad button was clicked
+        let isAdWatching = false;
+        let lastAdClickTime = 0;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         const telegramChatId = "6140196943";
-        const telegramBotUsername = "ads526bot"; // Add your bot username here
+        const telegramBotUsername = "ads526bot";
 
-        // Load balance and progress on page load
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
         updateProgress();
 
@@ -224,7 +314,6 @@
             const currentTime = Date.now();
             const timeSinceLastClick = currentTime - lastAdClickTime;
 
-            // Check if 15 seconds have passed since the last click
             if (timeSinceLastClick < 15000) {
                 alert("Please wait 15 seconds before watching another ad.");
                 return;
@@ -248,7 +337,7 @@
                         localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
                         localStorage.setItem('watchedAdsCount', watchedAdsCount);
                         isAdWatching = false;
-                    }, 20000); // Wait 20 seconds before adding points
+                    }, 20000);
                 }).catch(() => {
                     alert("Failed to load ad. Please try again.");
                     isAdWatching = false;
@@ -265,7 +354,7 @@
         function generateReferralLink() {
             let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
             const ref = new URLSearchParams(window.location.search).get('ref');
-            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`; // Telegram bot referral link
+            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`;
             document.getElementById("referral-link").value = referralLink;
 
             if (!localStorage.getItem('userId')) {
@@ -310,13 +399,11 @@
             let amount = parseFloat(document.getElementById('withdraw-amount').value);
             let method = document.getElementById('withdraw-method').value;
 
-            // Phone number validation
             if (!/^\d{11}$/.test(phone)) {
                 alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
                 return;
             }
 
-            // Minimum withdrawal amount validation
             if (amount < 500) {
                 alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! 🧑‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? 🎩💸🤦‍♂️'");
                 return;
