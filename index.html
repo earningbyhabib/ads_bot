@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আসসালামু আলাইকুম </title>
+    <title>আসসালামু আলাইকুম</title>
     <style>
         body {
             margin: 0;
@@ -181,6 +181,8 @@
     <script>
         let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
+        let isAdWatching = false; // Track if an ad is being watched
+        let lastAdClickTime = 0; // Track the last time the ad button was clicked
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         const telegramChatId = "6140196943";
@@ -196,16 +198,37 @@
         }
 
         function watchAd() {
+            const currentTime = Date.now();
+            const timeSinceLastClick = currentTime - lastAdClickTime;
+
+            // Check if 15 seconds have passed since the last click
+            if (timeSinceLastClick < 15000) {
+                alert("Please wait 15 seconds before watching another ad.");
+                return;
+            }
+
+            if (isAdWatching) {
+                alert("An ad is already being watched.");
+                return;
+            }
+
             if (typeof show_8928905 === 'function') {
+                isAdWatching = true;
+                lastAdClickTime = currentTime;
+
                 show_8928905().then(() => {
-                    watchedAdsCount++;
-                    earnedPoints += 1;
-                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-                    updateProgress();
-                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    setTimeout(() => {
+                        watchedAdsCount++;
+                        earnedPoints += 1;
+                        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+                        updateProgress();
+                        localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+                        localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                        isAdWatching = false;
+                    }, 20000); // Wait 20 seconds before adding points
                 }).catch(() => {
                     alert("Failed to load ad. Please try again.");
+                    isAdWatching = false;
                 });
             } else {
                 alert("Ad service is currently unavailable.");
@@ -264,24 +287,21 @@
             let amount = parseFloat(document.getElementById('withdraw-amount').value);
             let method = document.getElementById('withdraw-method').value;
 
-       // Phone number validation
-if (!/^\d{11}$/.test(phone)) {
-    alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
-    return;
-}
+            // Phone number validation
+            if (!/^\d{11}$/.test(phone)) {
+                alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
+                return;
+            }
 
-            
             if (amount < 50) {
-    alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! 🧑‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? 🎩💸🤦‍♂️'");
-    return;
-}
-
+                alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! 🧑‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? 🎩💸🤦‍♂️'");
+                return;
+            }
 
             if (amount > earnedPoints) {
-    alert("🤣📢 'ওই মিয়া! 🤨 ফাইজলামিরো একটা লিমিট আছে! 💸💨 যে পরিমাণ উইদ্র মারতেছো, তোমার একাউন্টের দশা তো এমন, যেন শেষবার ব্যালেন্স দেখছিলে ১৯৯৮ সালে! 😭📉 তুমি কি NASA’র গোপন ফান্ডে হাত দিতেছো নাকি? 🚀😂 নাকি মনের জোর করেই টাকা তুলবা? 🤔✨💰'");
-    return;
-}
-
+                alert("🤣📢 'ওই মিয়া! 🤨 ফাইজলামিরো একটা লিমিট আছে! 💸💨 যে পরিমাণ উইদ্র মারতেছো, তোমার একাউন্টের দশা তো এমন, যেন শেষবার ব্যালেন্স দেখছিলে ১৯৯৮ সালে! 😭📉 তুমি কি NASA’র গোপন ফান্ডে হাত দিতেছো নাকি? 🚀😂 নাকি মনের জোর করেই টাকা তুলবা? 🤔✨💰'");
+                return;
+            }
 
             earnedPoints -= amount;
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
