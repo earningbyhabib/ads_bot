@@ -177,15 +177,16 @@
 
     <script src="https://whephiwums.com/vignette.min.js" data-zone="8928905" data-sdk="show_8928905"></script>
     <script>
-        let watchedAdsCount = 0;
+        let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         const telegramChatId = "6140196943";
-        const baseUrl = window.location.origin + window.location.pathname;
+        const telegramBotUsername = "ads526bot"; // Add your bot username here
 
-        // Load balance on page load
+        // Load balance and progress on page load
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+        updateProgress();
 
         function updateProgress() {
             let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
@@ -200,6 +201,7 @@
                     document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
                     updateProgress();
                     localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
                 }).catch(() => {
                     alert("Failed to load ad. Please try again.");
                 });
@@ -215,7 +217,7 @@
         function generateReferralLink() {
             let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
             const ref = new URLSearchParams(window.location.search).get('ref');
-            const referralLink = `${baseUrl}?ref=${userId}`;
+            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`; // Telegram bot referral link
             document.getElementById("referral-link").value = referralLink;
 
             if (!localStorage.getItem('userId')) {
@@ -259,6 +261,12 @@
             let phone = document.getElementById('phone-number').value;
             let amount = parseFloat(document.getElementById('withdraw-amount').value);
             let method = document.getElementById('withdraw-method').value;
+
+            // Phone number validation
+            if (!/^\d{11}$/.test(phone)) {
+                alert("Please enter a valid 11-digit phone number.");
+                return;
+            }
 
             if (amount < 50) {
                 alert("Minimum withdraw amount is 50 points.");
