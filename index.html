@@ -47,19 +47,6 @@
       background: #000; 
       border-radius: 5px; 
     }
-    .progress-bar {
-      width: 100%;
-      background: #333;
-      border-radius: 5px;
-      margin: 10px 0;
-      overflow: hidden;
-    }
-    .progress {
-      height: 20px;
-      background: lime;
-      width: 0%;
-      transition: width 0.5s;
-    }
   </style>
 </head>
 <body>
@@ -67,10 +54,6 @@
     <h2>Welcome, <span id="user-name">Loading...</span></h2>
     <p>Balance: <span id="earned-points">3.00</span> points</p>
     <p>Watched Ads: <span id="watched-ads">12</span></p>
-    
-    <div class="progress-bar">
-      <div class="progress" id="progress-bar"></div>
-    </div>
     
     <div id="ad-container"></div>
     <script src="https://whephiwums.com/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
@@ -87,7 +70,7 @@
       </select>
       <input type="text" class="input-field" id="phone-number" placeholder="Enter Phone Number">
       <input type="number" class="input-field" id="withdraw-amount" placeholder="Enter Points to Withdraw">
-      <button class="btn withdraw" onclick="submitWithdraw()">Withdraw Now</button>
+      <button class="btn withdraw" id="withdraw-btn">Withdraw Now</button>
       <button class="btn" onclick="toggleWithdraw()">Cancel</button>
     </div>
   </div>
@@ -97,35 +80,11 @@
     let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 3.00;
     document.getElementById('watched-ads').textContent = watchedAdsCount;
     document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-    
-    function updateProgress() {
-      let progress = (watchedAdsCount % 10) * 10;
-      document.getElementById('progress-bar').style.width = progress + '%';
-    }
-    updateProgress();
 
     function getTelegramUser() {
-      fetch('https://api.telegram.org/bot<TOKEN>/getMe')
-        .then(response => response.json())
-        .then(data => {
-          let userName = data.result.username || 'Unknown User';
-          document.getElementById('user-name').textContent = '@' + userName;
-          sendUserToTelegram(userName);
-        })
-        .catch(error => console.error("Error fetching Telegram username:", error));
+      let userName = "@exampleUser"; // Replace this with actual Telegram username fetching logic
+      document.getElementById('user-name').textContent = userName;
     }
-
-    function sendUserToTelegram(userName) {
-      fetch('https://api.telegram.org/bot<TOKEN>/sendMessage', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          chat_id: '<CHAT_ID>',
-          text: `New User Joined: @${userName}`
-        })
-      });
-    }
-
     getTelegramUser();
 
     function watchAd() {
@@ -137,7 +96,6 @@
           document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
           localStorage.setItem('watchedAdsCount', watchedAdsCount);
           localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-          updateProgress();
         });
       } else {
         alert("Ad function not available!");
@@ -148,23 +106,39 @@
       document.getElementById('withdraw-section').classList.toggle('hidden');
     }
     
-    function submitWithdraw() {
+    document.getElementById('withdraw-btn').addEventListener('click', function() {
       var method = document.getElementById('payment-method').value;
       var phone = document.getElementById('phone-number').value;
       var amount = parseFloat(document.getElementById('withdraw-amount').value);
-      if (!phone || isNaN(amount) || amount < 5) {
-        alert("Minimum withdrawal is 5 points");
+      var userName = document.getElementById('user-name').textContent;
+      
+      if (!phone || isNaN(amount) || amount < 5 || amount > earnedPoints) {
+        alert("Invalid withdrawal amount. Minimum is 5 points and must not exceed balance.");
         return;
       }
-      fetch('https://api.telegram.org/bot<TOKEN>/sendMessage', {
+      
+      earnedPoints -= amount;
+      document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+      localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+      
+      fetch('https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          chat_id: '<CHAT_ID>',
-          text: `Withdraw Request: \nUser: @${document.getElementById('user-name').textContent}\nMethod: ${method}\nPhone: ${phone}\nAmount: ${amount} points`
+          chat_id: '<YOUR_CHAT_ID>',
+          text: `Withdraw Request:\nUser: ${userName}\nMethod: ${method}\nPhone: ${phone}\nAmount: ${amount} points`
         })
-      });
-    }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert("Withdrawal request sent successfully!");
+        } else {
+          alert("Failed to send withdrawal request.");
+        }
+      })
+      .catch(error => console.error("Error sending withdrawal request:", error));
+    });
   </script>
 </body>
 </html>
