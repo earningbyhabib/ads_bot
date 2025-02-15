@@ -266,7 +266,7 @@
         updateProgress();
 
         function updateProgress() {
-            let percentage = Math.min((watchedAdsCount / 1) * 1000, 1000);
+            let percentage = Math.min((watchedAdsCount / 1) * 100, 100);
             document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
         }
 
