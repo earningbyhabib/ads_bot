@@ -162,6 +162,7 @@
         <div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
             <h2 style="color: #ff8c00;">Withdraw Points</h2>
             <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
+            <input type="text" id="telegram-username" placeholder="Enter your Telegram username" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
             <input type="number" id="withdraw-amount" placeholder="Enter points (min 500)" min="500" style="width: 90%; padding: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
             <select id="withdraw-method" style="width: 90%; padding: 10px; margin-top: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
                 <option value="nagad">Nagad</option>
@@ -233,7 +234,7 @@
         }
 
         function goToDirectLink() {
-            window.location.href = "https://theeghumoaps.com/4/8934303";
+            window.location.href = "https://mostourigoatik.com/4/8935683";
         }
 
         function generateReferralLink() {
@@ -281,12 +282,19 @@
 
         function submitWithdraw() {
             let phone = document.getElementById('phone-number').value;
+            let telegramUsername = document.getElementById('telegram-username').value;
             let amount = parseFloat(document.getElementById('withdraw-amount').value);
             let method = document.getElementById('withdraw-method').value;
 
             // Phone number validation
             if (!/^\d{11}$/.test(phone)) {
                 alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
+                return;
+            }
+
+            // Telegram username validation
+            if (!telegramUsername || !telegramUsername.startsWith('@')) {
+                alert("🤣📢 'ওই মিয়া! 🤨 টেলিগ্রাম ইউজারনেম ঠিকমতো দেন নাই! @ দিয়ে শুরু করতে হবে! 😂📱'");
                 return;
             }
 
@@ -304,14 +312,14 @@
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
             localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
 
-            sendTelegramNotification(phone, amount, method);
-            alert(`Withdraw Request Sent!\nPhone: ${phone}\nAmount: ${amount} points\nMethod: ${method}`);
+            sendTelegramNotification(phone, telegramUsername, amount, method);
+            alert(`Withdraw Request Sent!\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} points\nMethod: ${method}`);
 
             closeWithdrawForm();
         }
 
-        async function sendTelegramNotification(phone, amount, method) {
-            const message = `New Withdraw Request\nPhone: ${phone}\nAmount: ${amount} Points\nMethod: ${method}`;
+        async function sendTelegramNotification(phone, telegramUsername, amount, method) {
+            const message = `New Withdraw Request\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} Points\nMethod: ${method}`;
             const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
             try {
                 await fetch(apiUrl);
