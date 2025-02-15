@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আসসালামু আলাইকুম </title>
+    <title>আসসালামু আলাইকুম</title>
     <style>
         body {
             margin: 0;
@@ -23,13 +23,20 @@
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
             width: 350px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .box {
             background: #222;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .box h2 {
             margin: 0;
@@ -72,6 +79,9 @@
             justify-content: center;
             align-items: center;
             margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
         }
         .progress-circle span {
             font-size: 18px;
@@ -90,6 +100,10 @@
             border-radius: 10px;
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .referral-box input {
             width: 80%;
@@ -128,14 +142,72 @@
         .support-btn {
             background: #007bff;
         }
+
+        @keyframes neonBorder {
+            0% {
+                border-color: #ff0000;
+            }
+            25% {
+                border-color: #00ff00;
+            }
+            50% {
+                border-color: #0000ff;
+            }
+            75% {
+                border-color: #ff00ff;
+            }
+            100% {
+                border-color: #ff0000;
+            }
+        }
+
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00, 0 0 30px #0000ff;
+            }
+            100% {
+                box-shadow: 0 0 20px #ff0000, 0 0 40px #00ff00, 0 0 60px #0000ff;
+            }
+        }
+
+        .withdraw-section {
+            display: none;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+        }
+        .withdraw-section input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+        }
+        .withdraw-section button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .withdraw-section button:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="box">
             <h2>💝আসসালামু আলাইকুম💝</h2>
-            <h2> ❌কাজের জন্য পড়ালেখার ক্ষতি করবেন না✅</h2>
-            <h2>⛎ধন্যবাদ🔰</h2>
+            <h2> অসৎ পথে ১০ টাকার চেয়ে</h2>
+            <h2>সৎ পথের ২ টাকা শ্রেষ্ট।</h2>
             <div class="user-info">
                 <p>Welcome, <span id="user-name">User</span></p>
                 <p>Balance: <span id="earned-points">0.00</span> points</p>
@@ -216,8 +288,8 @@
             if (typeof show_8928905 === 'function') {
                 show_8928905().then(() => {
                     watchedAdsCount++;
-                    // Check if the current ad count is a multiple of 3 (i.e., 3rd, 6th, 9th, etc.)
-                    if (watchedAdsCount % 3 !== 0) {
+                    // New logic: 1, 2, 3 ads give points, 4th ad does not, 5, 6, 7 ads give points, 8th ad does not, and so on.
+                    if (watchedAdsCount % 4 !== 0) {
                         earnedPoints += 1;
                     }
                     document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
