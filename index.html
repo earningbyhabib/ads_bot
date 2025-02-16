@@ -246,6 +246,23 @@
         .popup-close:hover {
             background: #c82333;
         }
+
+        /* New Animation for Copy Button */
+        @keyframes copyAnimation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .copied {
+            animation: copyAnimation 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -333,11 +350,10 @@
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
         updateProgress();
 
-        // Show popup only on first visit or new session
-        if (!sessionStorage.getItem('popupShown')) {
+        // Show popup after 1 seconds
+        setTimeout(() => {
             showPopup();
-            sessionStorage.setItem('popupShown', true);
-        }
+        }, 2000);
 
         function updateProgress() {
             let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
@@ -408,6 +424,11 @@
             const copyText = document.getElementById("referral-link");
             copyText.select();
             document.execCommand("copy");
+            const copyButton = document.querySelector('.referral-box button');
+            copyButton.classList.add('copied');
+            setTimeout(() => {
+                copyButton.classList.remove('copied');
+            }, 500);
             alert("Referral Link Copied: " + copyText.value);
         }
 
