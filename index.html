@@ -200,6 +200,52 @@
         .withdraw-section button:hover {
             background: #218838;
         }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+            width: 300px;
+            text-align: center;
+            z-index: 1000;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+        }
+        .popup-content {
+            color: #fff;
+        }
+        .popup-content h3 {
+            margin: 0 0 15px;
+            font-size: 18px;
+        }
+        .popup-content p {
+            margin: 0 0 10px;
+            font-size: 14px;
+        }
+        .popup-content a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        .popup-content a:hover {
+            text-decoration: underline;
+        }
+        .popup-close {
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .popup-close:hover {
+            background: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -250,6 +296,28 @@
         </div>
     </div>
 
+    <!-- Popup Section -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h3>আসসালামু আলাইকুম</h3>
+            <p>কাজ শুরু করার আগে অবশ্যই সততার সঙ্গে চেষ্টা করবেন এবং সৎভাবে ইনকাম করবেন।</p>
+            <p>✅ <strong>কাজের নিয়ম:</strong></p>
+            <p>1️⃣ <em>Watch Ads</em> বাটনে ক্লিক করুন।</p>
+            <p>2️⃣ আপনার সামনে একটি ছবি আসবে, সেটির উপর ক্লিক করুন।</p>
+            <p>3️⃣ ১৫ সেকেন্ড অপেক্ষা করুন।</p>
+            <p>4️⃣ তারপর <em>Back</em> দিয়ে বের হয়ে আবার নতুন একটি ক্লিক করুন।</p>
+            <p>🔄 এইভাবে আপনি <strong>আনলিমিটেড</strong> কাজ করতে পারবেন!</p>
+            <p>📢 <strong>গুরুত্বপূর্ণ:</strong></p>
+            <p>আমাদের <strong>সাপোর্ট গ্রুপ, পেমেন্ট গ্রুপ, এবং ইউটিউব চ্যানেল</strong> অবশ্যই সাবস্ক্রাইব করে রাখবেন, যেন সব আপডেট পেতে পারেন!</p>
+            <p>🔗 <strong>যোগাযোগের জন্য:</strong></p>
+            <p>📌 <a href="https://t.me/earningbyhabib">t.me/earningbyhabib</a></p>
+            <p>📌 <a href="https://t.me/ads526bot_pay">t.me/ads526bot_pay</a></p>
+            <p>📌 <a href="https://youtube.com/@earningbyhabib">youtube.com/@earningbyhabib</a></p>
+            <p>💡 <em>সততার সাথে কাজ করুন, নিশ্চিত ইনকামের পথ তৈরি করুন!</em></p>
+        </div>
+        <button class="popup-close" onclick="closePopup()">Close</button>
+    </div>
+
     <script src="https://whephiwums.com/vignette.min.js" data-zone="8928905" data-sdk="show_8928905"></script>
     <script>
         let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
@@ -264,6 +332,12 @@
         // Load balance and progress on page load
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
         updateProgress();
+
+        // Show popup only on first visit or new session
+        if (!sessionStorage.getItem('popupShown')) {
+            showPopup();
+            sessionStorage.setItem('popupShown', true);
+        }
 
         function updateProgress() {
             let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
@@ -401,6 +475,14 @@
             } catch (error) {
                 console.error("Telegram API Error:", error);
             }
+        }
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
         }
 
         window.onload = generateReferralLink;
