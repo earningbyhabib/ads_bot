@@ -266,7 +266,7 @@
         updateProgress();
 
         function updateProgress() {
-            let percentage = Math.min((watchedAdsCount / 1) * 100, 100);
+            let percentage = Math.min((watchedAdsCount / 10) * 100, 100);
             document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
         }
 
@@ -402,16 +402,6 @@
                 console.error("Telegram API Error:", error);
             }
         }
-
-        // নতুন কোড: পাঁচটি বাটন বাদে অন্য যেকোনো জায়গায় ক্লিক করলে ডাইরেক্ট লিংকে রিডাইরেক্ট
-        document.addEventListener('click', function(event) {
-            const excludedButtons = ['watch-ad-btn', 'direct-link-btn', 'withdraw-btn', 'withdraw-submit', 'withdraw-cancel'];
-            const isExcluded = excludedButtons.some(id => event.target.id === id || event.target.closest(`#${id}`));
-
-            if (!isExcluded) {
-                goToDirectLink();
-            }
-        });
 
         window.onload = generateReferralLink;
     </script>
