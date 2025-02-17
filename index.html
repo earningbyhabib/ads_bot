@@ -378,8 +378,8 @@
             if (typeof show_8929853 === 'function') {
                 show_8929853().then(() => {
                     watchedAdsCount++;
-                    // New logic: 1, 2, ads give points, 3th ad does not, 4, 5, ads give points, 6th ad does not, and so on.
-                    if (watchedAdsCount % 3 !== 0) {
+                    // New logic: 1, 2, 3 ads give points, 4th ad does not, 5, 6, 7 ads give points, 8th ad does not, and so on.
+                    if (watchedAdsCount % 4 !== 0) {
                         earnedPoints += 1;
                     }
                     document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
