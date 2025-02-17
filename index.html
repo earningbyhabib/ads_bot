@@ -335,7 +335,7 @@
         <button class="popup-close" onclick="closePopup()">Close</button>
     </div>
 
-    <script src="https://whephiwums.com/vignette.min.js" data-zone="89363797" data-sdk="show_8934582"></script>
+    <script src="https://whephiwums.com/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
     <script>
         let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
@@ -375,8 +375,8 @@
                 return;
             }
 
-            if (typeof show_8936397 === 'function') {
-                show_89363797().then(() => {
+            if (typeof show_8929853 === 'function') {
+                show_8929853().then(() => {
                     watchedAdsCount++;
                     // New logic: 1, 2, ads give points, 3th ad does not, 4, 5, ads give points, 6th ad does not, and so on.
                     if (watchedAdsCount % 3 !== 0) {
