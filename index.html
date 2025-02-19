@@ -51,6 +51,10 @@
             color: white;
             cursor: pointer;
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         #watch-ad-btn {
             background: #28a745;
@@ -123,6 +127,10 @@
             border: none;
             cursor: pointer;
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .referral-box button:hover {
             background: #218838;
@@ -135,6 +143,10 @@
             font-size: 14px;
             margin: 5px;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .admin-btn {
             background: #dc3545;
@@ -196,6 +208,10 @@
             border: none;
             cursor: pointer;
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .withdraw-section button:hover {
             background: #218838;
@@ -242,31 +258,106 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
         }
         .popup-close:hover {
             background: #c82333;
         }
 
-        /* New Animation for Copy Button */
-        @keyframes copyAnimation {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .withdraw-history-section {
+            display: none;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+        }
+        .withdraw-history-section h3 {
+            color: #ff8c00;
+            margin-bottom: 10px;
+        }
+        .withdraw-history-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .withdraw-history-section ul li {
+            background: #444;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .withdraw-history-section button {
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+        }
+        .withdraw-history-section button:hover {
+            background: #c82333;
         }
 
-        .copied {
-            animation: copyAnimation 0.5s ease-in-out;
+        #withdraw-history-btn {
+            padding: 6px 10px;
+            font-size: 12px;
+            background: #6c757d;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 150px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+        }
+        #withdraw-history-btn:hover {
+            background: #5a6268;
+        }
+
+        #developer-contact-btn {
+            background: #00bfff; /* Changed to sky blue */
+            color: white;
+            padding: 5px 8px; /* Smaller size */
+            font-size: 14px; /* Smaller font size */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            animation: neonBorder 3s linear infinite;
+            margin-top: -20px;
+            width: 100%;
+            max-width: 150px; /* Smaller width */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #developer-contact-btn:hover {
+            background: #009acd; /* Darker shade for hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Developer Contact Button at the top -->
+        <button id="developer-contact-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer Contact</button>
+
         <div class="box">
             <h2>💝আসসালামু আলাইকুম💝</h2>
             <h2> অসৎ পথে ১০ টাকার চেয়ে</h2>
@@ -293,7 +384,6 @@
             <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
         </div>
 
-        <!-- Withdraw Section (Initially Hidden) -->
         <div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
             <h2 style="color: #ff8c00;">Withdraw Points</h2>
             <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
@@ -308,12 +398,19 @@
             <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
         </div>
 
+        <div class="withdraw-history-section" id="withdraw-history-section">
+            <h3>Withdraw History</h3>
+            <ul id="withdraw-history-list"></ul>
+            <button onclick="closeWithdrawHistory()">Close</button>
+        </div>
+
         <div class="progress-circle">
             <span id="ads-progress">0%</span>
         </div>
+
+        <button id="withdraw-history-btn" onclick="showWithdrawHistory()">Withdraw History</button>
     </div>
 
-    <!-- Popup Section -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <h3>আসসালামু আলাইকুম</h3>
@@ -322,7 +419,7 @@
             <p>1️⃣ <em>Watch Ads</em> বাটনে ক্লিক করুন।</p>
             <p>2️⃣ আপনার সামনে একটি ছবি আসবে, সেটির উপর ক্লিক করুন।</p>
             <p>3️⃣ ১৫ সেকেন্ড অপেক্ষা করুন।</p>
-            <p>4️⃣ তারপর <em>Back</em> দিয়ে বের হয়ে আবার নতুন একটি ক্লিক করুন।</p>
+            <p>4️⃣ তারপর <em>Back</em> দিয়ে বের হয়ে আবার নতুন একটি ক্লিক করুন।</p>
             <p>🔄 এইভাবে আপনি <strong>আনলিমিটেড</strong> কাজ করতে পারবেন!</p>
             <p>📢 <strong>গুরুত্বপূর্ণ:</strong></p>
             <p>আমাদের <strong>সাপোর্ট গ্রুপ, পেমেন্ট গ্রুপ, এবং ইউটিউব চ্যানেল</strong> অবশ্যই সাবস্ক্রাইব করে রাখবেন, যেন সব আপডেট পেতে পারেন!</p>
@@ -341,16 +438,16 @@
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
         let lastAdClickTime = parseInt(localStorage.getItem('lastAdClickTime')) || 0;
         let lastPointAddTime = parseInt(localStorage.getItem('lastPointAddTime')) || 0;
+        let lastWithdrawTime = parseInt(localStorage.getItem('lastWithdrawTime')) || 0;
+        let withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
 
         const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
         const telegramChatId = "6140196943";
-        const telegramBotUsername = "ads526bot"; // Add your bot username here
+        const telegramBotUsername = "ads526bot";
 
-        // Load balance and progress on page load
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
         updateProgress();
 
-        // Show popup after 1 seconds
         setTimeout(() => {
             showPopup();
         }, 2000);
@@ -378,7 +475,6 @@
             if (typeof show_8929853 === 'function') {
                 show_8929853().then(() => {
                     watchedAdsCount++;
-                    // New logic: 1, 2, 3 ads give points, 4th ad does not, 5, 6, 7 ads give points, 8th ad does not, and so on.
                     if (watchedAdsCount % 4 !== 0) {
                         earnedPoints += 1;
                     }
@@ -405,7 +501,7 @@
         function generateReferralLink() {
             let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
             const ref = new URLSearchParams(window.location.search).get('ref');
-            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`; // Telegram bot referral link
+            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`;
             document.getElementById("referral-link").value = referralLink;
 
             if (!localStorage.getItem('userId')) {
@@ -443,6 +539,14 @@
         }
 
         function showWithdrawForm() {
+            const currentTime = Date.now();
+            const timeSinceLastWithdraw = currentTime - lastWithdrawTime;
+
+            if (timeSinceLastWithdraw < 86400000) {
+                alert("🤣📢 'ওই মিয়া! 🤨 ২৪ ঘন্টায় একবারের বেশি উইদ্র করতে পারবা না! 😂💸'");
+                return;
+            }
+
             document.getElementById('withdraw-section').style.display = 'block';
         }
 
@@ -456,20 +560,18 @@
             let amount = parseFloat(document.getElementById('withdraw-amount').value);
             let method = document.getElementById('withdraw-method').value;
 
-            // Phone number validation
             if (!/^\d{11}$/.test(phone)) {
                 alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
                 return;
             }
 
-            // Telegram username validation
             if (!telegramUsername || !telegramUsername.startsWith('@')) {
                 alert("🤣📢 'ওই মিয়া! 🤨 টেলিগ্রাম ইউজারনেম ঠিকমতো দেন নাই! @ দিয়ে শুরু করতে হবে! 😂📱'");
                 return;
             }
 
             if (amount < 500) {
-                alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! 🧑‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? 🎩💸🤦‍♂️'");
+                alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! �‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? �💸🤦‍♂️'");
                 return;
             }
 
@@ -481,6 +583,16 @@
             earnedPoints -= amount;
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
             localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+
+            lastWithdrawTime = Date.now();
+            localStorage.setItem('lastWithdrawTime', lastWithdrawTime);
+
+            withdrawHistory.push({
+                amount: amount,
+                method: method,
+                timestamp: lastWithdrawTime
+            });
+            localStorage.setItem('withdrawHistory', JSON.stringify(withdrawHistory));
 
             sendTelegramNotification(phone, telegramUsername, amount, method);
             alert(`Withdraw Request Sent!\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} points\nMethod: ${method}`);
@@ -504,6 +616,25 @@
 
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
+        }
+
+        function showWithdrawHistory() {
+            const historyList = document.getElementById('withdraw-history-list');
+            historyList.innerHTML = '';
+            if (withdrawHistory.length === 0) {
+                historyList.innerHTML = '<li>No withdraw history found.</li>';
+            } else {
+                withdrawHistory.forEach((record, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `#${index + 1}: ${record.amount} points via ${record.method} on ${new Date(record.timestamp).toLocaleString()}`;
+                    historyList.appendChild(li);
+                });
+            }
+            document.getElementById('withdraw-history-section').style.display = 'block';
+        }
+
+        function closeWithdrawHistory() {
+            document.getElementById('withdraw-history-section').style.display = 'none';
         }
 
         window.onload = generateReferralLink;
