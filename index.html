@@ -432,7 +432,7 @@
         <button class="popup-close" onclick="closePopup()">Close</button>
     </div>
 
-    <script src="https://whephiwums.com/vignette.min.js" data-zone="8928905" data-sdk="show_8928905"></script>
+    <script src="https://whephiwums.com/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
     <script>
         let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
         let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
@@ -441,9 +441,9 @@
         let lastWithdrawTime = parseInt(localStorage.getItem('lastWithdrawTime')) || 0;
         let withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
 
-        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
-        const telegramChatId = "6140196943";
-        const telegramBotUsername = "ads526bot";
+        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY"; // আপনার বট টোকেন
+        const telegramChatId = "6140196943"; // আপনার চ্যাট আইডি
+        const telegramBotUsername = "ads526bot"; // আপনার বট ইউজারনেম
 
         document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
         updateProgress();
@@ -472,8 +472,8 @@
                 return;
             }
 
-            if (typeof show_8928905 === 'function') {
-                show_8928905().then(() => {
+            if (typeof show_8929853 === 'function') {
+                show_8929853().then(() => {
                     watchedAdsCount++;
                     if (watchedAdsCount % 3 !== 0) {
                         earnedPoints += 1;
@@ -495,7 +495,7 @@
         }
 
         function goToDirectLink() {
-            window.location.href = "https://nanoushaks.net/4/8982271";
+            window.location.href = "https://mostourigoatik.com/4/8935683";
         }
 
         function generateReferralLink() {
@@ -531,8 +531,14 @@
         async function sendTelegramMessage(referrer, points) {
             const message = `New Referral!\nReferrer: ${referrer}\nPoints: ${points} points`;
             const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+
             try {
-                await fetch(apiUrl);
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log("Telegram API Response:", data);
             } catch (error) {
                 console.error("Telegram API Error:", error);
             }
@@ -603,8 +609,14 @@
         async function sendTelegramNotification(phone, telegramUsername, amount, method) {
             const message = `New Withdraw Request\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} Points\nMethod: ${method}`;
             const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+
             try {
-                await fetch(apiUrl);
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log("Telegram API Response:", data);
             } catch (error) {
                 console.error("Telegram API Error:", error);
             }
