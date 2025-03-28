@@ -3,653 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আসসালামু আলাইকুম</title>
+    <title>EARNING BY HABIB</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #fff;
             font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            text-align: center;
-            background: #1f1f1f;
+            max-width: 500px;
+            background: white;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
-            width: 350px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .box {
-            background: #222;
-            padding: 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .box h2 {
-            margin: 0;
-            font-size: 20px;
-            color: #ffffff;
+        h1 {
+            color: #333;
+            margin: 5px 0;
         }
-        .buttons button {
-            padding: 12px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
+        .subtitle {
+            font-size: 14px;
+            color: #666;
         }
-        #watch-ad-btn {
-            background: #28a745;
+        .name-display {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            min-height: 40px;
         }
-        #watch-ad-btn:hover {
-            background: #218838;
-        }
-        #direct-link-btn {
-            background: #007bff;
-        }
-        #direct-link-btn:hover {
-            background: #0056b3;
-        }
-        #withdraw-btn {
-            background: #ffc107;
-        }
-        #withdraw-btn:hover {
-            background: #e0a800;
-        }
-        .progress-circle {
-            width: 80px;
-            height: 80px;
-            border: 4px solid #28a745;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px auto;
-            position: relative;
-            overflow: hidden;
-            animation: neonGlow 1.5s ease-in-out infinite alternate;
-        }
-        .progress-circle span {
-            font-size: 18px;
-            font-weight: bold;
-            color: #28a745;
-        }
-        .extra-buttons {
+        .buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 10px;
-        }
-        .referral-box {
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .referral-box input {
-            width: 80%;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-        }
-        .referral-box button {
-            margin-top: 10px;
-            padding: 8px 12px;
-            border-radius: 5px;
-            background: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .referral-box button:hover {
-            background: #218838;
-        }
-        .small-btn {
-            padding: 8px 12px;
-            border-radius: 5px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            margin: 5px;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .admin-btn {
-            background: #dc3545;
-        }
-        .support-btn {
-            background: #007bff;
-        }
-
-        @keyframes neonBorder {
-            0% {
-                border-color: #ff0000;
-            }
-            25% {
-                border-color: #00ff00;
-            }
-            50% {
-                border-color: #0000ff;
-            }
-            75% {
-                border-color: #ff00ff;
-            }
-            100% {
-                border-color: #ff0000;
-            }
-        }
-
-        @keyframes neonGlow {
-            0% {
-                box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00, 0 0 30px #0000ff;
-            }
-            100% {
-                box-shadow: 0 0 20px #ff0000, 0 0 40px #00ff00, 0 0 60px #0000ff;
-            }
-        }
-
-        .withdraw-section {
-            display: none;
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
             margin-top: 20px;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
         }
-        .withdraw-section input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-        }
-        .withdraw-section button {
+        button {
             padding: 10px 20px;
-            border-radius: 5px;
-            background: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .withdraw-section button:hover {
-            background: #218838;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #1f1f1f;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
-            width: 300px;
-            text-align: center;
-            z-index: 1000;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .popup-content {
-            color: #fff;
-        }
-        .popup-content h3 {
-            margin: 0 0 15px;
-            font-size: 18px;
-        }
-        .popup-content p {
-            margin: 0 0 10px;
-            font-size: 14px;
-        }
-        .popup-content a {
-            color: #28a745;
-            text-decoration: none;
-        }
-        .popup-content a:hover {
-            text-decoration: underline;
-        }
-        .popup-close {
-            background: #dc3545;
+            background-color: #4CAF50;
             color: white;
-            padding: 8px 12px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
         }
-        .popup-close:hover {
-            background: #c82333;
-        }
-
-        .withdraw-history-section {
-            display: none;
-            background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .withdraw-history-section h3 {
-            color: #ff8c00;
-            margin-bottom: 10px;
-        }
-        .withdraw-history-section ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .withdraw-history-section ul li {
-            background: #444;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            color: #fff;
-        }
-        .withdraw-history-section button {
-            background: #dc3545;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        .withdraw-history-section button:hover {
-            background: #c82333;
-        }
-
-        #withdraw-history-btn {
-            padding: 6px 10px;
-            font-size: 12px;
-            background: #6c757d;
-            margin-top: 20px;
-            width: 100%;
-            max-width: 150px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-        }
-        #withdraw-history-btn:hover {
-            background: #5a6268;
-        }
-
-        #developer-contact-btn {
-            background: #00bfff; /* Changed to sky blue */
-            color: white;
-            padding: 5px 8px; /* Smaller size */
-            font-size: 14px; /* Smaller font size */
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            animation: neonBorder 3s linear infinite;
-            margin-top: -20px;
-            width: 100%;
-            max-width: 150px; /* Smaller width */
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #developer-contact-btn:hover {
-            background: #009acd; /* Darker shade for hover */
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Developer Contact Button at the top -->
-        <button id="developer-contact-btn" onclick="window.location.href='https://t.me/HS_SIKDAR_BD'">Developer Contact</button>
-
-        <div class="box">
-            <h2>💝আসসালামু আলাইকুম💝</h2>
-            <h2> অসৎ পথে ১০ টাকার চেয়ে</h2>
-            <h2>সৎ পথের ২ টাকা শ্রেষ্ট।</h2>
-            <div class="user-info">
-                <p>Welcome, <span id="user-name">🔥💸 𝗦𝗠𝗔𝗥𝗧 𝗜𝗡𝗖𝗢𝗠𝗘 𝗕𝗢𝗧 🔥</span></p>
-                <p>Balance: <span id="earned-points">0.00</span> points</p>
-                <div class="button-container">
-                    <a href="https://t.me/HS_SIKDAR_BD" class="small-btn admin-btn">Admin Contact</a>
-                    <a href="https://t.me/earningbyhabib" class="small-btn support-btn">Support Group</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="referral-box">
-            <h3 style="color: #ff8c00;">Your Referral Link</h3>
-            <input type="text" id="referral-link" value="" readonly>
-            <button onclick="copyReferralLink()">Copy</button>
-        </div>
-
+        <p class="subtitle">Present By</p>
+        <h1>EARNING BY HABIB</h1>
+        <hr>
+        
+        <div class="name-display" id="nameDisplay"></div>
+        
         <div class="buttons">
-            <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
-            <button id="direct-link-btn" onclick="goToDirectLink()"> Direct Link </button>
-            <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
+            <button onclick="copyName()">Copy</button>
+            <button onclick="changeName()">Name Change</button>
         </div>
-
-        <div id="withdraw-section" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #222; padding: 20px; border-radius: 10px; width: 300px; text-align: center;">
-            <h2 style="color: #ff8c00;">Withdraw Points</h2>
-            <input type="text" id="phone-number" placeholder="Enter your phone number" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-            <input type="text" id="telegram-username" placeholder="Enter your Telegram username" style="width: 90%; padding: 10px; margin: 10px 0; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-            <input type="number" id="withdraw-amount" placeholder="Enter points (min 500)" min="500" style="width: 90%; padding: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-            <select id="withdraw-method" style="width: 90%; padding: 10px; margin-top: 10px; background: #444; color: #fff; border: none; border-radius: 5px; text-align: center;">
-                <option value="nagad">Nagad</option>
-                <option value="rocket">Rocket</option>
-                <option value="bkash">bKash</option>
-            </select>
-            <button id="withdraw-submit" style="background: #28a745; color: white; padding: 10px; margin-top: 15px; border: none; border-radius: 5px; width: 90%;" onclick="submitWithdraw()">Withdraw</button>
-            <button id="withdraw-cancel" style="background: #dc3545; color: white; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; width: 90%;" onclick="closeWithdrawForm()">Cancel</button>
-        </div>
-
-        <div class="withdraw-history-section" id="withdraw-history-section">
-            <h3>Withdraw History</h3>
-            <ul id="withdraw-history-list"></ul>
-            <button onclick="closeWithdrawHistory()">Close</button>
-        </div>
-
-        <div class="progress-circle">
-            <span id="ads-progress">0%</span>
-        </div>
-
-        <button id="withdraw-history-btn" onclick="showWithdrawHistory()">Withdraw History</button>
     </div>
 
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <h3>আসসালামু আলাইকুম</h3>
-            <p>কাজ শুরু করার আগে অবশ্যই সততার সঙ্গে চেষ্টা করবেন এবং সৎভাবে ইনকাম করবেন।</p>
-            <p>✅ <strong>কাজের নিয়ম:</strong></p>
-            <p>1️⃣ <em>Watch Ads</em> বাটনে ক্লিক করুন।</p>
-            <p>2️⃣ আপনার সামনে একটি ছবি আসবে, সেটির উপর ক্লিক করুন।</p>
-            <p>3️⃣ ১৫ সেকেন্ড অপেক্ষা করুন।</p>
-            <p>4️⃣ তারপর <em>Back</em> দিয়ে বের হয়ে আবার নতুন একটি ক্লিক করুন।</p>
-            <p>🔄 এইভাবে আপনি <strong>আনলিমিটেড</strong> কাজ করতে পারবেন!</p>
-            <p>📢 <strong>গুরুত্বপূর্ণ:</strong></p>
-            <p>আমাদের <strong>সাপোর্ট গ্রুপ, পেমেন্ট গ্রুপ, এবং ইউটিউব চ্যানেল</strong> অবশ্যই সাবস্ক্রাইব করে রাখবেন, যেন সব আপডেট পেতে পারেন!</p>
-            <p>🔗 <strong>যোগাযোগের জন্য:</strong></p>
-            <p>📌 <a href="https://t.me/earningbyhabib">t.me/earningbyhabib</a></p>
-            <p>📌 <a href="https://t.me/ads526bot_pay">t.me/ads526bot_pay</a></p>
-            <p>📌 <a href="https://youtube.com/@earningbyhabib">youtube.com/@earningbyhabib</a></p>
-            <p>💡 <em>সততার সাথে কাজ করুন, নিশ্চিত ইনকামের পথ তৈরি করুন!</em></p>
-        </div>
-        <button class="popup-close" onclick="closePopup()">Close</button>
-    </div>
-
-    <script src="https://whephiwums.com/vignette.min.js" data-zone="8929853" data-sdk="show_8929853"></script>
     <script>
-        let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
-        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
-        let lastAdClickTime = parseInt(localStorage.getItem('lastAdClickTime')) || 0;
-        let lastPointAddTime = parseInt(localStorage.getItem('lastPointAddTime')) || 0;
-        let lastWithdrawTime = parseInt(localStorage.getItem('lastWithdrawTime')) || 0;
-        let withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+        const bangladeshiGirlNames = [
+          "Tasnim Ahmed", "Sumaiya Khan", "Fatima Rahman", "Ayesha Chowdhury", "Zara Islam", 
+            "Nusrat Jahan", "Mahi Akter", "Preeti Das", "Sanjida Begum", "Ishrat Hossain", 
+            "Zerin Sultana", "Tanha Haque", "Nishat Alam", "Ruma Khatun", "Shayla Banu", 
+            "Fariha Siddiqua", "Mehjabin Ahmed", "Saba Karim", "Nabila Rahman", "Irin Akter", 
+            "Trisha Das", "Faiza Islam", "Raisa Khan", "Jannat Begum", "Maliha Hossain", 
+            "Nazia Sultana", "Sarina Haque", "Ishita Alam", "Rima Khatun", "Simran Banu",
+            "Afrin Siddiqua", "Bushra Ahmed", "Chandni Karim", "Dalia Rahman", "Esha Akter", 
+            "Farzana Das", "Gulshan Islam", "Hena Khan", "Ira Begum", "Joya Hossain", 
+            "Kona Sultana", "Lubna Haque", "Mim Alam", "Nadia Khatun", "Oishi Banu", 
+            "Papia Siddiqua", "Qurratulain Ahmed", "Rina Karim", "Sharmin Rahman", "Tania Akter",
+            "Umme Das", "Vabna Islam", "Warda Khan", "Xeenat Begum", "Yasmin Hossain", 
+            "Zakia Sultana", "Anika Haque", "Bithi Alam", "Chaity Khatun", "Disha Banu", 
+            "Eva Siddiqua", "Fahima Ahmed", "Gita Karim", "Hridi Rahman", "Isha Akter",
+            "Jui Das", "Krishna Islam", "Liza Khan", "Mou Begum", "Nila Hossain", 
+            "Ora Sultana", "Purnima Haque", "Quazi Alam", "Riya Khatun", "Shirin Banu", 
+            "Tuli Siddiqua", "Urmi Ahmed", "Vanya Karim", "Writi Rahman", "Xara Akter",
+            "Yasira Das", "Zinnia Islam", "Anila Khan", "Brishti Begum", "Champa Hossain", 
+            "Dola Sultana", "Eti Haque", "Faria Alam", "Gulshanara Khatun", "Habiba Banu", 
+            "Ira Siddiqua", "Jannati Ahmed", "Keya Karim", "Lamia Rahman", "Mithila Akter",
+            "Nupur Das", "Orpa Islam", "Piyali Khan", "Quaderia Begum", "Rashida Hossain", 
+            "Shabnam Sultana", "Tithi Haque", "Usha Alam", "Vumi Khatun", "Wazifa Banu", 
+            "Xaki Siddiqua", "Yamin Ahmed", "Zara Karim", "Anjuman Rahman", "Bilkis Akter",
+            "Chandni Das", "Dipa Islam", "Eram Khan", "Farida Begum", "Guria Hossain", 
+            "Hena Sultana", "Ishrat Haque", "Jorina Alam", "Kohinoor Khatun", "Laili Banu", 
+            "Mousumi Siddiqua", "Nargis Ahmed", "Oyshee Karim", "Papia Rahman", "Queency Akter",
+            "Ruma Das", "Shahnaz Islam", "Taslima Khan", "Urmila Begum", "Vicky Hossain", 
+            "Wazia Sultana", "Xara Haque", "Yasmeen Alam", "Zebunnessa Khatun", "Afroza Banu", 
+            "Bela Siddiqua", "Chumki Ahmed", "Dola Karim", "Eti Rahman", "Fahmida Akter",
+            "Gulap Das", "Hena Islam", "Ismat Khan", "Jorina Begum", "Kulsum Hossain", 
+            "Lucky Sultana", "Mala Haque", "Nipa Alam", "Ora Khatun", "Puja Banu", 
+            "Quazi Siddiqua", "Rina Ahmed", "Shabnoor Karim", "Tumpa Rahman", "Urmi Akter",
+            "Vicky Das", "Wazia Islam", "Xara Khan", "Yasmin Begum", "Zakia Hossain", 
+            "Anika Sultana", "Bithi Haque", "Chaity Alam", "Disha Khatun", "Eva Banu", 
+            "Fahima Siddiqua", "Gita Ahmed", "Hridi Karim", "Isha Rahman", "Jui Akter",
+            "Krishna Das", "Liza Islam", "Mou Khan", "Nila Begum", "Ora Hossain", 
+            "Purnima Sultana", "Quazi Haque", "Riya Alam", "Shirin Khatun", "Tuli Banu", 
+            "Urmi Siddiqua", "Vanya Ahmed", "Writi Karim", "Xara Rahman", "Yasira Akter",
+            "Zinnia Das", "Anila Islam", "Brishti Khan", "Champa Begum", "Dola Hossain", 
+            "Eti Sultana", "Faria Haque", "Gulshanara Alam", "Habiba Khatun", "Ira Banu", 
+            "Jannati Siddiqua", "Keya Ahmed", "Lamia Karim", "Mithila Rahman", "Nupur Akter",
+            "Orpa Das", "Piyali Islam", "Quaderia Khan", "Rashida Begum", "Shabnam Hossain", 
+            "Tithi Sultana", "Usha Haque", "Vumi Alam", "Wazifa Khatun", "Xaki Banu", 
+            "Yamin Siddiqua", "Zara Ahmed", "Anjuman Karim", "Bilkis Rahman", "Chandni Akter",
+            "Dipa Das", "Eram Islam", "Farida Khan", "Guria Begum", "Hena Hossain", 
+            "Ishrat Sultana", "Jorina Haque", "Kohinoor Alam", "Laili Khatun", "Mousumi Banu", 
+            "Nargis Siddiqua", "Oyshee Ahmed", "Papia Karim", "Queency Rahman", "Ruma Akter",
+            "Shahnaz Das", "Taslima Islam", "Urmila Khan", "Vicky Begum", "Wazia Hossain", 
+            "Xara Sultana", "Yasmeen Haque", "Zebunnessa Alam", "Afroza Khatun", "Bela Banu", 
+            "Chumki Siddiqua", "Dola Ahmed", "Eti Karim", "Fahmida Rahman", "Gulap Akter",
+            "Hena Das", "Ismat Islam", "Jorina Khan", "Kulsum Begum", "Lucky Hossain", 
+            "Mala Sultana", "Nipa Haque", "Ora Alam", "Puja Khatun", "Quazi Banu", 
+            "Rina Siddiqua", "Shabnoor Ahmed", "Tumpa Karim", "Urmi Rahman", "Vicky Akter",
+            "Wazia Das", "Xara Islam", "Yasmin Khan", "Zakia Begum", "Anika Hossain", 
+            "Bithi Sultana", "Chaity Haque", "Disha Alam", "Eva Khatun", "Fahima Banu", 
+            "Gita Siddiqua", "Hridi Ahmed", "Isha Karim", "Jui Rahman", "Krishna Akter",
+            "Liza Das", "Mou Islam", "Nila Khan", "Ora Begum", "Purnima Hossain", 
+            "Quazi Sultana", "Riya Haque", "Shirin Alam", "Tuli Khatun", "Urmi Banu", 
+            "Vanya Siddiqua", "Writi Ahmed", "Xara Karim", "Yasira Rahman", "Zinnia Akter",
+            "Anila Das", "Brishti Islam", "Champa Khan", "Dola Begum", "Eti Hossain", 
+            "Faria Sultana", "Gulshanara Haque", "Habiba Alam", "Ira Khatun", "Jannati Banu", 
+            "Keya Siddiqua", "Lamia Ahmed", "Mithila Karim", "Nupur Rahman", "Orpa Akter",
+            "Piyali Das", "Quaderia Islam", "Rashida Khan", "Shabnam Begum", "Tithi Hossain", 
+            "Usha Sultana", "Vumi Haque", "Wazifa Alam", "Xaki Khatun", "Yamin Banu", 
+            "Zara Siddiqua", "Anjuman Ahmed", "Bilkis Karim", "Chandni Rahman", "Dipa Akter",
+            "Eram Das", "Farida Islam", "Guria Khan", "Hena Begum", "Ishrat Hossain", 
+            "Jorina Sultana", "Kohinoor Haque", "Laili Alam", "Mousumi Khatun", "Nargis Banu", 
+            "Oyshee Siddiqua", "Papia Ahmed", "Queency Karim", "Ruma Rahman", "Shahnaz Akter",
+            "Taslima Das", "Urmila Islam", "Vicky Khan", "Wazia Begum", "Xara Hossain", 
+            "Yasmeen Sultana", "Zebunnessa Haque", "Afroza Alam", "Bela Khatun", "Chumki Banu", 
+            "Dola Siddiqua", "Eti Ahmed", "Fahmida Karim", "Gulap Rahman", "Hena Akter",
+            "Ismat Das", "Jorina Islam", "Kulsum Khan", "Lucky Begum", "Mala Hossain", 
+            "Nipa Sultana", "Ora Haque", "Puja Alam", "Quazi Khatun", "Rina Banu", 
+            "Shabnoor Siddiqua", "Tumpa Ahmed", "Urmi Karim", "Vicky Rahman", "Wazia Akter",
+            "Xara Das", "Yasmin Islam", "Zakia Khan", "Anika Begum", "Bithi Hossain", 
+            "Chaity Sultana", "Disha Haque", "Eva Alam", "Fahima Khatun", "Gita Banu", 
+            "Hridi Siddiqua", "Isha Ahmed", "Jui Karim", "Krishna Rahman", "Liza Akter",
+            "Mou Das", "Nila Islam", "Ora Khan", "Purnima Begum", "Quazi Hossain", 
+            "Riya Sultana", "Shirin Haque", "Tuli Alam", "Urmi Khatun", "Vanya Banu", 
+            "Writi Siddiqua", "Xara Ahmed", "Yasira Karim", "Zinnia Rahman", "Anila Akter",
+            "Brishti Das", "Champa Islam", "Dola Khan", "Eti Begum", "Faria Hossain", 
+            "Gulshanara Sultana", "Habiba Haque", "Ira Alam", "Jannati Khatun", "Keya Banu", 
+            "Lamia Siddiqua", "Mithila Ahmed", "Nupur Karim", "Orpa Rahman", "Piyali Akter",
+            "Quaderia Das", "Rashida Islam", "Shabnam Khan", "Tithi Begum", "Usha Hossain", 
+            "Vumi Sultana", "Wazifa Haque", "Xaki Alam", "Yamin Khatun", "Zara Banu", 
+            "Anjuman Siddiqua", "Bilkis Ahmed", "Chandni Karim", "Dipa Rahman", "Eram Akter",
+            "Farida Das", "Guria Islam", "Hena Khan", "Ishrat Begum", "Jorina Hossain", 
+            "Kohinoor Sultana", "Laili Haque", "Mousumi Alam", "Nargis Khatun", "Oyshee Banu", 
+            "Papia Siddiqua", "Queency Ahmed", "Ruma Karim", "Shahnaz Rahman", "Taslima Akter",
+            "Urmila Das", "Vicky Islam", "Wazia Khan", "Xara Begum", "Yasmeen Hossain", 
+            "Zebunnessa Sultana", "Afroza Haque", "Bela Alam", "Chumki Khatun", "Dola Banu", 
+            "Eti Siddiqua", "Fahmida Ahmed", "Gulap Karim", "Hena Rahman", "Ismat Akter",
+            "Jorina Das", "Kulsum Islam", "Lucky Khan", "Mala Begum", "Nipa Hossain", 
+            "Ora Sultana", "Puja Haque", "Quazi Alam", "Rina Khatun", "Shabnoor Banu", 
+            "Tumpa Siddiqua", "Urmi Ahmed", "Vicky Karim", "Wazia Rahman", "Xara Akter",
+            "Yasmin Das", "Zakia Islam", "Anika Khan", "Bithi Begum", "Chaity Hossain", 
+            "Disha Sultana", "Eva Haque", "Fahima Alam", "Gita Khatun", "Hridi Banu", 
+            "Isha Siddiqua", "Jui Ahmed", "Krishna Karim", "Liza Rahman", "Mou Akter",
+            "Nila Das", "Ora Islam", "Purnima Khan", "Quazi Begum", "Riya Hossain", 
+            "Shirin Sultana", "Tuli Haque", "Urmi Alam", "Vanya Khatun", "Writi Banu", 
+            "Xara Siddiqua", "Yasira Ahmed", "Zinnia Karim", "Anila Rahman", "Brishti Akter",
+            "Champa Das", "Dola Islam", "Eti Khan", "Faria Begum", "Gulshanara Hossain", 
+            "Habiba Sultana", "Ira Haque", "Jannati Alam", "Keya Khatun", "Lamia Banu", 
+            "Mithila Siddiqua", "Nupur Ahmed", "Orpa Karim", "Piyali Rahman", "Quaderia Akter",
+            "Rashida Das", "Shabnam Islam", "Tithi Khan", "Usha Begum", "Vumi Hossain", 
+            "Wazifa Sultana", "Xaki Haque", "Yamin Alam", "Zara Khatun", "Anjuman Banu", 
+            "Bilkis Siddiqua", "Chandni Ahmed", "Dipa Karim", "Eram Rahman", "Farida Akter",
+            "Guria Das", "Hena Islam", "Ishrat Khan", "Jorina Begum", "Kohinoor Hossain", 
+            "Laili Sultana", "Mousumi Haque", "Nargis Alam", "Oyshee Khatun", "Papia Banu", 
+            "Queency Siddiqua", "Ruma Ahmed", "Shahnaz Karim", "Taslima Rahman", "Urmila Akter",
+            "Vicky Das", "Wazia Islam", "Xara Khan", "Yasmeen Begum", "Zebunnessa Hossain", 
+            "Afroza Sultana", "Bela Haque", "Chumki Alam", "Dola Khatun", "Eti Banu", 
+            "Fahmida Siddiqua", "Gulap Ahmed", "Hena Karim", "Ismat Rahman", "Jorina Akter"
+        ];
 
-        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY"; // আপনার বট টোকেন
-        const telegramChatId = "6140196943"; // আপনার চ্যাট আইডি
-        const telegramBotUsername = "ads526bot"; // আপনার বট ইউজারনেম
-
-        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-        updateProgress();
-
-        setTimeout(() => {
-            showPopup();
-        }, 2000);
-
-        function updateProgress() {
-            let percentage = Math.min((watchedAdsCount / 1000) * 100, 100);
-            document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
+        function changeName() {
+            const nameElement = document.getElementById('nameDisplay');
+            const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
+            nameElement.textContent = bangladeshiGirlNames[randomIndex];
         }
 
-        function watchAd() {
-            const currentTime = Date.now();
-            const timeSinceLastAdClick = currentTime - lastAdClickTime;
-            const timeSinceLastPointAdd = currentTime - lastPointAddTime;
-
-            if (timeSinceLastAdClick < 15000) {
-                alert("Please wait 15 seconds before clicking the 'Watch Ad' button again.");
-                return;
-            }
-
-            if (timeSinceLastPointAdd < 20000) {
-                alert("Please wait 20 seconds before earning another point.");
-                return;
-            }
-
-            if (typeof show_8929853 === 'function') {
-                show_8929853().then(() => {
-                    watchedAdsCount++;
-                    if (watchedAdsCount % 3 !== 0) {
-                        earnedPoints += 1;
-                    }
-                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-                    updateProgress();
-                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
-                    lastAdClickTime = currentTime;
-                    lastPointAddTime = currentTime;
-                    localStorage.setItem('lastAdClickTime', lastAdClickTime);
-                    localStorage.setItem('lastPointAddTime', lastPointAddTime);
-                }).catch(() => {
-                    alert("Failed to load ad. Please try again.");
-                });
-            } else {
-                alert("Ad service is currently unavailable.");
-            }
-        }
-
-        function goToDirectLink() {
-            window.location.href = "https://t.me/earningbyhabib";
-        }
-
-        function generateReferralLink() {
-            let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
-            const ref = new URLSearchParams(window.location.search).get('ref');
-            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`;
-            document.getElementById("referral-link").value = referralLink;
-
-            if (!localStorage.getItem('userId')) {
-                localStorage.setItem('userId', userId);
-            }
-
-            if (ref && ref !== userId) {
-                let referrerPoints = parseFloat(localStorage.getItem(ref)) || 0;
-                referrerPoints += 10;
-                localStorage.setItem(ref, referrerPoints.toFixed(2));
-                sendTelegramMessage(ref, referrerPoints);
-            }
-        }
-
-        function copyReferralLink() {
-            const copyText = document.getElementById("referral-link");
-            copyText.select();
-            document.execCommand("copy");
-            const copyButton = document.querySelector('.referral-box button');
-            copyButton.classList.add('copied');
-            setTimeout(() => {
-                copyButton.classList.remove('copied');
-            }, 500);
-            alert("Referral Link Copied: " + copyText.value);
-        }
-
-        async function sendTelegramMessage(referrer, points) {
-            const message = `New Referral!\nReferrer: ${referrer}\nPoints: ${points} points`;
-            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
-                }
-                const data = await response.json();
-                console.log("Telegram API Response:", data);
-            } catch (error) {
-                console.error("Telegram API Error:", error);
-            }
-        }
-
-        function showWithdrawForm() {
-            const currentTime = Date.now();
-            const timeSinceLastWithdraw = currentTime - lastWithdrawTime;
-
-            if (timeSinceLastWithdraw < 86400000) {
-                alert("🤣📢 'ওই মিয়া! 🤨 ২৪ ঘন্টায় একবারের বেশি উইদ্র করতে পারবা না! 😂💸'");
-                return;
-            }
-
-            document.getElementById('withdraw-section').style.display = 'block';
-        }
-
-        function closeWithdrawForm() {
-            document.getElementById('withdraw-section').style.display = 'none';
-        }
-
-        function submitWithdraw() {
-            let phone = document.getElementById('phone-number').value;
-            let telegramUsername = document.getElementById('telegram-username').value;
-            let amount = parseFloat(document.getElementById('withdraw-amount').value);
-            let method = document.getElementById('withdraw-method').value;
-
-            if (!/^\d{11}$/.test(phone)) {
-                alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
-                return;
-            }
-
-            if (!telegramUsername || !telegramUsername.startsWith('@')) {
-                alert("🤣📢 'ওই মিয়া! 🤨 টেলিগ্রাম ইউজারনেম ঠিকমতো দেন নাই! @ দিয়ে শুরু করতে হবে! 😂📱'");
-                return;
-            }
-
-            if (amount < 500) {
-                alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! �‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? �💸🤦‍♂️'");
-                return;
-            }
-
-            if (amount > earnedPoints) {
-                alert("🤣📢 'ওই মিয়া! 🤨 ফাইজলামিরো একটা লিমিট আছে! 💸💨 যে পরিমাণ উইদ্র মারতেছো, তোমার একাউন্টের দশা তো এমন, যেন শেষবার ব্যালেন্স দেখছিলে ১৯৯৮ সালে! 😭📉 তুমি কি NASA’র গোপন ফান্ডে হাত দিতেছো নাকি? 🚀😂 নাকি মনের জোর করেই টাকা তুলবা? 🤔✨💰'");
-                return;
-            }
-
-            earnedPoints -= amount;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
-
-            lastWithdrawTime = Date.now();
-            localStorage.setItem('lastWithdrawTime', lastWithdrawTime);
-
-            withdrawHistory.push({
-                amount: amount,
-                method: method,
-                timestamp: lastWithdrawTime
-            });
-            localStorage.setItem('withdrawHistory', JSON.stringify(withdrawHistory));
-
-            sendTelegramNotification(phone, telegramUsername, amount, method);
-            alert(`Withdraw Request Sent!\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} points\nMethod: ${method}`);
-
-            closeWithdrawForm();
-        }
-
-        async function sendTelegramNotification(phone, telegramUsername, amount, method) {
-            const message = `New Withdraw Request\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} Points\nMethod: ${method}`;
-            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
-                }
-                const data = await response.json();
-                console.log("Telegram API Response:", data);
-            } catch (error) {
-                console.error("Telegram API Error:", error);
+        function copyName() {
+            const nameToCopy = document.getElementById('nameDisplay').textContent;
+            if (nameToCopy) {
+                const tempInput = document.createElement('input');
+                document.body.appendChild(tempInput);
+                tempInput.value = nameToCopy;
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('Copied: ' + nameToCopy);
             }
         }
 
-        function showPopup() {
-            document.getElementById('popup').style.display = 'block';
-        }
-
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-
-        function showWithdrawHistory() {
-            const historyList = document.getElementById('withdraw-history-list');
-            historyList.innerHTML = '';
-            if (withdrawHistory.length === 0) {
-                historyList.innerHTML = '<li>No withdraw history found.</li>';
-            } else {
-                withdrawHistory.forEach((record, index) => {
-                    const li = document.createElement('li');
-                    li.textContent = `#${index + 1}: ${record.amount} points via ${record.method} on ${new Date(record.timestamp).toLocaleString()}`;
-                    historyList.appendChild(li);
-                });
-            }
-            document.getElementById('withdraw-history-section').style.display = 'block';
-        }
-
-        function closeWithdrawHistory() {
-            document.getElementById('withdraw-history-section').style.display = 'none';
-        }
-
-        window.onload = generateReferralLink;
+        window.onload = changeName;
     </script>
 </body>
 </html>
