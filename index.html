@@ -191,20 +191,18 @@
             const nameElement = document.getElementById('nameDisplay');
             const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
             nameElement.textContent = bangladeshiGirlNames[randomIndex];
-        }
+        }function copyName() {
+    const nameToCopy = document.getElementById('nameDisplay').textContent;
+    if (nameToCopy) {
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = nameToCopy;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+    }
+}
 
-        function copyName() {
-            const nameToCopy = document.getElementById('nameDisplay').textContent;
-            if (nameToCopy) {
-                const tempInput = document.createElement('input');
-                document.body.appendChild(tempInput);
-                tempInput.value = nameToCopy;
-                tempInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
-                alert('Copied: ' + nameToCopy);
-            }
-        }
 
         window.onload = changeName;
     </script>
