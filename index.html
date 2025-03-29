@@ -48,11 +48,20 @@
             color: #333;
             margin: 5px 0;
             font-size: 28px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: rgbTextAnimation 6s linear infinite;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        @keyframes rgbTextAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .subtitle {
             font-size: 14px;
@@ -69,26 +78,32 @@
             font-size: 24px;
             margin: 25px 0;
             padding: 15px;
-            border: 1px dashed rgba(78, 205, 196, 0.5);
+            border: 1px dashed #ccc;
             min-height: 40px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.7);
+            background: white;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             color: #444;
         }
         .name-display:hover {
-            border-color: rgba(255, 107, 107, 0.7);
-            box-shadow: inset 0 0 15px rgba(255,107,107,0.1);
+            border-color: #aaa;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
         }
-        .buttons {
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .action-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 25px;
         }
         button {
-            padding: 12px 25px;
+            padding: 8px 16px;
             color: white;
             border: none;
             border-radius: 8px;
@@ -99,38 +114,60 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
+            font-size: 13px;
+            z-index: 1;
         }
-        button::after {
+        button::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255,255,255,0.2);
-            transform: rotate(30deg);
-            transition: all 0.3s ease;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 8px;
+            z-index: -1;
+            animation: rgbBorderAnimation 3s linear infinite;
         }
-        button:hover::after {
-            left: 100%;
+        @keyframes rgbBorderAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            transform: translateY(1px);
         }
-        button:nth-child(1) {
-            background: linear-gradient(45deg, #4ecdc4, #556270);
+        /* Top buttons - Different colors */
+        .telegram-btn {
+            background: linear-gradient(45deg, #3b5998, #4c70ba);
         }
-        button:nth-child(1):hover {
-            background: linear-gradient(45deg, #556270, #4ecdc4);
-            box-shadow: 0 6px 12px rgba(85, 98, 112, 0.3);
+        .telegram-btn::before {
+            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
+            background-size: 300% 300%;
         }
-        button:nth-child(2) {
-            background: linear-gradient(45deg, #ff6b6b, #c44e4e);
+        .admin-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
         }
-        button:nth-child(2):hover {
-            background: linear-gradient(45deg, #c44e4e, #ff6b6b);
-            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+        .admin-btn::before {
+            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
+            background-size: 300% 300%;
+        }
+        /* Bottom buttons - Different colors */
+        .copy-btn {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d);
+        }
+        .copy-btn::before {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+            background-size: 300% 300%;
+        }
+        .change-btn {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+        .change-btn::before {
+            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
+            background-size: 300% 300%;
         }
         .rgb-border {
             position: absolute;
@@ -140,33 +177,51 @@
             bottom: 0;
             border-radius: 15px;
             padding: 2px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #556270);
+            background: linear-gradient(135deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 400% 400%;
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
             z-index: -1;
+            animation: rgbAnimation 6s linear infinite;
+        }
+        @keyframes rgbAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="rgb-border"></div>
+        
+        <div class="top-buttons">
+            <button class="telegram-btn" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
+                Telegram Group
+            </button>
+            <button class="admin-btn" onclick="window.open('https://wa.me/8801601735574', '_blank')">
+                Admin Contact
+            </button>
+        </div>
+        
         <p class="subtitle">Present By</p>
         <h1>EARNING BY HABIB</h1>
         <hr>
         
         <div class="name-display" id="nameDisplay"></div>
         
-        <div class="buttons">
-            <button onclick="copyName()">Copy</button>
-            <button onclick="changeName()">Name Change</button>
+        <div class="action-buttons">
+            <button class="copy-btn" onclick="copyName()">Copy</button>
+            <button class="change-btn" onclick="changeName()">Name Change</button>
         </div>
     </div>
 
     <script>
         const bangladeshiGirlNames = [
-            "Tasnim Ahmed", "Sumaiya Khan", "Fatima Rahman", "Ayesha Chowdhury", "Zara Islam", 
+          "Tasnim Ahmed", "Sumaiya Khan", "Fatima Rahman", "Ayesha Chowdhury", "Zara Islam", 
             "Nusrat Jahan", "Mahi Akter", "Preeti Das", "Sanjida Begum", "Ishrat Hossain", 
             "Zerin Sultana", "Tanha Haque", "Nishat Alam", "Ruma Khatun", "Shayla Banu", 
             "Fariha Siddiqua", "Mehjabin Ahmed", "Saba Karim", "Nabila Rahman", "Irin Akter", 
@@ -303,10 +358,11 @@
                 document.body.removeChild(tempInput);
                 
                 // Add copy confirmation effect
-                const originalText = document.querySelector('button:nth-child(1)').textContent;
-                document.querySelector('button:nth-child(1)').textContent = 'Copied!';
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
                 setTimeout(() => {
-                    document.querySelector('button:nth-child(1)').textContent = originalText;
+                    copyBtn.textContent = originalText;
                 }, 1000);
             }
         }
