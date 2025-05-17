@@ -10,7 +10,7 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,45 +19,62 @@
         }
         .container {
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(15, 23, 42, 0.9);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .container::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-            z-index: -1;
-            animation: rotate 20s linear infinite;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 17px;
+            background: linear-gradient(45deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 400% 400%;
+            z-index: -2;
+            animation: rgbBorderAnimation 8s linear infinite;
         }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes rgbBorderAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            background: rgba(15, 23, 42, 0.9);
+            z-index: -1;
         }
         h1 {
-            color: #333;
+            color: #fff;
             margin: 5px 0;
             font-size: 28px;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background: linear-gradient(90deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
             animation: rgbTextAnimation 6s linear infinite;
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
+            letter-spacing: 1px;
         }
         @keyframes rgbTextAnimation {
             0% { background-position: 0% 50%; }
@@ -65,33 +82,35 @@
         }
         .subtitle {
             font-size: 14px;
-            color: #666;
+            color: #a1a1aa;
             letter-spacing: 1px;
+            margin-bottom: 5px;
         }
         hr {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             margin: 15px 0;
         }
         .name-display, .password-display {
             font-size: 20px;
             margin: 15px 0;
             padding: 12px;
-            border: 1px dashed #ccc;
+            border: 1px solid rgba(255,255,255,0.1);
             min-height: 30px;
             border-radius: 8px;
-            background: white;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            color: #444;
+            color: #f8fafc;
         }
         .password-display {
             font-family: monospace;
+            letter-spacing: 1px;
         }
         .name-display:hover, .password-display:hover {
-            border-color: #aaa;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
         }
         .top-buttons {
             display: flex;
@@ -118,12 +137,14 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
             font-size: 13px;
             z-index: 1;
             flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
         button::before {
             content: '';
@@ -132,83 +153,75 @@
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: 8px;
-            z-index: -1;
-            animation: rgbBorderAnimation 3s linear infinite;
-        }
-        @keyframes rgbBorderAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        button:active {
-            transform: translateY(1px);
-        }
-        .telegram-btn {
-            background: linear-gradient(45deg, #3b5998, #4c70ba);
-        }
-        .telegram-btn::before {
-            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
-            background-size: 300% 300%;
-        }
-        .admin-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
-        }
-        .admin-btn::before {
-            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
-            background-size: 300% 300%;
-        }
-        .copy-btn {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d);
-        }
-        .copy-btn::before {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
-            background-size: 300% 300%;
-        }
-        .change-btn {
-            background: linear-gradient(45deg, #00b09b, #96c93d);
-        }
-        .change-btn::before {
-            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
-            background-size: 300% 300%;
-        }
-        .rgb-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 15px;
-            padding: 2px;
-            background: linear-gradient(135deg, 
+            background: linear-gradient(45deg, 
                 #ff0000, #ff7f00, #ffff00, #00ff00, 
                 #0000ff, #4b0082, #9400d3, #ff0000);
             background-size: 400% 400%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
             z-index: -1;
-            animation: rgbAnimation 6s linear infinite;
+            border-radius: 8px;
+        }
+        button:hover::before {
+            opacity: 0.7;
+            animation: rgbAnimation 3s linear infinite;
         }
         @keyframes rgbAnimation {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        .telegram-btn {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        .admin-btn {
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+        .copy-btn {
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        .change-btn {
+            border: 1px solid rgba(139, 92, 246, 0.5);
+        }
         .label {
             font-size: 16px;
             margin-bottom: 5px;
-            color: #555;
+            color: #e2e8f0;
             font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .rgb-light {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(255,0,0,0.1) 0%, 
+                rgba(255,127,0,0.1) 20%, 
+                rgba(255,255,0,0.1) 40%, 
+                rgba(0,255,0,0.1) 60%, 
+                rgba(0,0,255,0.1) 80%, 
+                rgba(75,0,130,0.1) 100%);
+            z-index: -3;
+            animation: rgbLightAnimation 10s linear infinite;
+            opacity: 0.5;
+        }
+        @keyframes rgbLightAnimation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="rgb-border"></div>
+        <div class="rgb-light"></div>
         
         <div class="top-buttons">
             <button class="telegram-btn" onclick="window.open('https://www.t.me/earningbyhabib', '_blank')">
@@ -223,7 +236,7 @@
         <h1>EARNING BY HABIB</h1>
         <hr>
         
-        <!-- Password Section (Now at the Top) -->
+        <!-- Password Section -->
         <div class="label">Password:</div>
         <div class="password-display" id="passwordDisplay"></div>
         
@@ -234,7 +247,7 @@
             </div>
         </div>
         
-        <!-- Name Section (Now at the Bottom) -->
+        <!-- Name Section -->
         <div class="label" style="margin-top: 20px;">Name:</div>
         <div class="name-display" id="nameDisplay"></div>
         
@@ -245,112 +258,115 @@
             </div>
         </div>
 
-    <script>
-        // Name Generator
-        const bangladeshiGirlNames = [
-         "Jiří Vlček", "Ágnes Kovács", "Günter Schröder", "Mária Szabó", "Łukasz Nowak", 
-"François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski",
-        ];
+<script>
+    // Name Generator
+    const bangladeshiGirlNames = [
+        "Jiří Vlček", "Ágnes Kovács", "Günter Schröder", "Mária Szabó", "Łukasz Nowak", 
+        "François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski",
+    ];
 
-        function changeName() {
-            const nameElement = document.getElementById('nameDisplay');
-            const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
-            nameElement.textContent = bangladeshiGirlNames[randomIndex];
-            nameElement.style.transform = 'scale(0.9)';
-            setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
+    function changeName() {
+        const nameElement = document.getElementById('nameDisplay');
+        const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
+        nameElement.textContent = bangladeshiGirlNames[randomIndex];
+        nameElement.style.transform = 'scale(0.9)';
+        setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
+    }
+
+    function copyName() {
+        const nameToCopy = document.getElementById('nameDisplay').textContent;
+        if (nameToCopy) {
+            navigator.clipboard.writeText(nameToCopy);
+            const copyBtn = document.querySelectorAll('.copy-btn')[1];
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
         }
+    }
 
-        function copyName() {
-            const nameToCopy = document.getElementById('nameDisplay').textContent;
-            if (nameToCopy) {
-                navigator.clipboard.writeText(nameToCopy);
-                const copyBtn = document.querySelectorAll('.copy-btn')[1];
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copied!';
-                setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
-            }
-         }
-
-        // Password Generator with TODAY's date
-        function generatePassword() {
-            const length = 10;
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
-            let password = "";
-            
-            password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
-            password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            password += getRandomChar("0123456789");
-            password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
-            
-            for (let i = 4; i < length; i++) {
-                password += getRandomChar(charset);
-            }
-            
-            password = shuffleString(password);
-            
-            // Add TODAY's date (2 digits)
-            const today = new Date();
-            const currentDay = today.getDate().toString().padStart(2, '0');
-            password += currentDay;
-            
-            document.getElementById('passwordDisplay').textContent = password;
-            document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
-            setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
-        }
-
-        // Auto-Change System for 11 PM Daily
-        function setupDailyAutoChange() {
-            const now = new Date();
-            const changeTime = new Date();
-            
-            // Set target time to 11 PM (23:00)
-            changeTime.setHours(23, 0, 0, 0);
-            
-            // If it's already past 11 PM, schedule for next day
-            if (now > changeTime) {
-                changeTime.setDate(changeTime.getDate() + 1);
-            }
-            
-            const timeUntilChange = changeTime - now;
-            
-            setTimeout(() => {
-                generatePassword(); // Generate with next day's date
-                // Set daily interval (24 hours) to update password with new date
-                setInterval(generatePassword, 24 * 60 * 60 * 1000);
-            }, timeUntilChange);
-        }
-
-        // Helper functions
-        function getRandomChar(charSet) {
-            return charSet.charAt(Math.floor(Math.random() * charSet.length));
+    // Password Generator with TODAY's date
+    function generatePassword() {
+        const length = 10;
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
+        let password = "";
+        
+        password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
+        password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        password += getRandomChar("0123456789");
+        password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
+        
+        for (let i = 4; i < length; i++) {
+            password += getRandomChar(charset);
         }
         
-        function shuffleString(str) {
-            const array = str.split('');
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array.join('');
+        password = shuffleString(password);
+        
+        // Add TODAY's date (2 digits)
+        const today = new Date();
+        const currentDay = today.getDate().toString().padStart(2, '0');
+        password += currentDay;
+        
+        document.getElementById('passwordDisplay').textContent = password;
+        document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
+        setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
+    }
+
+    // Auto-Change System for 11 PM Daily
+    function setupDailyAutoChange() {
+        // Generate password immediately with today's date
+        generatePassword();
+        
+        // Calculate time until next 11 PM
+        const now = new Date();
+        const targetTime = new Date();
+        
+        // Set target to today's 11 PM
+        targetTime.setHours(23, 0, 0, 0);
+        
+        // If it's already past 11 PM, set for tomorrow
+        if (now > targetTime) {
+            targetTime.setDate(targetTime.getDate() + 1);
         }
         
-        function copyPassword() {
-            const passwordToCopy = document.getElementById('passwordDisplay').textContent;
-            if (passwordToCopy) {
-                navigator.clipboard.writeText(passwordToCopy);
-                const copyBtn = document.querySelectorAll('.copy-btn')[1];
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copied!';
-                setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
-            }
-        }
+        const timeUntilTarget = targetTime - now;
+        
+        // Set timeout for next 11 PM
+        setTimeout(() => {
+            generatePassword(); // Generate at 11 PM
+            
+            // Then set interval for every 24 hours
+            setInterval(generatePassword, 24 * 60 * 60 * 1000);
+        }, timeUntilTarget);
+    }
 
-        // Initialize
-        window.onload = function() {
-            changeName();
-            generatePassword(); // This will show today's date
-            setupDailyAutoChange(); // This will schedule the 11 PM update
-        };
-    </script>
-</body>
-</html>
+    // Helper functions
+    function getRandomChar(charSet) {
+        return charSet.charAt(Math.floor(Math.random() * charSet.length));
+    }
+    
+    function shuffleString(str) {
+        const array = str.split('');
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array.join('');
+    }
+    
+    function copyPassword() {
+        const passwordToCopy = document.getElementById('passwordDisplay').textContent;
+        if (passwordToCopy) {
+            navigator.clipboard.writeText(passwordToCopy);
+            const copyBtn = document.querySelectorAll('.copy-btn')[1];
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
+        }
+    }
+
+    // Initialize
+    window.onload = function() {
+        changeName();
+        setupDailyAutoChange(); // This will handle initial generation and scheduling
+    };
+</script>
