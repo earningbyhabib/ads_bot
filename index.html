@@ -223,17 +223,8 @@
         <h1>EARNING BY HABIB</h1>
         <hr>
         
-        <div class="label">Name:</div>
-        <div class="name-display" id="nameDisplay"></div>
-        
-        <div class="action-buttons">
-            <div class="double-buttons">
-                <button class="copy-btn" onclick="copyName()">Copy Name</button>
-                <button class="change-btn" onclick="changeName()">Change Name</button>
-            </div>
-        </div>
-        
-        <div class="label" style="margin-top: 20px;">Password:</div>
+        <!-- Password Section (Now at the Top) -->
+        <div class="label">Password:</div>
         <div class="password-display" id="passwordDisplay"></div>
         
         <div class="action-buttons">
@@ -242,87 +233,23 @@
                 <button class="change-btn" onclick="generatePassword()">Generate Password</button>
             </div>
         </div>
+        
+        <!-- Name Section (Now at the Bottom) -->
+        <div class="label" style="margin-top: 20px;">Name:</div>
+        <div class="name-display" id="nameDisplay"></div>
+        
+        <div class="action-buttons">
+            <div class="double-buttons">
+                <button class="copy-btn" onclick="copyName()">Copy Name</button>
+                <button class="change-btn" onclick="changeName()">Change Name</button>
+            </div>
+        </div>
 
     <script>
         // Name Generator
         const bangladeshiGirlNames = [
          "Jiří Vlček", "Ágnes Kovács", "Günter Schröder", "Mária Szabó", "Łukasz Nowak", 
-"François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski", 
-"János Tóth", "Élodie Martin", "Žydrūnas Savickas", "Nádia Silva", "René García", 
-"Anneli Mäkinen", "Iván Rodríguez", "Hélène Dubois", "Štefan Kováč", "Oleksiy Petrenko", 
-"Grzegorz Brzęczyszczykiewicz", "Zsófia Farkas", "Jörg Müller", "Eszter Balogh", "Lærke Nielsen", 
-"Róisín O’Sullivan", "Péter Nagy", "Fiódor Dostoyevskiy", "Māris Kalniņš", "Čestmír Vyhnal", 
-"Béla Bartók", "Jürgen Köhler", "Sébastien Lefèvre", "Þórunn Sigurðardóttir", "Ľubomír Rehák", 
-"Raúl González", "Gísli Jónsson", "Ondřej Černý", "Eugen Ștefan", "Agnieszka Wójcik", 
-"Guðrún Ólafsdóttir", "Attila Molnár", "Håkon Andersen", "Ivar Bjørnson", "Łucja Kowalska", 
-"Rūta Meilutytė", "Sándor Petőfi", "Václav Havel", "Žaneta Vitkus", "Ömer Yılmaz", 
-"Jānis Bērziņš", "Dóra Kiss", "Cristóbal Mendoza", "Fréderic Moreau", "Gøran Pedersen", 
-"Ægir Thorsson", "Iñaki García", "Régis Leclerc", "Miroslav Svoboda", "Đorđe Petrović", 
-"László Kovács", "Jørgen Hansen", "Éva Török", "Ragnar Þórsson", "Siniša Marković", 
-"Véronique Laurent", "Krzysztof Kieślowski", "Þóra Magnúsdóttir", "Željko Ivanović", 
-"Alžběta Novotná", "Øyvind Larsen", "Ģirts Līcis", "Róbert Varga", "Séan O’Reilly", 
-"Géraldine Faure", "Tadeuš Mazowiecki", "Jónsi Sigurðsson", "Čedomir Popović", 
-"Børge Nielsen", "Dömötör Ádám", "Sigríður Einarsdóttir", "Ľudovít Feld", 
-"József Szabó", "Séraphine Morel", "Ælfred Jørgensen", "Gvido Pētersons", 
-"Rémy Girard", "Živa Kovač", "Hjördis Björnsson", "Ładislaus Nowicki", 
-"Étienne Rousseau", "Šárka Dvořáková", "Þórir Hafsteinsson", "Cäcilia Weber", 
-"Jördis Wagner", "Žydrė Petrauskaitė", "Fíona MacLeod", "Grégoire Lefèbvre", 
-"Ēriks Kalniņš", "Rúnar Sigurðsson", "Séverine Dubois", "Đinh Nguyen", 
-"Léa Moreau", "Žigmund Kováč", "Hróðgeir Björnsson", "Łukasz Wiśniewski", 
-"Édouard Laurent", "Šimon Horváth", "Þórður Jónsson", "César Fernández", 
-"Jürgen Müller", "Žan Lukas", "Hélèna Papadopoulos", "Łucja Zielińska", 
-"Réka Molnár", "Štefánia Ivanová", "Þórhildur Ólafsdóttir", "Günter Hoffmann", 
-"János Kádár", "Žofia Gallová", "Håvard Johansen", "Łukasz Szymański", 
-"Élodie Petit", "Štěpán Novák", "Þórunn Jónsdóttir", "Gísli Pálsson", 
-"Jørn Andersen", "Žaneta Kovačević", "Hjálmar Þórsson", "Łucja Nowak", 
-"Émile Durkheim", "Šárka Černá", "Þórir Guðmundsson", "Gérald Lemoine", 
-"Jürgen Klopp", "Žydrūnas Kavaliauskas", "Hróbjartur Árnason", "Łukasz Pawłowski", 
-"Éva Kovács", "Štefan Bán", "Þórir Óskarsson", "Günter Grass", 
-"János Arany", "Živa Mlakar", "Håkon Sigurdsson", "Łucja Dąbrowska", 
-"Étienne Balibar", "Šimon Petrov", "Þórður Þórðarson", "Gísli Örn", 
-"Jørgen Moe", "Željko Petrović", "Hjörtur Hilmarsson", "Łukasz Kamiński", 
-"Élodie Rousseau", "Štěpánka Svobodová", "Þóra Björnsdóttir", "Günter Netzer", 
-"János Bolyai", "Žofia Hrušovská", "Håvard Flørenes", "Łucja Mazur", 
-"Édouard Manet", "Šárka Kučerová", "Þórir Jónasson", "Gísli Gunnarsson", 
-"Jørn Lande", "Žydrūnas Savickas", "Hjálmar Friðgeirsson", "Łukasz Fabiański", 
-"Émile Zola", "Štefan Kiš", "Þórunn Lárusdóttir", "Günter Wallraff", 
-"János Hadik", "Živa Pirc", "Håkon Wium Lie", "Łucja Kaczmarek", 
-"Étienne de La Boétie", "Šimon Trnavský", "Þórður Pálsson", "Gísli Helgason", 
-"Jørgen Leth", "Željko Joksimović", "Hróðmar Sigurjónsson", "Łukasz Piszczek", 
-"Élodie Yung", "Štěpán Vachoušek", "Þóra Arnórsdóttir", "Günter Verheugen", 
-"János Martonyi", "Žofia Czakó", "Håkon Opdal", "Łucja Wójcik", 
-"Édouard Philippe", "Šárka Strachová", "Þórir Snær", "Gísli Þórðarson", 
-"Jørgen Randers", "Žydrūnas Karčemarskas", "Hjörtur Logi", "Łukasz Skorupski", 
-"Émile Jaques-Dalcroze", "Štefan Margita", "Þórunn Sveinsdóttir", "Günter Brus", 
-"János Áder", "Živa Lesjak", "Håvard Nordtveit", "Łucja Cieślak", 
-"Étienne Chouard", "Šimon Múčka", "Þórður Ingi", "Gísli Örn Garðarsson", 
-"Jørgen Vig Knudstorp", "Željko Obradović", "Hróbjartur Jónasson", "Łukasz Teodorczyk", 
-"Élodie Bouchez", "Štěpánka Matějková", "Þóra Tómasdóttir", "Günter Schabowski", 
-"János Hóvári", "Žofia Žiaková", "Håkon Evjen", "Łucja Górka", 
-"Édouard Glissant", "Šárka Záhrobská", "Þórir Örn", "Gísli Pálmason", 
-"Jørgen Lønne", "Žydrūnas Urbonas", "Hjálmar Jónsson", "Łukasz Trałka", 
-"Émile Littré", "Štefan Svitko", "Þórunn Óskarsdóttir", "Günter Guillaume", 
-"János Kóbor", "Živa Jelušič", "Håvard Bøkko", "Łucja Szewczyk", 
-"Étienne Tshisekedi", "Šimon Nemec", "Þórður Guðjónsson", "Gísli Sigurðsson", 
-"Jørgen Hansen", "Željko Komšić", "Hróðgeir Sigurðsson", "Łukasz Piszczek", 
-"Élodie Frégé", "Štěpán Pecháček", "Þóra Melsteð", "Günter Rexrodt", 
-"János Starker", "Žofia Polonyová", "Håkon Opdal", "Łucja Lewandowska", 
-"Édouard Balladur", "Šárka Kašpárková", "Þórir Guðnason", "Gísli Kristjánsson", 
-"Jørgen Høst", "Žydrūnas Savickas", "Hjörtur Hermannsson", "Łukasz Broź", 
-"Émile Benveniste", "Štefan Hríb", "Þórunn Kristjánsdóttir", "Günter Verheugen", 
-"János Ferencsik", "Živa Digon", "Håvard Vad Petersson", "Łucja Kruk", 
-"Étienne Klein", "Šimon Grech", "Þórður Valdimarsson", "Gísli Magnússon", 
-"Jørgen Ingmann", "Željko Ivanović", "Hróbjartur Guðmundsson", "Łukasz Szukała", 
-"Élodie Gossuin", "Štěpánka Hilgertová", "Þóra Dóra", "Günter Schabowski", 
-"János Kóbor", "Žofia Vajda", "Håkon Wium Lie", "Łucja Bielczyk", 
-"Édouard Herriot", "Šárka Pančochová", "Þórir Helgason", "Gísli Örn Garðarsson", 
-"Jørgen Moe", "Žydrūnas Karčemarskas", "Hjálmar Þórsson", "Łukasz Gikiewicz", 
-"Émile Durkheim", "Štefan Margita", "Þórunn Lárusdóttir", "Günter Netzer", 
-"János Arany", "Živa Mlakar", "Håkon Sigurdsson", "Łucja Dąbrowska", 
-"Étienne Balibar", "Šimon Petrov", "Þórður Þórðarson", "Gísli Örn", 
-"Jørgen Leth", "Željko Petrović", "Hjörtur Hilmarsson", "Łukasz Kamiński", 
-"Élodie Rousseau", "Štěpánka Svobodová", "Þóra Björnsdóttir", "Günter Grass", 
-"János Bolyai", "Žofia Hrušovská",
+"François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski",
         ];
 
         function changeName() {
@@ -337,12 +264,12 @@
             const nameToCopy = document.getElementById('nameDisplay').textContent;
             if (nameToCopy) {
                 navigator.clipboard.writeText(nameToCopy);
-                const copyBtn = document.querySelectorAll('.copy-btn')[0];
+                const copyBtn = document.querySelectorAll('.copy-btn')[1];
                 const originalText = copyBtn.textContent;
                 copyBtn.textContent = 'Copied!';
                 setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
             }
-        }
+         }
 
         // Password Generator with TODAY's date
         function generatePassword() {
