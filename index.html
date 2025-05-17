@@ -242,7 +242,6 @@
                 <button class="change-btn" onclick="generatePassword()">Generate Password</button>
             </div>
         </div>
-    </div>
 
     <script>
         // Name Generator
@@ -345,7 +344,7 @@
             }
         }
 
-        // Password Generator with NEXT DAY's date
+        // Password Generator with TODAY's date
         function generatePassword() {
             const length = 10;
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
@@ -362,11 +361,10 @@
             
             password = shuffleString(password);
             
-            // Add NEXT DAY's date (2 digits)
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            const nextDay = tomorrow.getDate().toString().padStart(2, '0');
-            password += nextDay;
+            // Add TODAY's date (2 digits)
+            const today = new Date();
+            const currentDay = today.getDate().toString().padStart(2, '0');
+            password += currentDay;
             
             document.getElementById('passwordDisplay').textContent = password;
             document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
@@ -389,8 +387,8 @@
             const timeUntilChange = changeTime - now;
             
             setTimeout(() => {
-                generatePassword();
-                // Set daily interval (24 hours)
+                generatePassword(); // Generate with next day's date
+                // Set daily interval (24 hours) to update password with new date
                 setInterval(generatePassword, 24 * 60 * 60 * 1000);
             }, timeUntilChange);
         }
@@ -423,8 +421,8 @@
         // Initialize
         window.onload = function() {
             changeName();
-            generatePassword();
-            setupDailyAutoChange();
+            generatePassword(); // This will show today's date
+            setupDailyAutoChange(); // This will schedule the 11 PM update
         };
     </script>
 </body>
