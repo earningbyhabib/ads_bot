@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন ফর্ম</title>
+    <title>লগইন/রেজিস্ট্রেশন</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,13 +12,16 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
-        .form-container {
+        .container {
             max-width: 500px;
             margin: 0 auto;
+        }
+        .form-container {
             background: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
         h1 {
             text-align: center;
@@ -33,6 +36,8 @@
             font-weight: bold;
         }
         input[type="text"],
+        input[type="email"],
+        input[type="tel"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
@@ -53,42 +58,122 @@
         .submit-btn:hover {
             background-color: #45a049;
         }
-        .register-link {
+        .toggle-link {
             text-align: center;
             margin-top: 15px;
         }
-        .register-link a {
+        .toggle-link a {
             color: #1a73e8;
             text-decoration: none;
             font-size: 14px;
         }
-        .register-link a:hover {
+        .toggle-link a:hover {
             text-decoration: underline;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>লগইন ফর্ম</h1>
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="username">ইউজার নাম</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">পাসওয়ার্ড</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <div class="form-group">
-                <button type="submit" class="submit-btn">লগইন করুন</button>
-            </div>
-            
-            <div class="register-link">
-                <a href="registration.html">রেজিস্ট্রেশন করুন</a>
-            </div>
-        </form>
+    <div class="container">
+        <!-- লগইন ফর্ম -->
+        <div id="login-form" class="form-container">
+            <h1>লগইন করুন</h1>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="login-username">ইউজার নাম</label>
+                    <input type="text" id="login-username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">পাসওয়ার্ড</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">লগইন করুন</button>
+                </div>
+                
+                <div class="toggle-link">
+                    অ্যাকাউন্ট নেই? <a href="#" id="show-register">রেজিস্ট্রেশন করুন</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- রেজিস্ট্রেশন ফর্ম -->
+        <div id="register-form" class="form-container hidden">
+            <h1>রেজিস্ট্রেশন ফর্ম</h1>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="reg-fullname">ফুল নাম</label>
+                    <input type="text" id="reg-fullname" name="fullname" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-email">ই-মেইল</label>
+                    <input type="email" id="reg-email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-mobile">মোবাইল নাম্বার</label>
+                    <input type="tel" id="reg-mobile" name="mobile" pattern="[+]{1}880[0-9]{9,10}" placeholder="+8801XXXXXXXXX" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-username">ইউজার নাম</label>
+                    <input type="text" id="reg-username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-password">পাসওয়ার্ড</label>
+                    <input type="password" id="reg-password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-confirm-password">পাসওয়ার্ড পুনরায় টাইপ করুন</label>
+                    <input type="password" id="reg-confirm-password" name="confirm_password" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">রেজিস্ট্রেশন ফর্ম</button>
+                </div>
+                
+                <div class="toggle-link">
+                    ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#" id="show-login">লগইন করুন</a>
+                </div>
+            </form>
+        </div>
     </div>
+
+    <script>
+        // ফর্ম টগল করার জন্য JavaScript
+        document.getElementById('show-register').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+        });
+
+        document.getElementById('show-login').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        });
+
+        // পাসওয়ার্ড মিলানো যাচাই
+        var password = document.getElementById("reg-password");
+        var confirm_password = document.getElementById("reg-confirm-password");
+
+        function validatePassword() {
+            if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("পাসওয়ার্ড মিলছে না");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 </body>
 </html>
