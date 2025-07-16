@@ -1,427 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EARNING BY HABIB</title>
+    <title>লগইন ফর্ম</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            background-color: #f5f5f5;
         }
-        .container {
+        .form-container {
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-            z-index: -1;
-            animation: rotate 20s linear infinite;
-        }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
+            text-align: center;
             color: #333;
-            margin: 5px 0;
-            font-size: 28px;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            animation: rgbTextAnimation 6s linear infinite;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: inline-block;
         }
-        @keyframes rgbTextAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        .form-group {
+            margin-bottom: 15px;
         }
-        .subtitle {
-            font-size: 14px;
-            color: #666;
-            letter-spacing: 1px;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
-        hr {
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
             border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
-            margin: 15px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
         }
-        .name-display, .password-display {
-            font-size: 20px;
-            margin: 15px 0;
-            padding: 12px;
-            border: 1px dashed #ccc;
-            min-height: 30px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            color: #444;
+        .submit-btn:hover {
+            background-color: #45a049;
         }
-        .password-display {
-            font-family: monospace;
-        }
-        .name-display:hover, .password-display:hover {
-            border-color: #aaa;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-        }
-        .top-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        .register-link {
+            text-align: center;
             margin-top: 15px;
         }
-        .double-buttons {
-            display: flex;
-            gap: 10px;
+        .register-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
         }
-        button {
-            padding: 8px 16px;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            font-size: 13px;
-            z-index: 1;
-            flex: 1;
-        }
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 8px;
-            z-index: -1;
-            animation: rgbBorderAnimation 3s linear infinite;
-        }
-        @keyframes rgbBorderAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        button:active {
-            transform: translateY(1px);
-        }
-        .telegram-btn {
-            background: linear-gradient(45deg, #3b5998, #4c70ba);
-        }
-        .telegram-btn::before {
-            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
-            background-size: 300% 300%;
-        }
-        .admin-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
-        }
-        .admin-btn::before {
-            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
-            background-size: 300% 300%;
-        }
-        .copy-btn {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d);
-        }
-        .copy-btn::before {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
-            background-size: 300% 300%;
-        }
-        .change-btn {
-            background: linear-gradient(45deg, #00b09b, #96c93d);
-        }
-        .change-btn::before {
-            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
-            background-size: 300% 300%;
-        }
-        .rgb-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 15px;
-            padding: 2px;
-            background: linear-gradient(135deg, 
-                #ff0000, #ff7f00, #ffff00, #00ff00, 
-                #0000ff, #4b0082, #9400d3, #ff0000);
-            background-size: 400% 400%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: -1;
-            animation: rgbAnimation 6s linear infinite;
-        }
-        @keyframes rgbAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .label {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
+        .register-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="rgb-border"></div>
-        
-        <div class="top-buttons">
-            <button class="telegram-btn" onclick="window.open('https://www.t.me/earningbyhabib', '_blank')">
-                Telegram Group
-            </button>
-            <button class="admin-btn" onclick="window.open('https://wa.me/8801601735574', '_blank')">
-                Admin Contact
-            </button>
-        </div>
-        
-        <p class="subtitle">Present By</p>
-        <h1>EARNING BY HABIB</h1>
-        <hr>
-        
-        <!-- Password Section (Now at the Top) -->
-        <div class="label">Password:</div>
-        <div class="password-display" id="passwordDisplay"></div>
-        
-        <div class="action-buttons">
-            <div class="double-buttons">
-                <button class="copy-btn" onclick="copyPassword()">Copy Password</button>
-                <button class="change-btn" onclick="generatePassword()">Generate Password</button>
+    <div class="form-container">
+        <h1>লগইন ফর্ম</h1>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="username">ইউজার নাম</label>
+                <input type="text" id="username" name="username" required>
             </div>
-        </div>
-        
-        <!-- Name Section (Now at the Bottom) -->
-        <div class="label" style="margin-top: 20px;">Name:</div>
-        <div class="name-display" id="nameDisplay"></div>
-        
-        <div class="action-buttons">
-            <div class="double-buttons">
-                <button class="copy-btn" onclick="copyName()">Copy Name</button>
-                <button class="change-btn" onclick="changeName()">Change Name</button>
-            </div>
-        </div>
-
-<script>
-    // Name Generator
-    const bangladeshiGirlNames = [
-        "তাসনিম আহমেদ", "সুমাইয়া খান", "ফাতিমা রহমান", "আয়েশা চৌধুরী", "জারা ইসলাম", 
-    "নুসরাত জাহান", "মাহি আক্তার", "প্রীতি দাস", "সানজিদা বেগম", "ইশরাত হোসেন", 
-    "জেরিন সুলতানা", "তানহা হক", "নিশাত আলম", "রুমা খাতুন", "শায়লা বানু", 
-    "ফারিহা সিদ্দিকা", "মেহজাবিন আহমেদ", "সাবা করিম", "নাবিলা রহমান", "ইরিন আক্তার", 
-    "ত্রিশা দাস", "ফাইজা ইসলাম", "রাইসা খান", "জান্নাত বেগম", "মালিহা হোসেন", 
-    "নাজিয়া সুলতানা", "সারিনা হক", "ঈশিতা আলম", "রিমা খাতুন", "সিমরান বানু",
-    "আফরিন সিদ্দিকা", "বুশরা আহমেদ", "চাঁদনী করিম", "ডালিয়া রহমান", "এশা আক্তার", 
-    "ফারজানা দাস", "গুলশান ইসলাম", "হেনা খান", "ইরা বেগম", "জয়া হোসেন", 
-    "কোনা সুলতানা", "লুবনা হক", "মিম আলম", "নাদিয়া খাতুন", "অয়েশী বানু", 
-    "পাপিয়া সিদ্দিকা", "কুররাতুলাইন আহমেদ", "রিনা করিম", "শারমিন রহমান", "তানিয়া আক্তার",
-    "উম্মে দাস", "ভাবনা ইসলাম", "ওয়ারদা খান", "জীনাত বেগম", "ইয়াসমিন হোসেন", 
-    "জাকিয়া সুলতানা", "অনিকা হক", "বিথি আলম", "চৈতি খাতুন", "দিশা বানু", 
-    "ইভা সিদ্দিকা", "ফাহিমা আহমেদ", "গীতা করিম", "হৃদি রহমান", "ইশা আক্তার",
-    "জুই দাস", "কৃষ্ণা ইসলাম", "লিজা খান", "মৌ বেগম", "নিলা হোসেন", 
-    "ওরা সুলতানা", "পূর্ণিমা হক", "কাজী আলম", "রিয়া খাতুন", "শিরিন বানু", 
-    "তুলি সিদ্দিকা", "উর্মি আহমেদ", "ভান্যা করিম", "রিতি রহমান", "জারা আক্তার",
-    "ইয়াসিরা দাস", "জিনিয়া ইসলাম", "অনিলা খান", "বৃষ্টি বেগম", "চম্পা হোসেন", 
-    "ডোলা সুলতানা", "এটি হক", "ফারিয়া আলম", "গুলশানারা খাতুন", "হাবিবা বানু", 
-    "ইরা সিদ্দিকা", "জান্নাতি আহমেদ", "কেয়া করিম", "লামিয়া রহমান", "মিথিলা আক্তার",
-    "নূপুর দাস", "অর্পা ইসলাম", "পিয়ালী খান", "কাদেরিয়া বেগম", "রশিদা হোসেন", 
-    "শবনম সুলতানা", "তিথি হক", "উষা আলম", "ভূমি খাতুন", "ওয়াজিফা বানু", 
-    "শাকি সিদ্দিকা", "ইয়ামিন আহমেদ", "জারা করিম", "আঞ্জুমান রহমান", "বিলকিস আক্তার",
-    "চাঁদনী দাস", "দীপা ইসলাম", "ইরাম খান", "ফরিদা বেগম", "গুরিয়া হোসেন", 
-    "হেনা সুলতানা", "ইশরাত হক", "জরিনা আলম", "কোহিনুর খাতুন", "লাইলি বানু", 
-    "মৌসুমী সিদ্দিকা", "নারগিস আহমেদ", "অয়শী করিম", "পাপিয়া রহমান", "কুইন্সি আক্তার",
-    "রুমা দাস", "শাহনাজ ইসলাম", "তাসলিমা খান", "উর্মিলা বেগম", "ভিকি হোসেন", 
-    "ওয়াজিয়া সুলতানা", "জারা হক", "ইয়াসমীন আলম", "জেবুন্নেছা খাতুন", "আফরোজা বানু", 
-    "বেলা সিদ্দিকা", "চুমকি আহমেদ", "ডোলা করিম", "এটি রহমান", "ফাহমিদা আক্তার",
-    "গুলাপ দাস", "হেনা ইসলাম", "ইসমাত খান", "জরিনা বেগম", "কুলসুম হোসেন", 
-    "লাকি সুলতানা", "মালা হক", "নিপা আলম", "ওরা খাতুন", "পূজা বানু", 
-    "কাজী সিদ্দিকা", "রিনা আহমেদ", "শাবনূর করিম", "টুম্পা রহমান", "উর্মি আক্তার",
-    "ভিকি দাস", "ওয়াজিয়া ইসলাম", "জারা খান", "ইয়াসমিন বেগম", "জাকিয়া হোসেন", 
-    "অনিকা সুলতানা", "বিথি হক", "চৈতি আলম", "দিশা খাতুন", "ইভা বানু", 
-    "ফাহিমা সিদ্দিকা", "গীতা আহমেদ", "হৃদি করিম", "ইশা রহমান", "জুই আক্তার",
-    "কৃষ্ণা দাস", "লিজা ইসলাম", "মৌ খান", "নিলা বেগম", "ওরা হোসেন", 
-    "পূর্ণিমা সুলতানা", "কাজী হক", "রিয়া আলম", "শিরিন খাতুন", "তুলি বানু", 
-    "উর্মি সিদ্দিকা", "ভান্যা আহমেদ", "রিতি করিম", "জারা রহমান", "ইয়াসিরা আক্তার",
-    "জিনিয়া দাস", "অনিলা ইসলাম", "বৃষ্টি খান", "চম্পা বেগম", "ডোলা হোসেন", 
-    "এটি সুলতানা", "ফারিয়া হক", "গুলশানারা আলম", "হাবিবা খাতুন", "ইরা বানু", 
-    "জান্নাতি সিদ্দিকা", "কেয়া আহমেদ", "লামিয়া করিম", "মিথিলা রহমান", "নূপুর আক্তার",
-    "অর্পা দাস", "পিয়ালী ইসলাম", "কাদেরিয়া খান", "রশিদা বেগম", "শবনম হোসেন", 
-    "তিথি সুলতানা", "উষা হক", "ভূমি আলম", "ওয়াজিফা খাতুন", "শাকি বানু", 
-    "ইয়ামিন সিদ্দিকা", "জারা আহমেদ", "আঞ্জুমান করিম", "বিলকিস রহমান", "চাঁদনী আক্তার",
-    "দীপা দাস", "ইরাম ইসলাম", "ফরিদা খান", "গুরিয়া বেগম", "হেনা হোসেন", 
-    "ইশরাত সুলতানা", "জরিনা হক", "কোহিনুর আলম", "লাইলি খাতুন", "মৌসুমী বানু", 
-    "নারগিস সিদ্দিকা", "অয়শী আহমেদ", "পাপিয়া করিম", "কুইন্সি রহমান", "রুমা আক্তার",
-    "শাহনাজ দাস", "তাসলিমা ইসলাম", "উর্মিলা খান", "ভিকি বেগম", "ওয়াজিয়া হোসেন", 
-    "জারা সুলতানা", "ইয়াসমীন হক", "জেবুন্নেছা আলম", "আফরোজা খাতুন", "বেলা বানু", 
-    "চুমকি সিদ্দিকা", "ডোলা আহমেদ", "এটি করিম", "ফাহমিদা রহমান", "গুলাপ আক্তার",
-    "হেনা দাস", "ইসমাত ইসলাম", "জরিনা খান", "কুলসুম বেগম", "লাকি হোসেন", 
-    "মালা সুলতানা", "নিপা হক", "ওরা আলম", "পূজা খাতুন", "কাজী বানু", 
-    "রিনা সিদ্দিকা", "শাবনূর আহমেদ", "টুম্পা করিম", "উর্মি রহমান", "ভিকি আক্তার",
-    "ওয়াজিয়া দাস", "জারা ইসলাম", "ইয়াসমিন খান", "জাকিয়া বেগম", "অনিকা হোসেন", 
-    "বিথি সুলতানা", "চৈতি হক", "দিশা আলম", "ইভা খাতুন", "ফাহিমা বানু", 
-    "গীতা সিদ্দিকা", "হৃদি আহমেদ", "ইশা করিম", "জুই রহমান", "কৃষ্ণা আক্তার",
-    "লিজা দাস", "মৌ ইসলাম", "নিলা খান", "ওরা বেগম", "পূর্ণিমা হোসেন", 
-    "কাজী সুলতানা", "রিয়া হক", "শিরিন আলম", "তুলি খাতুন", "উর্মি বানু", 
-    "ভান্যা সিদ্দিকা", "রিতি আহমেদ", "জারা করিম", "ইয়াসিরা রহমান", "জিনিয়া আক্তার",
-    "অনিলা দাস", "বৃষ্টি ইসলাম", "চম্পা খান", "ডোলা বেগম", "এটি হোসেন", 
-    "ফারিয়া সুলতানা", "গুলশানারা হক", "হাবিবা আলম", "ইরা খাতুন", "জান্নাতি বানু", 
-    "কেয়া সিদ্দিকা", "লামিয়া আহমেদ", "মিথিলা করিম", "নূপুর রহমান", "অর্পা আক্তার",
-    "পিয়ালী দাস", "কাদেরিয়া ইসলাম", "রশিদা খান", "শবনম বেগম", "তিথি হোসেন", 
-    "উষা সুলতানা", "ভূমি হক", "ওয়াজিফা আলম", "শাকি খাতুন", "ইয়ামিন বানু", 
-    "জারা সিদ্দিকা", "আঞ্জুমান আহমেদ", "বিলকিস করিম", "চাঁদনী রহমান", "দীপা আক্তার",
-    "ইরাম দাস", "ফরিদা ইসলাম", "গুরিয়া খান", "হেনা বেগম", "ইশরাত হোসেন", 
-    "জরিনা সুলতানা", "কোহিনুর হক", "লাইলি আলম", "মৌসুমী খাতুন", "নারগিস বানু", 
-    "অয়শী সিদ্দিকা", "পাপিয়া আহমেদ", "কুইন্সি করিম", "রুমা রহমান", "শাহনাজ আক্তার",
-    "তাসলিমা দাস", "উর্মিলা ইসলাম", "ভিকি খান", "ওয়াজিয়া বেগম", "জারা হোসেন", 
-    "ইয়াসমীন সুলতানা", "জেবুন্নেছা হক", "আফরোজা আলম", "বেলা খাতুন", "চুমকি বানু", 
-    "ডোলা সিদ্দিকা", "এটি আহমেদ", "ফাহমিদা করিম",
-    ];
-
-    function changeName() {
-        const nameElement = document.getElementById('nameDisplay');
-        const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
-        nameElement.textContent = bangladeshiGirlNames[randomIndex];
-        nameElement.style.transform = 'scale(0.9)';
-        setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
-    }
-
-    function copyName() {
-        const nameToCopy = document.getElementById('nameDisplay').textContent;
-        if (nameToCopy) {
-            navigator.clipboard.writeText(nameToCopy);
-            const copyBtn = document.querySelectorAll('.copy-btn')[1];
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
-            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
-        }
-    }
-
-    // Password Generator with TODAY's date
-    function generatePassword() {
-        const length = 10;
-        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
-        let password = "";
-        
-        password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
-        password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        password += getRandomChar("0123456789");
-        password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
-        
-        for (let i = 4; i < length; i++) {
-            password += getRandomChar(charset);
-        }
-        
-        password = shuffleString(password);
-        
-        // Add TODAY's date (2 digits)
-        const today = new Date();
-        const currentDay = today.getDate().toString().padStart(2, '0');
-        password += currentDay;
-        
-        document.getElementById('passwordDisplay').textContent = password;
-        document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
-        setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
-    }
-
-    // Auto-Change System for 11 PM Daily
-    function setupDailyAutoChange() {
-        // Generate password immediately with today's date
-        generatePassword();
-        
-        // Calculate time until next 11 PM
-        const now = new Date();
-        const targetTime = new Date();
-        
-        // Set target to today's 11 PM
-        targetTime.setHours(23, 0, 0, 0);
-        
-        // If it's already past 11 PM, set for tomorrow
-        if (now > targetTime) {
-            targetTime.setDate(targetTime.getDate() + 1);
-        }
-        
-        const timeUntilTarget = targetTime - now;
-        
-        // Set timeout for next 11 PM
-        setTimeout(() => {
-            generatePassword(); // Generate at 11 PM
             
-            // Then set interval for every 24 hours
-            setInterval(generatePassword, 24 * 60 * 60 * 1000);
-        }, timeUntilTarget);
-    }
-
-    // Helper functions
-    function getRandomChar(charSet) {
-        return charSet.charAt(Math.floor(Math.random() * charSet.length));
-    }
-    
-    function shuffleString(str) {
-        const array = str.split('');
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array.join('');
-    }
-    
-    function copyPassword() {
-        const passwordToCopy = document.getElementById('passwordDisplay').textContent;
-        if (passwordToCopy) {
-            navigator.clipboard.writeText(passwordToCopy);
-            const copyBtn = document.querySelectorAll('.copy-btn')[1];
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
-            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
-        }
-    }
-
-    // Initialize
-    window.onload = function() {
-        changeName();
-        setupDailyAutoChange(); // This will handle initial generation and scheduling
-    };
-</script>
+            <div class="form-group">
+                <label for="password">পাসওয়ার্ড</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">লগইন করুন</button>
+            </div>
+            
+            <div class="register-link">
+                <a href="registration.html">রেজিস্ট্রেশন করুন</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
