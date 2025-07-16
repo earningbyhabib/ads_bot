@@ -1,523 +1,359 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন ও ড্যাশবোর্ড</title>
+    <title>EARNING BY HABIB</title>
     <style>
-        /* কমন স্টাইল */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        /* লগইন/রেজিস্ট্রেশন স্টাইল */
-        .auth-container {
-            max-width: 500px;
-            margin: 50px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
             padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        
-        .auth-title {
-            text-align: center;
-            color: #4CAF50;
-            margin-bottom: 30px;
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            color: #333;
+            margin: 5px 0;
             font-size: 28px;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: rgbTextAnimation 6s linear infinite;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+        @keyframes rgbTextAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-        
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        
-        .toggle-link {
-            text-align: center;
-            margin-top: 20px;
+        .subtitle {
+            font-size: 14px;
             color: #666;
+            letter-spacing: 1px;
         }
-        
-        .toggle-link a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: bold;
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 15px 0;
         }
-
-        /* ড্যাশবোর্ড স্টাইল (আপনার দেওয়া কোড) */
-        #dashboard-page {
-            padding-bottom: 80px;
+        .name-display, .password-display {
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px dashed #ccc;
+            min-height: 30px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            color: #444;
         }
-        
-        header {
+        .password-display {
+            font-family: monospace;
+        }
+        .name-display:hover, .password-display:hover {
+            border-color: #aaa;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+        }
+        .top-buttons {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4CAF50;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .profile-notification {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .profile-icon, .notification-icon, .menu-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .slider-container {
-            width: 90%;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .slider {
-            width: 100%;
-            height: 150px;
-            background-color: #4CAF50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-        }
-        
-        .notice-line {
-            width: 90%
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        .notice-text {
-            display: inline-block;
-            animation: scrollText 20s linear infinite;
-        }
-        
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .button-section {
-            width: 90%;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .big-button {
-            padding: 30px 15px;
-            border-radius: 10px;
-            background-color: white;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 20px;
             gap: 10px;
-            text-align: center;
         }
-        
-        .big-button:hover {
-            transform: translateY(-5px);
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .double-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            font-size: 13px;
+            z-index: 1;
+            flex: 1;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 8px;
+            z-index: -1;
+            animation: rgbBorderAnimation 3s linear infinite;
+        }
+        @keyframes rgbBorderAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        button:hover {
+            transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-        
-        .big-button i {
-            font-size: 24px;
-            color: #4CAF50;
+        button:active {
+            transform: translateY(1px);
         }
-        
-        .video-section {
-            width: 90%;
-            margin: 20px auto;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .telegram-btn {
+            background: linear-gradient(45deg, #3b5998, #4c70ba);
         }
-        
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
+        .telegram-btn::before {
+            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
+            background-size: 300% 300%;
+        }
+        .admin-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+        }
+        .admin-btn::before {
+            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
+            background-size: 300% 300%;
+        }
+        .copy-btn {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d);
+        }
+        .copy-btn::before {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+            background-size: 300% 300%;
+        }
+        .change-btn {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+        .change-btn::before {
+            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
+            background-size: 300% 300%;
+        }
+        .rgb-border {
+            position: absolute;
+            top: 0;
             left: 0;
-            width: 100%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            z-index: 100;
-            gap: 15px;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(135deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 400% 400%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: -1;
+            animation: rgbAnimation 6s linear infinite;
         }
-        
-        .nav-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 12px;
-            color: #666;
-            text-decoration: none;
-            flex: 1;
-            max-width: 60px;
+        @keyframes rgbAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
-        
-        .nav-button i {
-            font-size: 20px;
+        .label {
+            font-size: 16px;
             margin-bottom: 5px;
-        }
-        
-        .premium-button {
-            background-color: #4CAF50;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: -20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            flex-shrink: 0;
-            margin: 0 10px;
-        }
-        
-        .success-message {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            color: #555;
+            font-weight: bold;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- লগইন পেজ -->
-    <div id="login-page" class="auth-container">
-        <div class="form-container">
-            <h1 class="auth-title">লগইন করুন</h1>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="login-username">ইউজারনেম</label>
-                    <input type="text" id="login-username" placeholder="আপনার ইউজারনেম লিখুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="login-password">পাসওয়ার্ড</label>
-                    <input type="password" id="login-password" placeholder="আপনার পাসওয়ার্ড লিখুন" required>
-                </div>
-                
-                <button type="submit" class="submit-btn">লগইন করুন</button>
-                
-                <div class="toggle-link">
-                    অ্যাকাউন্ট নেই? <a href="#" id="show-register">রেজিস্ট্রেশন করুন</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- রেজিস্ট্রেশন পেজ -->
-    <div id="register-page" class="auth-container hidden">
-        <div class="form-container">
-            <h1 class="auth-title">রেজিস্ট্রেশন করুন</h1>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="reg-fullname">পুরো নাম</label>
-                    <input type="text" id="reg-fullname" placeholder="আপনার পুরো নাম লিখুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-email">ইমেইল</label>
-                    <input type="email" id="reg-email" placeholder="আপনার ইমেইল লিখুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-mobile">মোবাইল নম্বর</label>
-                    <input type="tel" id="reg-mobile" pattern="[0-9]{9,0}" placeholder="01XXXXXXXXX" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-username">ইউজারনেম</label>
-                    <input type="text" id="reg-username" placeholder="একটি ইউজারনেম তৈরি করুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-password">পাসওয়ার্ড</label>
-                    <input type="password" id="reg-password" placeholder="একটি শক্তিশালী পাসওয়ার্ড দিন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-confirm-password">পাসওয়ার্ড নিশ্চিত করুন</label>
-                    <input type="password" id="reg-confirm-password" placeholder="পাসওয়ার্ড আবার লিখুন" required>
-                </div>
-                
-                <button type="submit" class="submit-btn">রেজিস্ট্রেশন সম্পন্ন করুন</button>
-                
-                <div class="toggle-link">
-                    ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#" id="show-login">লগইন করুন</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ড্যাশবোর্ড পেজ (আপনার দেওয়া হোমপেজ) -->
-    <div id="dashboard-page" class="hidden">
-        <!-- হেডার সেকশন -->
-        <header>
-            <div class="menu-icon">
-                <i class="fas fa-bars"></i>
-            </div>
-            
-            <div class="logo">ওয়েবসাইট লোগো</div>
-            
-            <div class="profile-notification">
-                <div class="notification-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="profile-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-            </div>
-        </header>
+    <div class="container">
+        <div class="rgb-border"></div>
         
-        <!-- স্লাইডার সেকশন -->
-        <div class="slider-container">
-            <div class="slider">
-                স্লাইডার ইমেজ/কন্টেন্ট
-            </div>
-        </div>
-        
-        <!-- নোটিশ লাইন -->
-        <div class="notice-line">
-            <div class="notice-text">
-                🙋‍♂️আসসালামু আলাইকুম।  সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
-            </div>
-        </div>
-        
-        <!-- বাটন সেকশন -->
-        <div class="button-section">
-            <button class="big-button">
-                <i class="fas fa-question-circle"></i>
-                সহায়তা কেন্দ্র
+        <div class="top-buttons">
+            <button class="telegram-btn" onclick="window.open('https://www.t.me/earningbyhabib', '_blank')">
+                Telegram Group
             </button>
-            
-            <button class="big-button">
-                <i class="fas fa-user-friends"></i>
-                বন্ধুদের আমন্ত্রণ জানান
-            </button>
-            
-            <button class="big-button">
-                <i class="fas fa-download"></i>
-                ডাউনলোড করুন অ্যাপ
-            </button>
-            
-            <button class="big-button">
-                <i class="fas fa-video"></i>
-                ভিডিও টিউটোরিয়াল
-            </button>
-            
-            <button class="big-button" style="grid-column: 1 / span 2;">
-                <i class="fas fa-info-circle"></i>
-                আমাদের সম্পর্কে জানুন
+            <button class="admin-btn" onclick="window.open('https://wa.me/8801601735574', '_blank')">
+                Admin Contact
             </button>
         </div>
         
-        <!-- ভিডিও সেকশন -->
-        <div class="video-section">
-            <i class="fas fa-play-circle" style="font-size: 50px;"></i>
-            <p>শর্ট ভিডিও কন্টেন্ট</p>
+        <p class="subtitle">Present By</p>
+        <h1>EARNING BY HABIB</h1>
+        <hr>
+        
+        <!-- Password Section (Now at the Top) -->
+        <div class="label">Password:</div>
+        <div class="password-display" id="passwordDisplay"></div>
+        
+        <div class="action-buttons">
+            <div class="double-buttons">
+                <button class="copy-btn" onclick="copyPassword()">Copy Password</button>
+                <button class="change-btn" onclick="generatePassword()">Generate Password</button>
+            </div>
         </div>
         
-        <!-- নেভিগেশন বার -->
-        <div class="nav-bar">
-            <a href="#" class="nav-button">
-                <i class="fas fa-home"></i>
-                হোম
-            </a>
-            <a href="#" class="nav-button">
-                <i class="fas fa-tasks"></i>
-                টাস্ক
-            </a>
-            <div class="premium-button">
-                <i class="fas fa-crown"></i>
+        <!-- Name Section (Now at the Bottom) -->
+        <div class="label" style="margin-top: 20px;">Name:</div>
+        <div class="name-display" id="nameDisplay"></div>
+        
+        <div class="action-buttons">
+            <div class="double-buttons">
+                <button class="copy-btn" onclick="copyName()">Copy Name</button>
+                <button class="change-btn" onclick="changeName()">Change Name</button>
             </div>
-            <a href="#" class="nav-button">
-                <i class="fas fa-users"></i>
-                জয়েন করুন
-            </a>
-            <a href="#" class="nav-button">
-                <i class="fas fa-user"></i>
-                প্রোফাইল
-            </a>
         </div>
-    </div>
 
-    <script>
-        // ১. ফর্ম টগল করার ফাংশনালিটি
-        document.getElementById('show-register').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('register-page').classList.remove('hidden');
-        });
+<script>
+    // Name Generator
+    const bangladeshiGirlNames = [
+        "Jiří Vlček", "Ágnes Kovács", "Günter Schröder", "Mária Szabó", "Łukasz Nowak", 
+        "François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski",
+    ];
 
-        document.getElementById('show-login').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('register-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
-        });
+    function changeName() {
+        const nameElement = document.getElementById('nameDisplay');
+        const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
+        nameElement.textContent = bangladeshiGirlNames[randomIndex];
+        nameElement.style.transform = 'scale(0.9)';
+        setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
+    }
 
-        // ২. পাসওয়ার্ড মিলানো যাচাই
-        var password = document.getElementById("reg-password");
-        var confirm_password = document.getElementById("reg-confirm-password");
-
-        function validatePassword() {
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("পাসওয়ার্ড মিলছে না");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
+    function copyName() {
+        const nameToCopy = document.getElementById('nameDisplay').textContent;
+        if (nameToCopy) {
+            navigator.clipboard.writeText(nameToCopy);
+            const copyBtn = document.querySelectorAll('.copy-btn')[1];
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
         }
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+    }
 
-        // ৩. রেজিস্ট্রেশন ফাংশনালিটি
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('reg-username').value;
-            
-            // লোকাল স্টোরেজ চেক (ইউজারনেম ইউনিক কিনা)
-            if(localStorage.getItem(username)) {
-                alert("⚠️ এই ইউজারনেমটি ইতিমধ্যে নেওয়া হয়েছে!");
-                return;
-            }
-            
-            // নতুন ইউজার ডেটা
-            const user = {
-                fullname: document.getElementById('reg-fullname').value,
-                email: document.getElementById('reg-email').value,
-                mobile: document.getElementById('reg-mobile').value,
-                username: username,
-                password: document.getElementById('reg-password').value
-            };
-            
-            // ব্রাউজারের লোকাল স্টোরেজে সেভ করুন
-            localStorage.setItem(user.username, JSON.stringify(user));
-            
-            // সাকসেস মেসেজ সহ লগইন পেজে রিডাইরেক্ট
-            document.getElementById('register-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
-            alert("✅ রেজিস্ট্রেশন সফল! এখন লগইন করুন");
-        });
+    // Password Generator with TODAY's date
+    function generatePassword() {
+        const length = 10;
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
+        let password = "";
+        
+        password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
+        password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        password += getRandomChar("0123456789");
+        password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
+        
+        for (let i = 4; i < length; i++) {
+            password += getRandomChar(charset);
+        }
+        
+        password = shuffleString(password);
+        
+        // Add TODAY's date (2 digits)
+        const today = new Date();
+        const currentDay = today.getDate().toString().padStart(2, '0');
+        password += currentDay;
+        
+        document.getElementById('passwordDisplay').textContent = password;
+        document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
+        setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
+    }
 
-        // ৪. লগইন ফাংশনালিটি
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    // Auto-Change System for 11 PM Daily
+    function setupDailyAutoChange() {
+        // Generate password immediately with today's date
+        generatePassword();
+        
+        // Calculate time until next 11 PM
+        const now = new Date();
+        const targetTime = new Date();
+        
+        // Set target to today's 11 PM
+        targetTime.setHours(23, 0, 0, 0);
+        
+        // If it's already past 11 PM, set for tomorrow
+        if (now > targetTime) {
+            targetTime.setDate(targetTime.getDate() + 1);
+        }
+        
+        const timeUntilTarget = targetTime - now;
+        
+        // Set timeout for next 11 PM
+        setTimeout(() => {
+            generatePassword(); // Generate at 11 PM
             
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            
-            // লোকাল স্টোরেজ থেকে ইউজার ডেটা লোড
-            const user = JSON.parse(localStorage.getItem(username));
-            
-            if(user && user.password === password) {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('dashboard-page').classList.remove('hidden');
-            } else {
-                alert("❌ ভুল ইউজারনেম বা পাসওয়ার্ড! আবার চেষ্টা করুন");
-            }
-        });
-    </script>
-</body>
-</html>
+            // Then set interval for every 24 hours
+            setInterval(generatePassword, 24 * 60 * 60 * 1000);
+        }, timeUntilTarget);
+    }
+
+    // Helper functions
+    function getRandomChar(charSet) {
+        return charSet.charAt(Math.floor(Math.random() * charSet.length));
+    }
+    
+    function shuffleString(str) {
+        const array = str.split('');
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array.join('');
+    }
+    
+    function copyPassword() {
+        const passwordToCopy = document.getElementById('passwordDisplay').textContent;
+        if (passwordToCopy) {
+            navigator.clipboard.writeText(passwordToCopy);
+            const copyBtn = document.querySelectorAll('.copy-btn')[1];
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
+        }
+    }
+
+    // Initialize
+    window.onload = function() {
+        changeName();
+        setupDailyAutoChange(); // This will handle initial generation and scheduling
+    };
+</script>
