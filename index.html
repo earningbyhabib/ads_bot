@@ -125,21 +125,6 @@
             z-index: 1;
             flex: 1;
         }
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 8px;
-            z-index: -1;
-            animation: rgbBorderAnimation 3s linear infinite;
-        }
-        @keyframes rgbBorderAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -150,30 +135,14 @@
         .telegram-btn {
             background: linear-gradient(45deg, #3b5998, #4c70ba);
         }
-        .telegram-btn::before {
-            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
-            background-size: 300% 300%;
-        }
         .admin-btn {
             background: linear-gradient(45deg, #25D366, #128C7E);
-        }
-        .admin-btn::before {
-            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
-            background-size: 300% 300%;
         }
         .copy-btn {
             background: linear-gradient(45deg, #833ab4, #fd1d1d);
         }
-        .copy-btn::before {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
-            background-size: 300% 300%;
-        }
         .change-btn {
             background: linear-gradient(45deg, #00b09b, #96c93d);
-        }
-        .change-btn::before {
-            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
-            background-size: 300% 300%;
         }
         .rgb-border {
             position: absolute;
@@ -204,11 +173,33 @@
             color: #555;
             font-weight: bold;
         }
+        .banner-ad {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .social-ad {
+            margin: 20px 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="rgb-border"></div>
+        
+        <!-- ব্যানার অ্যাড -->
+        <div class="banner-ad">
+            <script type="text/javascript">
+                atOptions = { 
+                    'key': 'c3ef9a757b7897fe421c93374d061946',
+                    'format': 'iframe',
+                    'height': 50,
+                    'width': 320,
+                    'params': {} 
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/c3ef9a757b7897fe421c93374d061946/invoke.js"></script>
+        </div>
         
         <div class="top-buttons">
             <button class="telegram-btn" onclick="window.open('https://www.t.me/earningbyhabib', '_blank')">
@@ -222,6 +213,11 @@
         <p class="subtitle">Present By</p>
         <h1>EARNING BY HABIB</h1>
         <hr>
+        
+        <!-- সোশ্যাল বার অ্যাড -->
+        <div class="social-ad">
+            <script type='text/javascript' src='//pl27278657.profitableratecpm.com/1a/c5/7d/1ac57da8a82142ad962f0afc4ca8f086.js'></script>
+        </div>
         
         <div class="label">Name:</div>
         <div class="name-display" id="nameDisplay"></div>
@@ -242,93 +238,52 @@
                 <button class="change-btn" onclick="generatePassword()">Generate Password</button>
             </div>
         </div>
+    </div>
 
     <script>
-        // Name Generator
-        const bangladeshiGirlNames = [
-         "Jiří Vlček", "Ágnes Kovács", "Günter Schröder", "Mária Szabó", "Łukasz Nowak", 
-"François Dupont", "Søren Jensen", "Björn Löfven", "Katarína Horváth", "Andrzej Dąbrowski", 
-"János Tóth", "Élodie Martin", "Žydrūnas Savickas", "Nádia Silva", "René García", 
-"Anneli Mäkinen", "Iván Rodríguez", "Hélène Dubois", "Štefan Kováč", "Oleksiy Petrenko", 
-"Grzegorz Brzęczyszczykiewicz", "Zsófia Farkas", "Jörg Müller", "Eszter Balogh", "Lærke Nielsen", 
-"Róisín O’Sullivan", "Péter Nagy", "Fiódor Dostoyevskiy", "Māris Kalniņš", "Čestmír Vyhnal", 
-"Béla Bartók", "Jürgen Köhler", "Sébastien Lefèvre", "Þórunn Sigurðardóttir", "Ľubomír Rehák", 
-"Raúl González", "Gísli Jónsson", "Ondřej Černý", "Eugen Ștefan", "Agnieszka Wójcik", 
-"Guðrún Ólafsdóttir", "Attila Molnár", "Håkon Andersen", "Ivar Bjørnson", "Łucja Kowalska", 
-"Rūta Meilutytė", "Sándor Petőfi", "Václav Havel", "Žaneta Vitkus", "Ömer Yılmaz", 
-"Jānis Bērziņš", "Dóra Kiss", "Cristóbal Mendoza", "Fréderic Moreau", "Gøran Pedersen", 
-"Ægir Thorsson", "Iñaki García", "Régis Leclerc", "Miroslav Svoboda", "Đorđe Petrović", 
-"László Kovács", "Jørgen Hansen", "Éva Török", "Ragnar Þórsson", "Siniša Marković", 
-"Véronique Laurent", "Krzysztof Kieślowski", "Þóra Magnúsdóttir", "Željko Ivanović", 
-"Alžběta Novotná", "Øyvind Larsen", "Ģirts Līcis", "Róbert Varga", "Séan O’Reilly", 
-"Géraldine Faure", "Tadeuš Mazowiecki", "Jónsi Sigurðsson", "Čedomir Popović", 
-"Børge Nielsen", "Dömötör Ádám", "Sigríður Einarsdóttir", "Ľudovít Feld", 
-"József Szabó", "Séraphine Morel", "Ælfred Jørgensen", "Gvido Pētersons", 
-"Rémy Girard", "Živa Kovač", "Hjördis Björnsson", "Ładislaus Nowicki", 
-"Étienne Rousseau", "Šárka Dvořáková", "Þórir Hafsteinsson", "Cäcilia Weber", 
-"Jördis Wagner", "Žydrė Petrauskaitė", "Fíona MacLeod", "Grégoire Lefèbvre", 
-"Ēriks Kalniņš", "Rúnar Sigurðsson", "Séverine Dubois", "Đinh Nguyen", 
-"Léa Moreau", "Žigmund Kováč", "Hróðgeir Björnsson", "Łukasz Wiśniewski", 
-"Édouard Laurent", "Šimon Horváth", "Þórður Jónsson", "César Fernández", 
-"Jürgen Müller", "Žan Lukas", "Hélèna Papadopoulos", "Łucja Zielińska", 
-"Réka Molnár", "Štefánia Ivanová", "Þórhildur Ólafsdóttir", "Günter Hoffmann", 
-"János Kádár", "Žofia Gallová", "Håvard Johansen", "Łukasz Szymański", 
-"Élodie Petit", "Štěpán Novák", "Þórunn Jónsdóttir", "Gísli Pálsson", 
-"Jørn Andersen", "Žaneta Kovačević", "Hjálmar Þórsson", "Łucja Nowak", 
-"Émile Durkheim", "Šárka Černá", "Þórir Guðmundsson", "Gérald Lemoine", 
-"Jürgen Klopp", "Žydrūnas Kavaliauskas", "Hróbjartur Árnason", "Łukasz Pawłowski", 
-"Éva Kovács", "Štefan Bán", "Þórir Óskarsson", "Günter Grass", 
-"János Arany", "Živa Mlakar", "Håkon Sigurdsson", "Łucja Dąbrowska", 
-"Étienne Balibar", "Šimon Petrov", "Þórður Þórðarson", "Gísli Örn", 
-"Jørgen Moe", "Željko Petrović", "Hjörtur Hilmarsson", "Łukasz Kamiński", 
-"Élodie Rousseau", "Štěpánka Svobodová", "Þóra Björnsdóttir", "Günter Netzer", 
-"János Bolyai", "Žofia Hrušovská", "Håvard Flørenes", "Łucja Mazur", 
-"Édouard Manet", "Šárka Kučerová", "Þórir Jónasson", "Gísli Gunnarsson", 
-"Jørn Lande", "Žydrūnas Savickas", "Hjálmar Friðgeirsson", "Łukasz Fabiański", 
-"Émile Zola", "Štefan Kiš", "Þórunn Lárusdóttir", "Günter Wallraff", 
-"János Hadik", "Živa Pirc", "Håkon Wium Lie", "Łucja Kaczmarek", 
-"Étienne de La Boétie", "Šimon Trnavský", "Þórður Pálsson", "Gísli Helgason", 
-"Jørgen Leth", "Željko Joksimović", "Hróðmar Sigurjónsson", "Łukasz Piszczek", 
-"Élodie Yung", "Štěpán Vachoušek", "Þóra Arnórsdóttir", "Günter Verheugen", 
-"János Martonyi", "Žofia Czakó", "Håkon Opdal", "Łucja Wójcik", 
-"Édouard Philippe", "Šárka Strachová", "Þórir Snær", "Gísli Þórðarson", 
-"Jørgen Randers", "Žydrūnas Karčemarskas", "Hjörtur Logi", "Łukasz Skorupski", 
-"Émile Jaques-Dalcroze", "Štefan Margita", "Þórunn Sveinsdóttir", "Günter Brus", 
-"János Áder", "Živa Lesjak", "Håvard Nordtveit", "Łucja Cieślak", 
-"Étienne Chouard", "Šimon Múčka", "Þórður Ingi", "Gísli Örn Garðarsson", 
-"Jørgen Vig Knudstorp", "Željko Obradović", "Hróbjartur Jónasson", "Łukasz Teodorczyk", 
-"Élodie Bouchez", "Štěpánka Matějková", "Þóra Tómasdóttir", "Günter Schabowski", 
-"János Hóvári", "Žofia Žiaková", "Håkon Evjen", "Łucja Górka", 
-"Édouard Glissant", "Šárka Záhrobská", "Þórir Örn", "Gísli Pálmason", 
-"Jørgen Lønne", "Žydrūnas Urbonas", "Hjálmar Jónsson", "Łukasz Trałka", 
-"Émile Littré", "Štefan Svitko", "Þórunn Óskarsdóttir", "Günter Guillaume", 
-"János Kóbor", "Živa Jelušič", "Håvard Bøkko", "Łucja Szewczyk", 
-"Étienne Tshisekedi", "Šimon Nemec", "Þórður Guðjónsson", "Gísli Sigurðsson", 
-"Jørgen Hansen", "Željko Komšić", "Hróðgeir Sigurðsson", "Łukasz Piszczek", 
-"Élodie Frégé", "Štěpán Pecháček", "Þóra Melsteð", "Günter Rexrodt", 
-"János Starker", "Žofia Polonyová", "Håkon Opdal", "Łucja Lewandowska", 
-"Édouard Balladur", "Šárka Kašpárková", "Þórir Guðnason", "Gísli Kristjánsson", 
-"Jørgen Høst", "Žydrūnas Savickas", "Hjörtur Hermannsson", "Łukasz Broź", 
-"Émile Benveniste", "Štefan Hríb", "Þórunn Kristjánsdóttir", "Günter Verheugen", 
-"János Ferencsik", "Živa Digon", "Håvard Vad Petersson", "Łucja Kruk", 
-"Étienne Klein", "Šimon Grech", "Þórður Valdimarsson", "Gísli Magnússon", 
-"Jørgen Ingmann", "Željko Ivanović", "Hróbjartur Guðmundsson", "Łukasz Szukała", 
-"Élodie Gossuin", "Štěpánka Hilgertová", "Þóra Dóra", "Günter Schabowski", 
-"János Kóbor", "Žofia Vajda", "Håkon Wium Lie", "Łucja Bielczyk", 
-"Édouard Herriot", "Šárka Pančochová", "Þórir Helgason", "Gísli Örn Garðarsson", 
-"Jørgen Moe", "Žydrūnas Karčemarskas", "Hjálmar Þórsson", "Łukasz Gikiewicz", 
-"Émile Durkheim", "Štefan Margita", "Þórunn Lárusdóttir", "Günter Netzer", 
-"János Arany", "Živa Mlakar", "Håkon Sigurdsson", "Łucja Dąbrowska", 
-"Étienne Balibar", "Šimon Petrov", "Þórður Þórðarson", "Gísli Örn", 
-"Jørgen Leth", "Željko Petrović", "Hjörtur Hilmarsson", "Łukasz Kamiński", 
-"Élodie Rousseau", "Štěpánka Svobodová", "Þóra Björnsdóttir", "Günter Grass", 
-"János Bolyai", "Žofia Hrušovská",
+        // নামের লিস্ট (আপনি এখানে পরবর্তীতে যত খুশি নাম অ্যাড করতে পারবেন)
+        const names = [
+            "তানজিনা মিয়া", "মালিহা আক্তার", "মাহি খান", "নাজমুন শরীফ", "শাপলা তালুকদার",
+"মিম মিয়া", "জান্নাত মোল্লা", "মিম চৌধুরী", "জান্নাত তালুকদার", "শাপলা আক্তার",
+"মাহি কবির", "লামিয়া রহমান", "মুনমুন আক্তার", "পূর্ণিমা তালুকদার", "সাবিনা ইসলাম",
+"সালমা মোল্লা", "রুমানা শিকদার", "শারমিন হোসেন", "ফারজানা আহমেদ", "নুসরাত মজুমদার",
+"তানিয়া মোল্লা", "শাঞ্জিদা ভূঁইয়া", "আফসানা হোসেন", "সুমাইয়া মিয়া", "শাপলা বিশ্বাস",
+"সালমা তালুকদার", "মিম রহমান", "মালিহা আক্তার", "জান্নাত নাহার", "শারমিন মিয়া",
+"রুমানা আক্তার", "মাহি ইসলাম", "মুনমুন হোসেন", "সাবিনা খান", "তানিয়া কবির",
+"শারমিন মোল্লা", "ফারজানা তালুকদার", "সুমাইয়া ইসলাম", "নুসরাত আক্তার", "শাঞ্জিদা চৌধুরী",
+"সালমা রহমান", "তানজিনা হোসেন", "রুমানা মিয়া", "মিম শিকদার", "পূর্ণিমা আক্তার",
+"জান্নাত মিয়া", "আফসানা শরীফ", "সুমাইয়া মোল্লা", "তানিয়া মজুমদার", "শারমিন তালুকদার",
+"নুসরাত ইসলাম", "মালিহা হোসেন", "মিম আক্তার", "সাবিনা আহমেদ", "মাহি বিশ্বাস",
+"সালমা মজুমদার", "শাপলা তালুকদার", "শাঞ্জিদা রহমান", "ফারজানা ইসলাম", "মুনমুন আক্তার",
+"তানিয়া চৌধুরী", "রুমানা আহমেদ", "শারমিন শরীফ", "তানজিনা কবির", "মিম খান",
+"সালমা ইসলাম", "সাবিনা নাহার", "সুমাইয়া শিকদার", "মালিহা বিশ্বাস", "মাহি মিয়া",
+"পূর্ণিমা ইসলাম", "তানিয়া মোল্লা", "শারমিন মজুমদার", "মুনমুন খান", "ফারজানা কবির",
+"শাপলা ইসলাম", "আফসানা তালুকদার", "সালমা হোসেন", "নুসরাত বিশ্বাস", "জান্নাত তালুকদার",
+"মিম ইসলাম", "শাঞ্জিদা নাহার", "রুমানা কবির", "সুমাইয়া আহমেদ", "মাহি তালুকদার",
+"তানজিনা মোল্লা", "শারমিন চৌধুরী", "মালিহা মজুমদার", "পূর্ণিমা রহমান", "সাবিনা মিয়া",
+"আফসানা ইসলাম", "শাপলা হোসেন", "সালমা মিয়া", "তানিয়া ইসলাম", "জান্নাত বিশ্বাস",
+"মুনমুন তালুকদার", "শারমিন নাহার", "ফারজানা মোল্লা", "মিম কবির", "নুসরাত ইসলাম",
+"সুমাইয়া চৌধুরী", "শাঞ্জিদা ইসলাম", "মালিহা কবির", "মাহি আক্তার", "সালমা শিকদার",
+"পূর্ণিমা তালুকদার", "তানিয়া হোসেন", "জান্নাত ইসলাম", "মুনমুন মজুমদার", "শারমিন রহমান",
+"তানজিনা আক্তার", "সাবিনা ইসলাম", "আফসানা কবির", "মিম তালুকদার", "সুমাইয়া মজুমদার",
+"মাহি হোসেন", "শাপলা আক্তার", "নুসরাত মিয়া", "রুমানা তালুকদার", "সালমা আহমেদ",
+"ফারজানা ইসলাম", "তানিয়া মজুমদার", "জান্নাত শিকদার", "শারমিন ইসলাম", "মুনমুন মিয়া",
+"আফসানা মোল্লা", "মিম আহমেদ", "সাবিনা তালুকদার", "শাঞ্জিদা আহমেদ", "পূর্ণিমা মিয়া",
+"তানজিনা রহমান", "সুমাইয়া তালুকদার", "মালিহা ইসলাম", "মাহি রহমান", "শারমিন হোসেন",
+"সালমা ইসলাম", "নুসরাত আহমেদ", "শাপলা মোল্লা", "জান্নাত রহমান", "ফারজানা আক্তার",
+"মুনমুন আহমেদ", "সাবিনা রহমান", "মিম হোসেন", "তানিয়া তালুকদার", "আফসানা ইসলাম",
+"তানজিনা মজুমদার", "সুমাইয়া রহমান", "মালিহা আক্তার", "শারমিন কবির", "মাহি ইসলাম",
+"রুমানা ইসলাম", "সালমা মোল্লা", "শাপলা তালুকদার", "জান্নাত হোসেন", "পূর্ণিমা ইসলাম",
+"মুনমুন মজুমদার", "মিম ইসলাম", "তানিয়া মিয়া", "নুসরাত কবির", "শারমিন তালুকদার",
+"আফসানা আহমেদ", "শাঞ্জিদা মিয়া", "সাবিনা চৌধুরী", "মাহি মোল্লা", "শাপলা আহমেদ",
+"সালমা রহমান", "জান্নাত তালুকদার", "শারমিন ইসলাম", "তানজিনা কবির", "মিম আক্তার",
+"সুমাইয়া হোসেন", "মালিহা ইসলাম", "পূর্ণিমা আক্তার", "নুসরাত তালুকদার", "মুনমুন কবির",
         ];
-
+        
         function changeName() {
             const nameElement = document.getElementById('nameDisplay');
-            const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
-            nameElement.textContent = bangladeshiGirlNames[randomIndex];
+            const randomIndex = Math.floor(Math.random() * names.length);
+            nameElement.textContent = names[randomIndex];
             nameElement.style.transform = 'scale(0.9)';
             setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
         }
@@ -344,7 +299,6 @@
             }
         }
 
-        // Password Generator with TODAY's date
         function generatePassword() {
             const length = 10;
             const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
@@ -361,7 +315,7 @@
             
             password = shuffleString(password);
             
-            // Add TODAY's date (2 digits)
+            // আজকের তারিখ যোগ করা
             const today = new Date();
             const currentDay = today.getDate().toString().padStart(2, '0');
             password += currentDay;
@@ -371,15 +325,11 @@
             setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
         }
 
-        // Auto-Change System for 11 PM Daily
         function setupDailyAutoChange() {
             const now = new Date();
             const changeTime = new Date();
-            
-            // Set target time to 11 PM (23:00)
             changeTime.setHours(23, 0, 0, 0);
             
-            // If it's already past 11 PM, schedule for next day
             if (now > changeTime) {
                 changeTime.setDate(changeTime.getDate() + 1);
             }
@@ -387,13 +337,11 @@
             const timeUntilChange = changeTime - now;
             
             setTimeout(() => {
-                generatePassword(); // Generate with next day's date
-                // Set daily interval (24 hours) to update password with new date
+                generatePassword();
                 setInterval(generatePassword, 24 * 60 * 60 * 1000);
             }, timeUntilChange);
         }
 
-        // Helper functions
         function getRandomChar(charSet) {
             return charSet.charAt(Math.floor(Math.random() * charSet.length));
         }
@@ -418,11 +366,11 @@
             }
         }
 
-        // Initialize
+        // পেজ লোড হলে স্বয়ংক্রিয়ভাবে নাম ও পাসওয়ার্ড জেনারেট করা
         window.onload = function() {
             changeName();
-            generatePassword(); // This will show today's date
-            setupDailyAutoChange(); // This will schedule the 11 PM update
+            generatePassword();
+            setupDailyAutoChange();
         };
     </script>
 </body>
