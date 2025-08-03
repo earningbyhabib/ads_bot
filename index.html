@@ -33,8 +33,8 @@
             background-color: LightCyan;
             border-radius: 15px;
             padding: 8px 15px;
-            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
-            margin: 0 auto 15px;
+            box-shadow: 0 0px 25px rgba(255, 0, 0, 0.5);
+            margin: 0 auto 5px;
             position: relative;
             overflow: hidden;
             transform: perspective(500px) rotateX(10deg);
@@ -65,8 +65,14 @@
             white-space: nowrap;
             position: relative;
             z-index: 1;
-            text-shadow: 3px 5px 6px rgba(0, 0, 0, 0.5);
+            text-shadow: 3px 5px 60px rgba(0, 0, 0, 0.5);
             margin: 0;
+        }
+        .datetime {
+            font-size: 18px;
+            color: white;
+            margin-top: 50px;
+            text-align: center;
         }
 
         .container {
@@ -81,13 +87,18 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            animation: boxAppear 0.8s ease-out;
-            margin-top: 10px;
+            animation: boxAppear 0.8s ease-out, pulseBackground 4s ease-in-out infinite;
+            margin-top: 100px;
         }
 
         @keyframes boxAppear {
             from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulseBackground {
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 70px rgba(255, 0, 0, 0.70); }
         }
 
         .container::before {
@@ -97,14 +108,14 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,100,100,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255,100,100,0.1) 0%, rgba(255,255,255,0) 700%);
             z-index: -1;
             animation: rotate 20s linear infinite;
         }
 
         @keyframes rotate {
             0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            100% { transform: rotate(3600deg); }
         }
 
         .rgb-border {
@@ -132,40 +143,25 @@
             100% { background-position: 100% 50%; }
         }
 
-        .title-section {
-            text-align: center;
-            margin: 10px 0;
+        .scrolling-text-container {
             width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 10px 0;
         }
 
-        h1 {
-            color: #fff;
-            margin: 5px 0;
-            font-size: 24px;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            animation: rgbTextAnimation 6s linear infinite;
-            padding: 5px 10px;
-            border-radius: 5px;
+        .scrolling-text {
             display: inline-block;
-        }
-
-        @keyframes rgbTextAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
+            padding-left: 100%;
+            animation: scroll 15s linear infinite;
             font-size: 14px;
-            color: #aaa;
+            color: white;
             letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
-            text-align: center;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
 
         hr {
@@ -334,6 +330,7 @@
                 👑 EARNING BY HABIB 💸
             </div>
         </div>
+        <div class="datetime" id="datetime"></div>
     </div>
 
     <div class="container">
@@ -348,9 +345,8 @@
             </button>
         </div>
         
-        <div class="title-section">
-            <span class="subtitle">Present By</span>
-            <h1>EARNING BY HABIB</h1>
+        <div class="scrolling-text-container">
+            <div class="scrolling-text">★ Presented By ★ EARNING BY HABIB ★</div>
         </div>
         
         <hr>
@@ -378,9 +374,28 @@
         </div>
 
         <script>
+            // Update datetime
+            function updateDateTime() {
+                const now = new Date();
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                };
+                document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
+            }
+            
+            // Update datetime every second
+            setInterval(updateDateTime, 1000);
+            updateDateTime(); // Initial call
+
             // Name Generator
             const bangladeshiGirlNames = [
-                "মিম মিয়া", "জান্নাত মোল্লা", "মিম চৌধুরী", "জান্নাত তালুকদার", "শাপলা আক্তার",
+               "মিম মিয়া", "জান্নাত মোল্লা", "মিম চৌধুরী", "জান্নাত তালুকদার", "শাপলা আক্তার",
 "মাহি কবির", "লামিয়া রহমান", "মুনমুন আক্তার", "পূর্ণিমা তালুকদার", "সাবিনা ইসলাম",
 "সালমা মোল্লা", "রুমানা শিকদার", "শারমিন হোসেন", "ফারজানা আহমেদ", "নুসরাত মজুমদার",
 "তানিয়া মোল্লা", "শাঞ্জিদা ভূঁইয়া", "আফসানা হোসেন", "সুমাইয়া মিয়া", "শাপলা বিশ্বাস",
