@@ -1,95 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2FA Zone Custom View</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        
-        .banner {
-            width: 100%;
-            text-align: center;
-            background: #f0f0f0;
-            flex-shrink: 0;
-        }
-        
-        .top-banner {
-            height: 50px;
-        }
-        
-        .bottom-banner {
-            height: 50px;
-        }
-        
-        .content-area {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            background: #f5f5f5;
-        }
-        
-        .iframe-container {
-            width: 100%;
-            height: 60%;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>EARNING BY HABIB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0c0f1a;
+      color: #fff;
+    }
+
+    .header {
+      background-color: #111;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #00ffff;
+    }
+
+    .header h1 .emoji {
+      font-size: 20px;
+    }
+
+    .datetime {
+      font-size: 14px;
+      color: #33ccff;
+      margin-top: 5px;
+    }
+
+    .main-box {
+      background: #1a1a1a;
+      margin: 100px auto;
+      padding: 25px 20px;
+      max-width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 0 100px red;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 50px red;
+      }
+      50% {
+        box-shadow: 0 0 100px red;
+      }
+      100% {
+        box-shadow: 0 0 50px red;
+      }
+    }
+
+    .main-box h2 {
+      font-size: 23px;
+      color: #00aee;
+      margin-bottom: 15px;
+    }
+
+    .main-box input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: #333;
+      color: white;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 10px;
+      background-color: #00cc66;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn.red {
+      background-color: red;
+    }
+
+    .code-display {
+      color: #33ccff;
+      font-size: 36px;
+      letter-spacing: 10px;
+      margin-top: 20px;
+      background-color: #003366;
+      padding: 10px;
+      border-radius: 10px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-bar {
+      height: 3px;
+      background-color: #00cc66;
+      margin-top: 10px;
+      border-radius: 3px;
+      transition: width 1s linear;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #00cc66;
+      margin-top: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .scroll-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="banner top-banner">
-        <!-- Top Banner -->
-        <script type="text/javascript">
-            atOptions = {
-                'key': 'c3ef9a757b7897fe421c93374d061946',
-                'format': 'iframe',
-                'height': 50,
-                'width': 320,
-                'params': {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/c3ef9a757b7897fe421c93374d061946/invoke.js"></script>
-    </div>
-    
-    <div class="content-area">
-        <div class="iframe-container">
-            <iframe src="https://2fa.zone/" frameborder="0"></iframe>
-        </div>
-    </div>
-    
-    <div class="banner bottom-banner">
-        <!-- Bottom Banner -->
-        <script type="text/javascript">
-            atOptions = {
-                'key': 'c3ef9a757b7897fe421c93374d061946',
-                'format': 'iframe',
-                'height': 50,
-                'width': 320,
-                'params': {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/c3ef9a757b7897fe421c93374d061946/invoke.js"></script>
-    </div>
+
+  <div class="header">
+    <h1>🌊 <span class="emoji"> </span> 𝐄𝐀𝐑𝐍𝐈𝐍𝐆 𝐁𝐘 𝐇𝐀𝐁𝐈𝐁 🌊</h1>
+    <div class="datetime" id="datetime"></div>
+  </div>
+
+  <div class="main-box">
+    <h2>🔐 🇪 🇧 🇭  𝟐𝐅𝐀 𝐓𝐎𝐎𝐋𝐒 🔑</h2>
+    <input id="twofa" type="text" placeholder=" 𝐏𝐚𝐬𝐭𝐞 𝟐𝐅𝐀 𝐊𝐞𝐲 >🇪 🇧 🇭< 𝟐𝐅𝐀 𝐓𝐨𝐨𝐥𝐬 ">
+    <button class="btn" onclick="generateCode()">𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐞 & 𝐂𝐨𝐩𝐲 </button>
+    <button class="btn red" onclick="clearInput()">𝐂𝐥𝐞𝐚𝐫</button>
+    <div class="code-display" id="codeDisplay">------</div>
+    <div class="timer-bar" id="timerBar"></div>
+  </div>
+
+  <div class="footer">
+    <div class="scroll-text">ᚍᚔᚍ 𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐞𝐝 𝐁𝐲 ᚍᚔᚍ 𝐄𝐀𝐑𝐍𝐈𝐍𝐆 𝐁𝐘 𝐇𝐀𝐁𝐈𝐁</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    // Running date and time
+    function updateDateTime() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US');
+      const date = now.toLocaleDateString('en-GB');
+      document.getElementById("datetime").innerHTML = `⏰ ${time} <br>📅 ${date}`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    // Base32 decoding function
+    function base32Decode(base32) {
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+      base32 = base32.replace(/\s+/g, '').replace(/=+$/, '').toUpperCase();
+      
+      let bits = 0;
+      let value = 0;
+      let output = [];
+      
+      for (let i = 0; i < base32.length; i++) {
+        const char = base32[i];
+        const index = alphabet.indexOf(char);
+        
+        if (index === -1) {
+          throw new Error('Invalid Base32 character');
+        }
+        
+        value = (value << 5) | index;
+        bits += 5;
+        
+        if (bits >= 8) {
+          output.push((value >>> (bits - 8)) & 0xFF);
+          bits -= 8;
+        }
+      }
+      
+      return new Uint8Array(output);
+    }
+
+    // TOTP generation function
+    function generateTOTP(secret) {
+      try {
+        // Decode Base32 secret
+        const key = base32Decode(secret);
+        
+        // Convert key to WordArray for CryptoJS
+        const keyWA = CryptoJS.lib.WordArray.create(key);
+        
+        // Calculate time step (30 seconds)
+        const timeStep = 30;
+        const counter = Math.floor(Date.now() / 1000 / timeStep);
+        
+        // Convert counter to byte array (big-endian)
+        const counterBytes = new ArrayBuffer(8);
+        const counterView = new DataView(counterBytes);
+        counterView.setUint32(4, counter);
+        
+        // Calculate HMAC-SHA1
+        const counterWA = CryptoJS.lib.WordArray.create(new Uint8Array(counterBytes));
+        const hmac = CryptoJS.HmacSHA1(counterWA, keyWA);
+        const hmacHex = hmac.toString(CryptoJS.enc.Hex);
+        
+        // Dynamic truncation
+        const offset = parseInt(hmacHex.substr(39, 1), 16) * 2;
+        const otpHex = hmacHex.substr(offset, 8);
+        let otp = parseInt(otpHex, 16) & 0x7FFFFFFF;
+        
+        // Get last 6 digits
+        otp = otp % 1000000;
+        
+        // Pad with leading zeros if necessary
+        return otp.toString().padStart(6, '0');
+      } catch (e) {
+        console.error('Error generating TOTP:', e);
+        throw new Error('Invalid 2FA key');
+      }
+    }
+
+    let currentSecret = '';
+    let timerInterval;
+
+    function generateCode() {
+      const input = document.getElementById("twofa");
+      currentSecret = input.value.trim();
+      
+      if (!currentSecret) {
+        alert("Please enter a 2FA key");
+        return;
+      }
+      
+      updateCode();
+      startTimer();
+    }
+
+    function updateCode() {
+      try {
+        const code = generateTOTP(currentSecret);
+        document.getElementById("codeDisplay").textContent = code;
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(code).then(() => {
+          console.log('Code copied to clipboard');
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+        });
+      } catch (err) {
+        document.getElementById("codeDisplay").textContent = 'INVALID';
+      }
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      
+      function updateTimer() {
+        const now = Math.floor(Date.now() / 1000);
+        const remaining = 30 - (now % 30);
+        const percentage = (remaining / 30) * 100;
+        
+        document.getElementById("timerBar").style.width = percentage + '%';
+        
+        if (remaining <= 1) {
+          updateCode();
+        }
+      }
+      
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function clearInput() {
+      document.getElementById("twofa").value = '';
+      document.getElementById("codeDisplay").textContent = '------';
+      document.getElementById("timerBar").style.width = '0%';
+      clearInterval(timerInterval);
+      currentSecret = '';
+    }
+
+    // Auto-update when typing
+    document.getElementById("twofa").addEventListener('input', function() {
+      const secret = this.value.trim();
+      if (secret.length >= 16) {
+        currentSecret = secret;
+        updateCode();
+        startTimer();
+      }
+    });
+  </script>
 </body>
-</html> 
+</html>
