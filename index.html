@@ -5,30 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EARNING BY HABIB</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0c0f1a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-box {
+            background-color: LightCyan;
+            border-radius: 15px;
+            padding: 8px 15px;
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+            margin: 0 auto 15px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+            width: fit-content;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-box:hover {
+            transform: perspective(500px) rotateX(10deg) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.7);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+        }
+
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: 1000;
+            color: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 5px 6px rgba(0, 0, 0, 0.5);
+            margin: 0;
         }
+
         .container {
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
+            max-width: 450px;
+            width: calc(100% - 30px);
+            background: rgba(20, 20, 30, 0.9);
+            padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            animation: boxAppear 0.8s ease-out;
+            margin-top: 10px;
         }
+
+        @keyframes boxAppear {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         .container::before {
             content: '';
             position: absolute;
@@ -36,114 +97,16 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255,100,100,0.1) 0%, rgba(255,255,255,0) 70%);
             z-index: -1;
             animation: rotate 20s linear infinite;
         }
+
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        h1 {
-            color: #333;
-            margin: 5px 0;
-            font-size: 28px;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            animation: rgbTextAnimation 6s linear infinite;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-        @keyframes rgbTextAnimation {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .subtitle {
-            font-size: 14px;
-            color: #666;
-            letter-spacing: 1px;
-        }
-        hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
-            margin: 15px 0;
-        }
-        .name-display, .password-display {
-            font-size: 20px;
-            margin: 15px 0;
-            padding: 12px;
-            border: 1px dashed #ccc;
-            min-height: 30px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            color: #444;
-        }
-        .password-display {
-            font-family: monospace;
-        }
-        .name-display:hover, .password-display:hover {
-            border-color: #aaa;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-        }
-        .top-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .double-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        button {
-            padding: 8px 16px;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            font-size: 13px;
-            z-index: 1;
-            flex: 1;
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        button:active {
-            transform: translateY(1px);
-        }
-        .telegram-btn {
-            background: linear-gradient(45deg, #3b5998, #4c70ba);
-        }
-        .admin-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
-        }
-        .copy-btn {
-            background: linear-gradient(45deg, #833ab4, #fd1d1d);
-        }
-        .change-btn {
-            background: linear-gradient(45deg, #00b09b, #96c93d);
-        }
+
         .rgb-border {
             position: absolute;
             top: 0;
@@ -163,41 +126,219 @@
             z-index: -1;
             animation: rgbAnimation 6s linear infinite;
         }
+
         @keyframes rgbAnimation {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-        .label {
-            font-size: 16px;
+
+        .title-section {
+            text-align: center;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 5px 0;
+            font-size: 24px;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: rgbTextAnimation 6s linear infinite;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        @keyframes rgbTextAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #aaa;
+            letter-spacing: 1px;
             margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
+            display: block;
+            text-align: center;
         }
-        .banner-ad {
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .name-display, .password-display {
+            font-size: 18px;
+            margin: 12px auto;
+            padding: 10px;
+            border: 1px dashed #444;
+            min-height: 25px;
+            border-radius: 8px;
+            background: rgba(30, 30, 40, 0.7);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            color: #fff;
+            animation: inputAppear 0.5s ease-out;
+            width: 90%;
+            text-align: center;
+        }
+
+        @keyframes inputAppear {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .password-display {
+            font-family: monospace;
+        }
+
+        .name-display:hover, .password-display:hover {
+            border-color: #666;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 15px;
-            text-align: center;
+            gap: 10px;
+            animation: slideDown 0.7s ease-out;
         }
-        .social-ad {
-            margin: 20px 0;
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .double-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 8px 12px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            font-size: 13px;
+            z-index: 1;
+            min-width: 110px;
+            animation: buttonAppear 0.6s ease-out;
+        }
+
+        @keyframes buttonAppear {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 8px;
+            z-index: -1;
+            animation: rgbBorderAnimation 3s linear infinite;
+        }
+
+        @keyframes rgbBorderAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .telegram-btn {
+            background: linear-gradient(45deg, #3b5998, #4c70ba);
+        }
+
+        .telegram-btn::before {
+            background: linear-gradient(45deg, #3b5998, #4c70ba, #5d85dc, #3b5998);
+            background-size: 300% 300%;
+        }
+
+        .admin-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+        }
+
+        .admin-btn::before {
+            background: linear-gradient(45deg, #25D366, #128C7E, #075E54, #25D366);
+            background-size: 300% 300%;
+        }
+
+        .copy-btn {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d);
+        }
+
+        .copy-btn::before {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+            background-size: 300% 300%;
+        }
+
+        .change-btn {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+
+        .change-btn::before {
+            background: linear-gradient(45deg, #00b09b, #96c93d, #00b09b, #96c93d);
+            background-size: 300% 300%;
+        }
+
+        .label {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-weight: bold;
             text-align: center;
+            display: block;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="logo-box" onclick="window.location.href='https://earningbyhabib.github.io/Tempmail/Note.html'">
+            <div class="logo-text">
+                👑 EARNING BY HABIB 💸
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="rgb-border"></div>
         
-        <!-- ব্যানার অ্যাড -->
-        <div class="banner-ad">
-            <script type="text/javascript">
-                atOptions = { 
-                    'key': 'c3ef9a757b7897fe421c93374d061946',
-                    'format': 'iframe',
-                    'height': 50,
-                    'width': 320,
-                    'params': {} 
-                };
-            
         <div class="top-buttons">
             <button class="telegram-btn" onclick="window.open('https://www.t.me/earningbyhabib', '_blank')">
                 Telegram Group
@@ -207,26 +348,15 @@
             </button>
         </div>
         
-        <p class="subtitle">Present By</p>
-        <h1>EARNING BY HABIB</h1>
+        <div class="title-section">
+            <span class="subtitle">Present By</span>
+            <h1>EARNING BY HABIB</h1>
+        </div>
+        
         <hr>
         
-        <!-- সোশ্যাল বার অ্যাড -->
-        <div class="social-ad">
-            <script type='text/javascript' src='//pl27278657.profitableratecpm.com/1a/c5/7d/1ac57da8a82142ad962f0afc4ca8f086.js'></script>
-        </div>
-        
-        <div class="label">Name:</div>
-        <div class="name-display" id="nameDisplay"></div>
-        
-        <div class="action-buttons">
-            <div class="double-buttons">
-                <button class="copy-btn" onclick="copyName()">Copy Name</button>
-                <button class="change-btn" onclick="changeName()">Change Name</button>
-            </div>
-        </div>
-        
-        <div class="label" style="margin-top: 20px;">Password:</div>
+        <!-- Password Section -->
+        <div class="label">Password:</div>
         <div class="password-display" id="passwordDisplay"></div>
         
         <div class="action-buttons">
@@ -235,13 +365,22 @@
                 <button class="change-btn" onclick="generatePassword()">Generate Password</button>
             </div>
         </div>
-    </div>
+        
+        <!-- Name Section -->
+        <div class="label" style="margin-top: 15px;">Name:</div>
+        <div class="name-display" id="nameDisplay"></div>
+        
+        <div class="action-buttons">
+            <div class="double-buttons">
+                <button class="copy-btn" onclick="copyName()">Copy Name</button>
+                <button class="change-btn" onclick="changeName()">Change Name</button>
+            </div>
+        </div>
 
-    <script>
-        // নামের লিস্ট (আপনি এখানে পরবর্তীতে যত খুশি নাম অ্যাড করতে পারবেন)
-        const names = [
-            "তানজিনা মিয়া", "মালিহা আক্তার", "মাহি খান", "নাজমুন শরীফ", "শাপলা তালুকদার",
-"মিম মিয়া", "জান্নাত মোল্লা", "মিম চৌধুরী", "জান্নাত তালুকদার", "শাপলা আক্তার",
+        <script>
+            // Name Generator
+            const bangladeshiGirlNames = [
+                "মিম মিয়া", "জান্নাত মোল্লা", "মিম চৌধুরী", "জান্নাত তালুকদার", "শাপলা আক্তার",
 "মাহি কবির", "লামিয়া রহমান", "মুনমুন আক্তার", "পূর্ণিমা তালুকদার", "সাবিনা ইসলাম",
 "সালমা মোল্লা", "রুমানা শিকদার", "শারমিন হোসেন", "ফারজানা আহমেদ", "নুসরাত মজুমদার",
 "তানিয়া মোল্লা", "শাঞ্জিদা ভূঁইয়া", "আফসানা হোসেন", "সুমাইয়া মিয়া", "শাপলা বিশ্বাস",
@@ -276,99 +415,111 @@
 "সালমা রহমান", "জান্নাত তালুকদার", "শারমিন ইসলাম", "তানজিনা কবির", "মিম আক্তার",
 "সুমাইয়া হোসেন", "মালিহা ইসলাম", "পূর্ণিমা আক্তার", "নুসরাত তালুকদার", "মুনমুন কবির",
         ];
-        
-        function changeName() {
-            const nameElement = document.getElementById('nameDisplay');
-            const randomIndex = Math.floor(Math.random() * names.length);
-            nameElement.textContent = names[randomIndex];
-            nameElement.style.transform = 'scale(0.9)';
-            setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
-        }
 
-        function copyName() {
-            const nameToCopy = document.getElementById('nameDisplay').textContent;
-            if (nameToCopy) {
-                navigator.clipboard.writeText(nameToCopy);
-                const copyBtn = document.querySelectorAll('.copy-btn')[0];
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copied!';
-                setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
+            function changeName() {
+                const nameElement = document.getElementById('nameDisplay');
+                const randomIndex = Math.floor(Math.random() * bangladeshiGirlNames.length);
+                nameElement.textContent = bangladeshiGirlNames[randomIndex];
+                nameElement.style.transform = 'scale(0.9)';
+                setTimeout(() => { nameElement.style.transform = 'scale(1)'; }, 100);
             }
-        }
 
-        function generatePassword() {
-            const length = 10;
-            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
-            let password = "";
-            
-            password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
-            password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            password += getRandomChar("0123456789");
-            password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
-            
-            for (let i = 4; i < length; i++) {
-                password += getRandomChar(charset);
+            function copyName() {
+                const nameToCopy = document.getElementById('nameDisplay').textContent;
+                if (nameToCopy) {
+                    navigator.clipboard.writeText(nameToCopy);
+                    const copyBtn = document.querySelectorAll('.copy-btn')[1];
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
+                }
             }
-            
-            password = shuffleString(password);
-            
-            // আজকের তারিখ যোগ করা
-            const today = new Date();
-            const currentDay = today.getDate().toString().padStart(2, '0');
-            password += currentDay;
-            
-            document.getElementById('passwordDisplay').textContent = password;
-            document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
-            setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
-        }
 
-        function setupDailyAutoChange() {
-            const now = new Date();
-            const changeTime = new Date();
-            changeTime.setHours(23, 0, 0, 0);
-            
-            if (now > changeTime) {
-                changeTime.setDate(changeTime.getDate() + 1);
+            // Password Generator with TODAY's date
+            function generatePassword() {
+                const length = 10;
+                const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\\:;?><,./-=";
+                let password = "";
+                
+                password += getRandomChar("abcdefghijklmnopqrstuvwxyz");
+                password += getRandomChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                password += getRandomChar("0123456789");
+                password += getRandomChar("!@#$%^&*()_+~`|}{[]\\:;?><,./-=");
+                
+                for (let i = 4; i < length; i++) {
+                    password += getRandomChar(charset);
+                }
+                
+                password = shuffleString(password);
+                
+                // Add TODAY's date (2 digits)
+                const today = new Date();
+                const currentDay = today.getDate().toString().padStart(2, '0');
+                password += currentDay;
+                
+                document.getElementById('passwordDisplay').textContent = password;
+                document.getElementById('passwordDisplay').style.transform = 'scale(0.9)';
+                setTimeout(() => { document.getElementById('passwordDisplay').style.transform = 'scale(1)'; }, 100);
             }
-            
-            const timeUntilChange = changeTime - now;
-            
-            setTimeout(() => {
+
+            // Auto-Change System for 11 PM Daily
+            function setupDailyAutoChange() {
+                // Generate password immediately with today's date
                 generatePassword();
-                setInterval(generatePassword, 24 * 60 * 60 * 1000);
-            }, timeUntilChange);
-        }
-
-        function getRandomChar(charSet) {
-            return charSet.charAt(Math.floor(Math.random() * charSet.length));
-        }
-        
-        function shuffleString(str) {
-            const array = str.split('');
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                
+                // Calculate time until next 11 PM
+                const now = new Date();
+                const targetTime = new Date();
+                
+                // Set target to today's 11 PM
+                targetTime.setHours(23, 0, 0, 0);
+                
+                // If it's already past 11 PM, set for tomorrow
+                if (now > targetTime) {
+                    targetTime.setDate(targetTime.getDate() + 1);
+                }
+                
+                const timeUntilTarget = targetTime - now;
+                
+                // Set timeout for next 11 PM
+                setTimeout(() => {
+                    generatePassword(); // Generate at 11 PM
+                    
+                    // Then set interval for every 24 hours
+                    setInterval(generatePassword, 24 * 60 * 60 * 1000);
+                }, timeUntilTarget);
             }
-            return array.join('');
-        }
-        
-        function copyPassword() {
-            const passwordToCopy = document.getElementById('passwordDisplay').textContent;
-            if (passwordToCopy) {
-                navigator.clipboard.writeText(passwordToCopy);
-                const copyBtn = document.querySelectorAll('.copy-btn')[1];
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copied!';
-                setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
-            }
-        }
 
-        // পেজ লোড হলে স্বয়ংক্রিয়ভাবে নাম ও পাসওয়ার্ড জেনারেট করা
-        window.onload = function() {
-            changeName();
-            generatePassword();
-            setupDailyAutoChange();
-        };
-    </script>
+            // Helper functions
+            function getRandomChar(charSet) {
+                return charSet.charAt(Math.floor(Math.random() * charSet.length));
+            }
+            
+            function shuffleString(str) {
+                const array = str.split('');
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array.join('');
+            }
+            
+            function copyPassword() {
+                const passwordToCopy = document.getElementById('passwordDisplay').textContent;
+                if (passwordToCopy) {
+                    navigator.clipboard.writeText(passwordToCopy);
+                    const copyBtn = document.querySelectorAll('.copy-btn')[0];
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => { copyBtn.textContent = originalText; }, 1000);
+                }
+            }
+
+            // Initialize
+            window.onload = function() {
+                changeName();
+                setupDailyAutoChange();
+            };
+        </script>
 </body>
 </html>
