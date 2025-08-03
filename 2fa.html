@@ -13,43 +13,92 @@
       font-family: 'Poppins', sans-serif;
       background-color: #0c0f1a;
       color: #fff;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .header {
       background-color: #111;
       padding: 10px 20px;
       text-align: center;
+      animation: slideDown 0.7s ease-out;
     }
 
-    .header h1 {
-      font-size: 24px;
-      color: #00ffff;
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
-    .header h1 .emoji {
-      font-size: 20px;
+    .logo-box {
+      background-color: LightCyan;
+      border-radius: 15px;
+      padding: 8px 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      margin: 0 auto 10px auto;
+      position: relative;
+      overflow: hidden;
+      transform: perspective(500px) rotateX(10deg);
+      animation: float 3s ease-in-out infinite;
+      width: fit-content;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-box:hover {
+      transform: perspective(500px) rotateX(10deg) scale(1.05);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+      50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+    }
+
+    .logo-text {
+      font-size: 1.5em;
+      font-weight: 1000;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+      text-shadow: 3px 5px 6px rgba(0, 0, 0, 0.5);
+      margin: 0;
     }
 
     .datetime {
       font-size: 14px;
-      color: #33ccff;
+      color: white;
       margin-top: 5px;
     }
 
     .main-box {
       background: #1a1a1a;
-      margin: 100px auto;
+      margin: 50px auto;
       padding: 25px 20px;
       max-width: 320px;
       border-radius: 10px;
-      box-shadow: 0 0 100px red;
+      box-shadow: 0 0 100px LightCyan;
       text-align: center;
-      animation: pulse 2s infinite;
+      animation: pulse 2s infinite, boxAppear 0.8s ease-out;
+      border: 2px solid LightCyan;
+      transform-origin: top;
+    }
+
+    @keyframes boxAppear {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     @keyframes pulse {
       0% {
-        box-shadow: 0 0 50px red;
+        box-shadow: 0 0 00px red;
       }
       50% {
         box-shadow: 0 0 100px red;
@@ -74,6 +123,12 @@
       color: white;
       margin-bottom: 15px;
       font-size: 14px;
+      animation: inputAppear 0.5s ease-out;
+    }
+
+    @keyframes inputAppear {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .btn {
@@ -88,10 +143,25 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 14px;
+      transition: transform 0.2s, background-color 0.2s;
+      animation: buttonAppear 0.6s ease-out;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @keyframes buttonAppear {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .btn.red {
       background-color: red;
+    }
+
+    .btn.red:hover {
+      background-color: #ff3333;
     }
 
     .code-display {
@@ -106,6 +176,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: codeDisplayAppear 0.7s ease-out;
+    }
+
+    @keyframes codeDisplayAppear {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .timer-bar {
@@ -114,15 +190,27 @@
       margin-top: 10px;
       border-radius: 3px;
       transition: width 1s linear;
+      animation: timerAppear 0.8s ease-out;
+    }
+
+    @keyframes timerAppear {
+      from { width: 0%; opacity: 0; }
+      to { width: 100%; opacity: 1; }
     }
 
     .footer {
       text-align: center;
       font-size: 14px;
-      color: #00cc66;
+      color: LightCyan;
       margin-top: 50px;
       overflow: hidden;
       white-space: nowrap;
+      animation: footerAppear 1s ease-out;
+    }
+
+    @keyframes footerAppear {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .scroll-text {
@@ -144,7 +232,12 @@
 <body>
 
   <div class="header">
-    <h1>🌊 <span class="emoji"> </span> 𝐄𝐀𝐑𝐍𝐈𝐍𝐆 𝐁𝐘 𝐇𝐀𝐁𝐈𝐁 🌊</h1>
+    <div class="logo-box" onclick="window.location.href='https://earningbyhabib.github.io/Tempmail/Note.html'">
+      <div class="logo-text">
+          👑 EARNING BY HABIB 💸
+    
+      </div>
+    </div>
     <div class="datetime" id="datetime"></div>
   </div>
 
@@ -300,15 +393,24 @@
       currentSecret = '';
     }
 
-    // Auto-update when typing
-    document.getElementById("twofa").addEventListener('input', function() {
-      const secret = this.value.trim();
+    // Auto-update when typing and on page load
+    function checkAndUpdateCode() {
+      const secret = document.getElementById("twofa").value.trim();
       if (secret.length >= 16) {
         currentSecret = secret;
         updateCode();
         startTimer();
+      } else {
+        document.getElementById("codeDisplay").textContent = '------';
+        document.getElementById("timerBar").style.width = '0%';
+        clearInterval(timerInterval);
       }
-    });
+    }
+
+    document.getElementById("twofa").addEventListener('input', checkAndUpdateCode);
+    
+    // Initialize on page load
+    window.addEventListener('load', checkAndUpdateCode);
   </script>
 </body>
 </html>
