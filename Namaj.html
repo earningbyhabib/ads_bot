@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>নামাজের সময়সূচি</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap');
+    
+    :root {
+      --primary: #00ff88;
+      --secondary: #ff0044;
+      --accent: #ffcc00;
+      --bg: #111111;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Tiro Bangla', serif;
+      background: radial-gradient(circle, #000000, #1a1a2e);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: auto;
+    }
+
+    /* Logo Style */
+    .logo-box {
+      background-color: LightCyan;
+      border-radius: 15px;
+      padding: 8px 15px;
+      box-shadow: 0 0px 25px rgba(255, 0, 0, 0.5);
+      margin: 5px auto;
+      position: relative;
+      overflow: hidden;
+      transform: perspective(500px) rotateX(10deg);
+      animation: float 3s ease-in-out infinite;
+      width: fit-content;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 2px solid rgba(255,255,255,0.3);
+      text-decoration: none;
+      display: block;
+    }
+
+    .logo-box:hover {
+      transform: perspective(500px) rotateX(10deg) scale(1.05);
+      box-shadow: 0 5px 30px rgba(255, 0, 0, 0.7);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+      50% { transform: perspective(500px) rotateX(10deg) translateY(-5px); }
+    }
+
+    .logo-text {
+      font-size: 1.2em;
+      font-weight: 1000;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+      text-shadow: 3px 5px 60px rgba(0, 0, 0, 0.5);
+      margin: 0;
+    }
+
+    /* Scrolling Text */
+    .scrolling-text-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 7px 0;
+    }
+
+    .scrolling-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 12s linear infinite;
+      font-size: 14px;
+      color: var(--primary);
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Main Container - Updated Size */
+    .container {
+      border: 3px solid var(--primary);
+      border-radius: 10px;
+      padding: 30px 25px; /* Increased padding */
+      max-width: 500px;
+      width: 100%;
+      min-height: 580px; /* Increased minimum height */
+      margin: 40px auto 20px;
+      background-color: rgba(17, 17, 17, 0.9);
+      box-shadow: 0 0 20px var(--primary), 
+                  0 0 40px rgba(0, 255, 136, 0.3);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      backdrop-filter: blur(5px);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        transparent,
+        transparent,
+        transparent,
+        var(--primary),
+        var(--bg)
+      );
+      transform: rotate(30deg);
+      animation: shine 6s linear infinite;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    @keyframes shine {
+      0% { transform: rotate(30deg) translate(-10%, -10%); }
+      100% { transform: rotate(30deg) translate(10%, 10%); }
+    }
+
+    h1 {
+      color: var(--secondary);
+      font-size: 18px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 5px rgba(255, 0, 68, 0.5);
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--primary), transparent);
+      margin: 6px auto;
+    }
+
+    .time-container {
+      position: relative;
+      margin: 8px 0;
+    }
+
+    .time {
+      font-size: 38px;
+      font-weight: bold;
+      color: #ff3300;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(255, 51, 0, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+
+    .time::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .ampm {
+      font-size: 20px;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 4px;
+    }
+
+    .date {
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 4px rgba(255, 204, 0, 0.3);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 16px;
+      margin: 12px 0 8px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::before, .section-title::after {
+      content: '✧';
+      margin: 0 6px;
+      color: var(--accent);
+    }
+
+    .prayer-times {
+      margin-bottom: 25px; /* Increased margin */
+    }
+
+    .prayer-time {
+      background: rgba(0, 43, 54, 0.7);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      padding: 10px 12px; /* Increased padding */
+      margin: 10px 0; /* Increased margin */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--primary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prayer-time.active {
+      background: rgba(0, 255, 136, 0.2);
+      box-shadow: 0 0 8px var(--primary);
+      transform: scale(1.02);
+      color: white;
+      border-color: white;
+    }
+
+    .prayer-time.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .prayer-time .name {
+      font-weight: bold;
+    }
+
+    .prayer-time .time {
+      font-size: 14px;
+      color: inherit;
+      text-shadow: none;
+      letter-spacing: normal;
+    }
+
+    .prayer-time .time::after {
+      display: none;
+    }
+
+    .footer {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      display: block;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--primary), transparent);
+      margin: 0 auto 8px;
+    }
+
+    .hijri-date {
+      color: #aaffaa;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .next-prayer {
+      margin-top: 8px;
+      padding: 5px;
+      background: rgba(255, 0, 68, 0.2);
+      border-radius: 6px;
+      color: #ffcc00;
+      font-size: 12px;
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 15px;
+        max-width: 320px;
+        min-height: 520px; /* Adjusted for mobile */
+      }
+      .time {
+        font-size: 32px;
+      }
+      .prayer-time {
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+      .logo-text {
+        font-size: 1em;
+      }
+      .scrolling-text {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="https://earningbyhabib.github.io/Tempmail/Note.html" class="logo-box">
+    <div class="logo-text">
+      👑 𝐄𝐀𝐑𝐍𝐈𝐍𝐆 𝐁𝐘 𝐇𝐀𝐁𝐈𝐁 💸
+    </div>
+  </a>
+
+  <div class="scrolling-text-container">
+    <div class="scrolling-text">ᚍᚔᚍ 𝐏𝐫𝐞𝐬𝐞𝐧𝐭𝐞𝐝 𝐁𝐲 ᚍᚔᚍ 𝐄𝐀𝐑𝐍𝐈𝐍𝐆 𝐁𝐘 𝐇𝐀𝐁𝐈𝐁</div>
+  </div>
+  
+  <div class="container">
+    <h1>আজকের নামাজের সময়</h1>
+    
+    <div class="time-container">
+      <span class="time" id="current-time">--:--:--</span>
+      <span class="ampm" id="ampm">--</span>
+    </div>
+    
+    <div class="date" id="current-date">লোড হচ্ছে...</div>
+    
+    <div class="hijri-date" id="hijri-date"></div>
+    
+    <div class="section-title">নামাজের সময়</div>
+    
+    <div class="prayer-times">
+      <div class="prayer-time" id="fajr">
+        <span class="name">ফজর</span>
+        <span class="time">05:00 AM</span>
+      </div>
+      <div class="prayer-time" id="dhuhr">
+        <span class="name">জোহর</span>
+        <span class="time">01:30 PM</span>
+      </div>
+      <div class="prayer-time" id="asr">
+        <span class="name">আসর</span>
+        <span class="time">05:00 PM</span>
+      </div>
+      <div class="prayer-time" id="maghrib">
+        <span class="name">মাগরিব</span>
+        <span class="time">06:40 PM</span>
+      </div>
+      <div class="prayer-time" id="isha">
+        <span class="name">ইশা</span>
+        <span class="time">08:30 PM</span>
+      </div>
+      <div class="prayer-time" id="jummah">
+        <span class="name">জুম'আ</span>
+        <span class="time">01:30 PM</span>
+      </div>
+    </div>
+    
+    <div class="next-prayer" id="next-prayer">পরবর্তী নামাজ: লোড হচ্ছে...</div>
+    
+    <div class="footer">⏰ সময় মত নামাজ আদায় করুন 🕌</div>
+  </div>
+
+  <script>
+    // Prayer times data (you can replace with actual API data)
+    const prayerTimes = {
+      fajr: "05:00 AM",
+      dhuhr: "01:30 PM",
+      asr: "05:00 PM",
+      maghrib: "06:40 PM",
+      isha: "08:30 PM",
+      jummah: "01:30 PM"
+    };
+    
+    // Bengali month names
+    const bengaliMonths = [
+      "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", 
+      "মে", "জুন", "জুলাই", "আগস্ট", 
+      "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+    ];
+    
+    // Bengali day names
+    const bengaliDays = [
+      "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", 
+      "বৃহস্পতিবার", "শুক্রবার", "শনিবার"
+    ];
+    
+    // Hijri month names
+    const hijriMonths = [
+      "মুহররম", "সফর", "রবিউল আউয়াল", "রবিউস সানি", 
+      "জমাদিউল আউয়াল", "জমাদিউস সানি", "রজব", "শাবান", 
+      "রমজান", "শাওয়াল", "জিলকদ", "জিলহজ"
+    ];
+    
+    // Update time and date
+    function updateTime() {
+      const now = new Date();
+      
+      // Current time
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
+      let ampm = hours >= 12 ? 'PM' : 'AM';
+      
+      // Convert to 12-hour format
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      
+      // Add leading zeros
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      
+      document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('ampm').textContent = ampm;
+      
+      // Current date
+      const day = bengaliDays[now.getDay()];
+      const date = now.getDate();
+      const month = bengaliMonths[now.getMonth()];
+      const year = now.getFullYear();
+      
+      document.getElementById('current-date').textContent = `${day}, ${date} ${month} ${year}`;
+      
+      // Calculate Hijri date (approximation)
+      const hijriDate = calculateHijriDate(now);
+      document.getElementById('hijri-date').textContent = `হিজরি: ${hijriDate.day} ${hijriDate.month} ${hijriDate.year}`;
+      
+      // Check active prayer time
+      checkActivePrayer(now);
+      
+      // Update next prayer
+      updateNextPrayer(now);
+    }
+    
+    // Calculate approximate Hijri date
+    function calculateHijriDate(gregorianDate) {
+      // This is a simplified calculation (actual Hijri date may vary)
+      const gregYear = gregorianDate.getFullYear();
+      const gregMonth = gregorianDate.getMonth();
+      const gregDay = gregorianDate.getDate();
+      
+      // Approximate conversion factor
+      const hijriYear = Math.floor((gregYear - 622) * (33 / 32));
+      const daysSinceEpoch = Math.floor((gregorianDate - new Date(622, 6, 16)) / (1000 * 60 * 60 * 24));
+      
+      let remainingDays = daysSinceEpoch;
+      let hYear = 0;
+      let hMonth = 0;
+      let hDay = 0;
+      
+      // Find Hijri year
+      while (remainingDays >= 354) {
+        const yearLength = isHijriLeapYear(hYear + 1) ? 355 : 354;
+        if (remainingDays >= yearLength) {
+          remainingDays -= yearLength;
+          hYear++;
+        } else {
+          break;
+        }
+      }
+      
+      // Find Hijri month
+      const monthsInYear = isHijriLeapYear(hYear + 1) ? [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 30] : 
+                                                   [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29];
+      
+      for (let i = 0; i < 12; i++) {
+        if (remainingDays >= monthsInYear[i]) {
+          remainingDays -= monthsInYear[i];
+          hMonth++;
+        } else {
+          break;
+        }
+      }
+      
+      hDay = remainingDays + 1;
+      
+      return {
+        day: hDay,
+        month: hijriMonths[hMonth],
+        year: 1440 + hijriYear // Starting from approximate current Hijri year
+      };
+    }
+    
+    function isHijriLeapYear(year) {
+      return (year * 11 + 14) % 30 < 11;
+    }
+    
+    // Check which prayer time is currently active
+    function checkActivePrayer(now) {
+      // Reset all active classes
+      document.querySelectorAll('.prayer-time').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Current time in minutes since midnight
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      
+      // Convert prayer times to minutes since midnight
+      const prayerMinutes = {};
+      for (const prayer in prayerTimes) {
+        const timeStr = prayerTimes[prayer];
+        const [time, period] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+        
+        if (period === 'PM' && hours !== 12) hours += 12;
+        if (period === 'AM' && hours === 12) hours = 0;
+        
+        prayerMinutes[prayer] = hours * 60 + minutes;
+      }
+      
+      // Determine which prayer is currently active (30 minutes window)
+      let activePrayer = null;
+      
+      if (currentMinutes >= prayerMinutes.fajr && currentMinutes < prayerMinutes.fajr + 30) {
+        activePrayer = 'fajr';
+      } else if (currentMinutes >= prayerMinutes.dhuhr && currentMinutes < prayerMinutes.dhuhr + 30) {
+        activePrayer = 'dhuhr';
+      } else if (currentMinutes >= prayerMinutes.asr && currentMinutes < prayerMinutes.asr + 30) {
+        activePrayer = 'asr';
+      } else if (currentMinutes >= prayerMinutes.maghrib && currentMinutes < prayerMinutes.maghrib + 30) {
+        activePrayer = 'maghrib';
+      } else if (currentMinutes >= prayerMinutes.isha && currentMinutes < prayerMinutes.isha + 30) {
+        activePrayer = 'isha';
+      } else if (now.getDay() === 5 && currentMinutes >= prayerMinutes.jummah && currentMinutes < prayerMinutes.jummah + 30) {
+        activePrayer = 'jummah';
+      }
+      
+      if (activePrayer) {
+        document.getElementById(activePrayer).classList.add('active');
+      }
+    }
+    
+    // Update next prayer information
+    function updateNextPrayer(now) {
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      const prayerMinutes = {};
+      const prayerOrder = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+      
+      for (const prayer in prayerTimes) {
+        const timeStr = prayerTimes[prayer];
+        const [time, period] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+        
+        if (period === 'PM' && hours !== 12) hours += 12;
+        if (period === 'AM' && hours === 12) hours = 0;
+        
+        prayerMinutes[prayer] = hours * 60 + minutes;
+      }
+      
+      // Special case for Jummah
+      if (now.getDay() === 5) { // Friday
+        prayerMinutes.dhuhr = prayerMinutes.jummah;
+      }
+      
+      let nextPrayer = null;
+      let nextPrayerTime = null;
+      let minDiff = Infinity;
+      
+      // Find the next prayer
+      for (const prayer of prayerOrder) {
+        const diff = prayerMinutes[prayer] - currentMinutes;
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextPrayer = prayer;
+          nextPrayerTime = prayerTimes[prayer];
+        }
+      }
+      
+      // If no prayer found for today, use Fajr of next day
+      if (!nextPrayer) {
+        nextPrayer = 'fajr';
+        nextPrayerTime = prayerTimes.fajr;
+        minDiff = (24 * 60 - currentMinutes) + prayerMinutes.fajr;
+      }
+      
+      // Calculate remaining time
+      const hoursLeft = Math.floor(minDiff / 60);
+      const minutesLeft = minDiff % 60;
+      
+      // Display next prayer info
+      const prayerNames = {
+        fajr: 'ফজর',
+        dhuhr: 'জোহর',
+        asr: 'আসর',
+        maghrib: 'মাগরিব',
+        isha: 'ইশা'
+      };
+      
+      document.getElementById('next-prayer').textContent = 
+        `পরবর্তী নামাজ: ${prayerNames[nextPrayer]} ${nextPrayerTime} (${hoursLeft > 0 ? hoursLeft + ' ঘণ্টা ' : ''}${minutesLeft} মিনিট বাকি)`;
+    }
+    
+    // Initialize
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
