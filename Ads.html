@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আসসালামু আলাইকুম</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding-bottom: 70px;
+        }
+        
+        .slider-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 15s infinite;
+        }
+        
+        .slide {
+            width: 33.33%;
+            height: 100%;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(0); }
+            33.33% { transform: translateX(-33.33%); }
+            58.33% { transform: translateX(-33.33%); }
+            66.66% { transform: translateX(-66.66%); }
+            91.66% { transform: translateX(-66.66%); }
+            100% { transform: translateX(0); }
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1f1f1f;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #28a745;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            display: none;
+            padding: 15px;
+        }
+        
+        #home-container {
+            display: block;
+        }
+        
+        .box {
+            background: #1f1f1f;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .box h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .user-info {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .user-info p {
+            margin: 5px 0;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .small-btn {
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .admin-btn {
+            background: #dc3545;
+        }
+        
+        .support-btn {
+            background: #007bff;
+        }
+        
+        .referral-box {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .referral-box input {
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            margin-bottom: 10px;
+        }
+        
+        .referral-box button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .main-buttons-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .main-button {
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            flex: 1;
+        }
+        
+        .main-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        #watch-ad-btn {
+            background: linear-gradient(to right, #28a745, #20c997);
+        }
+        
+        #direct-link-btn {
+            background: linear-gradient(to right, #007bff, #0dcaf0);
+        }
+        
+        .withdraw-section-btn {
+            background: linear-gradient(to right, #ffc107, #fd7e14);
+            color: #333;
+            padding: 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #28a745;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .progress-circle span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #ff8c00;
+        }
+        
+        .modal-close {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .withdraw-form input, .withdraw-form select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+        }
+        
+        .withdraw-form button {
+            padding: 12px;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .withdraw-history-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .withdraw-history-list li {
+            background: #444;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: #fff;
+        }
+        
+        .profile-container {
+            text-align: center;
+        }
+        
+        .profile-header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .profile-image-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #28a745;
+        }
+        
+        .profile-name {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #ff8c00;
+        }
+        
+        .profile-details {
+            background: #1f1f1f;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .profile-details p {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .profile-details span {
+            color: #28a745;
+        }
+        
+        .profile-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+        }
+        
+        .profile-form button {
+            padding: 12px;
+            border-radius: 5px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .developer-contact {
+            background: #00bfff;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .tasks-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .task-item {
+            background: #1f1f1f;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .task-info {
+            flex: 1;
+        }
+        
+        .task-info h3 {
+            font-size: 16px;
+            color: #ff8c00;
+        }
+        
+        .task-info p {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .task-action button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .task-action button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-content {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .popup-content h3 {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #ff8c00;
+            text-align: center;
+        }
+        
+        .popup-content p {
+            margin: 0 0 10px;
+            font-size: 14px;
+        }
+        
+        .popup-content a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        
+        .popup-close {
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .history-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .task-cooldown {
+            font-size: 12px;
+            color: #ff8c00;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Container -->
+    <div id="home-container" class="container">
+        <!-- Image Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="https://i.postimg.cc/K8ZrfrbF/images-34.jpg" alt="Slider Image 1">
+                </div>
+                <div class="slide">
+                    <img src="https://i.postimg.cc/K8ZrfrbF/images-34.jpg" alt="Slider Image 2">
+                </div>
+                <div class="slide">
+                    <img src="https://i.postimg.cc/K8ZrfrbF/images-34.jpg" alt="Slider Image 3">
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>💝আসসালামু আলাইকুম💝</h2>
+            <div class="user-info">
+                <p>Welcome, <span id="user-name">User</span></p>
+                <p>Balance: <span id="earned-points">0.00</span> points</p>
+                <div class="button-container">
+                    <a href="https://t.me/HS_SIKDAR_BD" class="small-btn admin-btn">Admin Contact</a>
+                    <a href="https://t.me/earningbyhabib" class="small-btn support-btn">Support Group</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="referral-box">
+            <h3 style="color: #ff8c00;">Your Referral Link</h3>
+            <input type="text" id="referral-link" value="" readonly>
+            <button onclick="copyReferralLink()">Copy</button>
+        </div>
+
+        <div class="main-buttons-row">
+            <button id="watch-ad-btn" class="main-button" onclick="watchAd()">
+                <i class="fas fa-play-circle"></i> Watch Ad
+            </button>
+            <button id="direct-link-btn" class="main-button" onclick="goToDirectLink()">
+                <i class="fas fa-link"></i> Direct Link
+            </button>
+        </div>
+
+        <div class="progress-circle">
+            <span id="ads-progress">0%</span>
+        </div>
+
+        <button class="withdraw-section-btn" onclick="showWithdrawModal()">
+            <i class="fas fa-money-bill-wave"></i> Withdraw
+        </button>
+
+        <button class="history-btn" onclick="showWithdrawHistoryModal()">
+            <i class="fas fa-history"></i> Withdraw History
+        </button>
+    </div>
+
+    <!-- Tasks Container -->
+    <div id="tasks-container" class="container">
+        <div class="tasks-container">
+            <div class="task-item">
+                <div class="task-info">
+                    <h3>Facebook Follow</h3>
+                    <p>Get 3 points for following</p>
+                    <p class="task-cooldown" id="facebook-cooldown"></p>
+                </div>
+                <div class="task-action">
+                    <button id="facebook-btn" onclick="completeTask('facebook')">Complete</button>
+                </div>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-info">
+                    <h3>YouTube Subscribe</h3>
+                    <p>Get 3 points for subscribing</p>
+                    <p class="task-cooldown" id="youtube-cooldown"></p>
+                </div>
+                <div class="task-action">
+                    <button id="youtube-btn" onclick="completeTask('youtube')">Complete</button>
+                </div>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-info">
+                    <h3>TikTok Follow</h3>
+                    <p>Get 3 points for following</p>
+                    <p class="task-cooldown" id="tiktok-cooldown"></p>
+                </div>
+                <div class="task-action">
+                    <button id="tiktok-btn" onclick="completeTask('tiktok')">Complete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Container -->
+    <div id="profile-container" class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img src="https://i.postimg.cc/FsYKfvZ0/1756046892094.png" alt="Profile Image" class="profile-image" id="profile-picture">
+                </div>
+                <h2 class="profile-name" id="profile-display-name">User Name</h2>
+            </div>
+            
+            <div class="profile-details">
+                <p>Total Points: <span id="profile-points">0.00</span></p>
+                <p>Total Withdraw: <span id="total-withdraw">0.00</span></p>
+                <p>Tasks Completed: <span id="tasks-completed">0</span></p>
+                <p>Referrals: <span id="referrals-count">0</span></p>
+            </div>
+            
+            <div class="profile-form">
+                <input type="text" id="profile-name" placeholder="Enter your name">
+                <input type="text" id="profile-phone" placeholder="Enter your phone number">
+                <input type="email" id="profile-email" placeholder="Enter your email">
+                <input type="text" id="profile-telegram" placeholder="Enter your Telegram username">
+                <input type="text" id="profile-image-url" placeholder="Enter profile image URL" onchange="updateProfilePictureFromUrl()">
+                <button onclick="updateProfile()">Update Profile</button>
+            </div>
+            
+            <a href="https://t.me/HS_SIKDAR_BD" class="developer-contact">
+                <i class="fas fa-user-tie"></i> Developer Contact
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showContainer('home-container')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="showContainer('tasks-container')">
+            <i class="fas fa-tasks"></i>
+            <span>Tasks</span>
+        </div>
+        <div class="nav-item" onclick="showContainer('profile-container')">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdraw-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Withdraw Points</h2>
+                <button class="modal-close" onclick="closeModal('withdraw-modal')">&times;</button>
+            </div>
+            <div class="withdraw-form">
+                <input type="text" id="phone-number" placeholder="Enter your phone number">
+                <input type="text" id="telegram-username" placeholder="Enter your Telegram username">
+                <input type="number" id="withdraw-amount" placeholder="Enter points (min 500)" min="500">
+                <select id="withdraw-method">
+                    <option value="nagad">Nagad</option>
+                    <option value="rocket">Rocket</option>
+                    <option value="bkash">bKash</option>
+                </select>
+                <button id="withdraw-submit" onclick="submitWithdraw()">Withdraw</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw History Modal -->
+    <div id="withdraw-history-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Withdraw History</h2>
+                <button class="modal-close" onclick="closeModal('withdraw-history-modal')">&times;</button>
+            </div>
+            <ul class="withdraw-history-list" id="withdraw-history-list"></ul>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h3>আসসালামু আলাইকুম</h3>
+            <p>কাজ শুরু করার আগে অবশ্যই সততার সঙ্গে চেষ্টা করবেন এবং সৎভাবে ইনকাম করবেন।</p>
+            <p>✅ <strong>কাজের নিয়ম:</strong></p>
+            <p>1️⃣ <em>Watch Ads</em> বাটনে ক্লিক করুন।</p>
+            <p>2️⃣ আপনার সামনে একটি ছবি আসবে, সেটির উপর ক্লিক করুন。</p>
+            <p>3️⃣ ১৫ সেকেন্ড অপেক্ষা করুন।</p>
+            <p>4️⃣ তারপর <em>Back</em> দিয়ে বের হয়ে আবার নতুন একটি ক্লিক করুন।</p>
+            <p>🔄 এইভাবে আপনি <strong>আনলিমিটেড</strong> কাজ করতে পারবেন!</p>
+            <p>📢 <strong>গুরুত্বপূর্ণ:</strong></p>
+            <p>আমাদের <strong>সاپোর্ট গ্রুপ, পেমেন্ট গ্রুপ, এবং ইউটিউব চ্যানেল</strong> অবশ্যই সাবস্ক্রাইব করে রাখবেন, যেন সব আপডেট পেতে পারেন!</p>
+            <p>🔗 <strong>যোগাযোগের জন্য:</strong></p>
+            <p>📌 <a href="https://t.me/earningbyhabib">t.me/earningbyhabib</a></p>
+            <p>📌 <a href="https://t.me/ads526bot_pay">t.me/ads526bot_pay</a></p>
+            <p>📌 <a href="https://youtube.com/@earningbyhabib">youtube.com/@earningbyhabib</a></p>
+            <p>💡 <em>সততার সাথে কাজ করুন, নিশ্চিত ইনকামের পথ তৈরি করুন!</em></p>
+            <button class="popup-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script src="https://whephiwums.com/vignette.min.js" data-zone="9765202" data-sdk="show_9765202"></script>
+    <script>
+        let watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount')) || 0;
+        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints')) || 0.00;
+        let lastAdClickTime = parseInt(localStorage.getItem('lastAdClickTime')) || 0;
+        let lastPointAddTime = parseInt(localStorage.getItem('lastPointAddTime')) || 0;
+        let lastWithdrawTime = parseInt(localStorage.getItem('lastWithdrawTime')) || 0;
+        let withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+        let tasksCompleted = parseInt(localStorage.getItem('tasksCompleted')) || 0;
+        let referralsCount = parseInt(localStorage.getItem('referralsCount')) || 0;
+        let totalWithdraw = parseFloat(localStorage.getItem('totalWithdraw')) || 0.00;
+        let userName = localStorage.getItem('userName') || 'User';
+        let userPhone = localStorage.getItem('userPhone') || '';
+        let userEmail = localStorage.getItem('userEmail') || '';
+        let userTelegram = localStorage.getItem('userTelegram') || '';
+        
+        // Task cooldown timers
+        let facebookLastCompleted = parseInt(localStorage.getItem('facebookLastCompleted')) || 0;
+        let youtubeLastCompleted = parseInt(localStorage.getItem('youtubeLastCompleted')) || 0;
+        let tiktokLastCompleted = parseInt(localStorage.getItem('tiktokLastCompleted')) || 0;
+
+        const telegramBotToken = "7888384699:AAFJKRYes81cyZPyCgapO11mdotdi9W74YY";
+        const telegramChatId = "6140196943";
+        const telegramBotUsername = "ads526bot";
+        
+        // Task links - আপনি এগুলো পরিবর্তন করতে পারবেন
+        const taskLinks = {
+            facebook: "https://www.facebook.com/example",
+            youtube: "https://www.youtube.com/channel/example",
+            tiktok: "https://www.tiktok.com/@example"
+        };
+
+        // Initialize UI
+        document.getElementById('user-name').textContent = userName;
+        document.getElementById('profile-display-name').textContent = userName;
+        document.getElementById('profile-name').value = userName;
+        document.getElementById('profile-phone').value = userPhone;
+        document.getElementById('profile-email').value = userEmail;
+        document.getElementById('profile-telegram').value = userTelegram;
+        document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+        document.getElementById('profile-points').textContent = earnedPoints.toFixed(1);
+        document.getElementById('tasks-completed').textContent = tasksCompleted;
+        document.getElementById('referrals-count').textContent = referralsCount;
+        document.getElementById('total-withdraw').textContent = totalWithdraw.toFixed(1);
+        
+        // Set profile picture
+        document.getElementById('profile-picture').src = "https://i.postimg.cc/FsYKfvZ0/1756046892094.png";
+        
+        updateProgress();
+        updateTaskCooldowns();
+
+        // Update task cooldowns every second
+        setInterval(updateTaskCooldowns, 1000);
+
+        setTimeout(() => {
+            showPopup();
+        }, 2000);
+
+        function showContainer(containerId) {
+            document.querySelectorAll('.container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById(containerId).style.display = 'block';
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            event.currentTarget.classList.add('active');
+        }
+
+        function updateProgress() {
+            let percentage = Math.min((watchedAdsCount / 1000) * 100, 100);
+            document.getElementById('ads-progress').textContent = percentage.toFixed(1) + "%";
+        }
+
+        function watchAd() {
+            const currentTime = Date.now();
+            const timeSinceLastAdClick = currentTime - lastAdClickTime;
+            const timeSinceLastPointAdd = currentTime - lastPointAddTime;
+
+            if (timeSinceLastAdClick < 15000) {
+                alert("Please wait 15 seconds before clicking the 'Watch Ad' button again.");
+                return;
+            }
+
+            if (timeSinceLastPointAdd < 20000) {
+                alert("Please wait 20 seconds before earning another point.");
+                return;
+            }
+
+            if (typeof show_9765202 === 'function') {
+                show_9765202().then(() => {
+                    watchedAdsCount++;
+                    if (watchedAdsCount % 4 !== 0) {
+                        earnedPoints += 1;
+                    }
+                    document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+                    document.getElementById('profile-points').textContent = earnedPoints.toFixed(1);
+                    updateProgress();
+                    localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+                    localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                    lastAdClickTime = currentTime;
+                    lastPointAddTime = currentTime;
+                    localStorage.setItem('lastAdClickTime', lastAdClickTime);
+                    localStorage.setItem('lastPointAddTime', lastPointAddTime);
+                }).catch(() => {
+                    alert("Failed to load ad. Please try again.");
+                });
+            } else {
+                alert("Ad service is currently unavailable.");
+            }
+        }
+
+        function goToDirectLink() {
+            window.location.href = "https://i.postimg.cc/K8ZrfrbF/images-34.jpg";
+        }
+
+        function generateReferralLink() {
+            let userId = localStorage.getItem('userId') || "user" + Math.floor(Math.random() * 1000000);
+            const ref = new URLSearchParams(window.location.search).get('ref');
+            const referralLink = `https://t.me/${telegramBotUsername}?start=${userId}`;
+            document.getElementById("referral-link").value = referralLink;
+
+            if (!localStorage.getItem('userId')) {
+                localStorage.setItem('userId', userId);
+            }
+
+            if (ref && ref !== userId) {
+                let referrerPoints = parseFloat(localStorage.getItem(ref)) || 0;
+                referrerPoints += 10;
+                localStorage.setItem(ref, referrerPoints.toFixed(2));
+                referralsCount++;
+                localStorage.setItem('referralsCount', referralsCount);
+                document.getElementById('referrals-count').textContent = referralsCount;
+                sendTelegramMessage(ref, referrerPoints);
+            }
+        }
+
+        function copyReferralLink() {
+            const copyText = document.getElementById("referral-link");
+            copyText.select();
+            document.execCommand("copy");
+            const copyButton = document.querySelector('.referral-box button');
+            copyButton.classList.add('copied');
+            setTimeout(() => {
+                copyButton.classList.remove('copied');
+            }, 500);
+            alert("Referral Link Copied: " + copyText.value);
+        }
+
+        async function sendTelegramMessage(referrer, points) {
+            const message = `New Referral!\nReferrer: ${referrer}\nPoints: ${points} points`;
+            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log("Telegram API Response:", data);
+            } catch (error) {
+                console.error("Telegram API Error:", error);
+            }
+        }
+
+        function showWithdrawModal() {
+            const currentTime = Date.now();
+            const timeSinceLastWithdraw = currentTime - lastWithdrawTime;
+
+            if (timeSinceLastWithdraw < 86400000) {
+                alert("🤣📢 'ওই মিয়া! 🤨 ২৪ ঘন্টায় একবারের বেশি উইদ্র করতে পারবা না! 😂💸'");
+                return;
+            }
+
+            document.getElementById('withdraw-modal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function submitWithdraw() {
+            let phone = document.getElementById('phone-number').value;
+            let telegramUsername = document.getElementById('telegram-username').value;
+            let amount = parseFloat(document.getElementById('withdraw-amount').value);
+            let method = document.getElementById('withdraw-method').value;
+
+            if (!/^\d{11}$/.test(phone)) {
+                alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বار না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
+                return;
+            }
+
+            if (!telegramUsername || !telegramUsername.startsWith('@')) {
+                alert("🤣📢 'ওই মিয়া! 🤨 টেলিগ্রাম ইউজারনেম ঠিকমতো দেন নাই! @ দিয়ে শুরু করতে হবে! 😂📱'");
+                return;
+            }
+
+            if (amount < 500) {
+                alert("🤣📢 'ওই মিয়া! 🤨 মিনিমাম উইদ্র ৫০০ পয়েন্ট, এইটা কি তোমার জানার বাইরে? নাকি অন্য গ্রহ থেকে ট্রান্সফার হয়ে আসছো? 👽🚀😂 এমন ফাইজলামি তো নাসার বিজ্ঞানীরাও করে না! �‍🔬🔭 নাকি ভেবেছো শূন্য পয়েন্টেও VIP ট্রিটমেন্ট পাবা? �💸🤦‍♂️'");
+                return;
+            }
+
+            if (amount > earnedPoints) {
+                alert("🤣📢 'ওই মিয়া! 🤨 ফাইজলামিরো একটা লিমিট আছে! 💸💨 যে পরিমাণ উইদ্র মারতেছো, তোমার একাউন্টের দশা তো এমন, যেন শেষবার ব্যালেন্স দেখছিলে ১৯৯৮ সালে! 😭📉 তুমি কি NASA’র গোপন ফান্ডে হাত দিতেছো নাকি? 🚀😂 নাকি মনের জোর করেই টাকা তুলবা? 🤔✨💰'");
+                return;
+            }
+
+            earnedPoints -= amount;
+            totalWithdraw += amount;
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+            document.getElementById('profile-points').textContent = earnedPoints.toFixed(1);
+            document.getElementById('total-withdraw').textContent = totalWithdraw.toFixed(1);
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+            localStorage.setItem('totalWithdraw', totalWithdraw.toFixed(1));
+
+            lastWithdrawTime = Date.now();
+            localStorage.setItem('lastWithdrawTime', lastWithdrawTime);
+
+            withdrawHistory.push({
+                amount: amount,
+                method: method,
+                timestamp: lastWithdrawTime
+            });
+            localStorage.setItem('withdrawHistory', JSON.stringify(withdrawHistory));
+
+            sendTelegramNotification(phone, telegramUsername, amount, method);
+            alert(`Withdraw Request Sent!\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} points\nMethod: ${method}`);
+
+            closeModal('withdraw-modal');
+        }
+
+        async function sendTelegramNotification(phone, telegramUsername, amount, method) {
+            const message = `New Withdraw Request\nPhone: ${phone}\nTelegram Username: ${telegramUsername}\nAmount: ${amount} Points\nMethod: ${method}`;
+            const apiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Telegram API Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log("Telegram API Response:", data);
+            } catch (error) {
+                console.error("Telegram API Error:", error);
+            }
+        }
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function showWithdrawHistoryModal() {
+            const historyList = document.getElementById('withdraw-history-list');
+            historyList.innerHTML = '';
+            if (withdrawHistory.length === 0) {
+                historyList.innerHTML = '<li>No withdraw history found.</li>';
+            } else {
+                withdrawHistory.forEach((record, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `#${index + 1}: ${record.amount} points via ${record.method} on ${new Date(record.timestamp).toLocaleString()}`;
+                    historyList.appendChild(li);
+                });
+            }
+            document.getElementById('withdraw-history-modal').style.display = 'flex';
+        }
+
+        function completeTask(taskType) {
+            const currentTime = Date.now();
+            const lastCompletedTime = parseInt(localStorage.getItem(`${taskType}LastCompleted`)) || 0;
+            const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            
+            if (currentTime - lastCompletedTime < cooldownTime) {
+                alert(`You can complete this task again after 24 hours.`);
+                return;
+            }
+            
+            // Open task link in new tab
+            window.open(taskLinks[taskType], '_blank');
+            
+            earnedPoints += 3;
+            tasksCompleted += 1;
+            
+            // Update last completed time
+            localStorage.setItem(`${taskType}LastCompleted`, currentTime);
+            
+            document.getElementById('earned-points').textContent = earnedPoints.toFixed(1);
+            document.getElementById('profile-points').textContent = earnedPoints.toFixed(1);
+            document.getElementById('tasks-completed').textContent = tasksCompleted;
+            localStorage.setItem('earnedPoints', earnedPoints.toFixed(1));
+            localStorage.setItem('tasksCompleted', tasksCompleted);
+            
+            alert(`Task completed! You earned 3 points for ${taskType}.`);
+            
+            // Update button state
+            updateTaskCooldowns();
+        }
+        
+        function updateTaskCooldowns() {
+            const currentTime = Date.now();
+            const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            
+            updateTaskCooldown('facebook', facebookLastCompleted, currentTime, cooldownTime);
+            updateTaskCooldown('youtube', youtubeLastCompleted, currentTime, cooldownTime);
+            updateTaskCooldown('tiktok', tiktokLastCompleted, currentTime, cooldownTime);
+        }
+        
+        function updateTaskCooldown(taskType, lastCompleted, currentTime, cooldownTime) {
+            const remainingTime = cooldownTime - (currentTime - lastCompleted);
+            const button = document.getElementById(`${taskType}-btn`);
+            const cooldownElement = document.getElementById(`${taskType}-cooldown`);
+            
+            if (remainingTime > 0) {
+                button.disabled = true;
+                
+                // Calculate remaining hours, minutes, seconds
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                
+                cooldownElement.textContent = `Available in: ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                button.disabled = false;
+                cooldownElement.textContent = 'Available now';
+            }
+        }
+        
+        function updateProfile() {
+            userName = document.getElementById('profile-name').value;
+            userPhone = document.getElementById('profile-phone').value;
+            userEmail = document.getElementById('profile-email').value;
+            userTelegram = document.getElementById('profile-telegram').value;
+            
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userPhone', userPhone);
+            localStorage.setItem('userEmail', userEmail);
+            localStorage.setItem('userTelegram', userTelegram);
+            
+            document.getElementById('user-name').textContent = userName;
+            document.getElementById('profile-display-name').textContent = userName;
+            
+            alert('Profile updated successfully!');
+        }
+        
+        function updateProfilePictureFromUrl() {
+            const imageUrl = document.getElementById('profile-image-url').value;
+            if (imageUrl) {
+                document.getElementById('profile-picture').src = imageUrl;
+                localStorage.setItem('profilePicture', imageUrl);
+            }
+        }
+
+        window.onload = function() {
+            generateReferralLink();
+            
+            // Load saved cooldown times
+            facebookLastCompleted = parseInt(localStorage.getItem('facebookLastCompleted')) || 0;
+            youtubeLastCompleted = parseInt(localStorage.getItem('youtubeLastCompleted')) || 0;
+            tiktokLastCompleted = parseInt(localStorage.getItem('tiktokLastCompleted')) || 0;
+            
+            updateTaskCooldowns();
+        };
+    </script>
+</body>
+</html>
