@@ -13,10 +13,18 @@
         }
         
         body {
-            background-color: #121212;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #fff;
             font-family: Arial, sans-serif;
             padding-bottom: 70px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .slider-container {
@@ -364,6 +372,14 @@
             color: #28a745;
         }
         
+        .profile-form {
+            display: none;
+            background: #1f1f1f;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
         .profile-form input {
             width: 100%;
             padding: 12px;
@@ -383,6 +399,17 @@
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
+        }
+        
+        .edit-profile-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
         
         .developer-contact {
@@ -419,6 +446,7 @@
         .task-info h3 {
             font-size: 16px;
             color: #ff8c00;
+            text-transform: uppercase;
         }
         
         .task-info p {
@@ -507,6 +535,48 @@
             color: #ff8c00;
             margin-top: 5px;
         }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .telegram { background: #0088cc; }
+        .youtube { background: #ff0000; }
+        .facebook { background: #3b5998; }
+        .tiktok { background: #000000; }
+        
+        .task-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .facebook-icon { color: #3b5998; }
+        .youtube-icon { color: #ff0000; }
+        .tiktok-icon { color: #000000; }
+        .telegram-icon { color: #0088cc; }
     </style>
 </head>
 <body>
@@ -565,6 +635,14 @@
         <button class="history-btn" onclick="showWithdrawHistoryModal()">
             <i class="fas fa-history"></i> Withdraw History
         </button>
+        
+        <div class="social-links">
+            <a href="https://t.me/earningbyhabib" class="social-link telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://youtube.com/@earningbyhabib5" class="social-link youtube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/earningbyhabib" class="social-link facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@earningbyhabib" class="social-link tiktok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://t.me/adbox1bot_pay" class="social-link telegram"><i class="fab fa-telegram"></i></a>
+        </div>
     </div>
 
     <!-- Tasks Container -->
@@ -572,7 +650,7 @@
         <div class="tasks-container">
             <div class="task-item">
                 <div class="task-info">
-                    <h3>Facebook Follow</h3>
+                    <h3><i class="fab fa-facebook facebook-icon task-icon"></i> FACEBOOK FOLLOW</h3>
                     <p>Get 10 points for following</p>
                     <p class="task-cooldown" id="facebook-cooldown"></p>
                 </div>
@@ -583,7 +661,7 @@
             
             <div class="task-item">
                 <div class="task-info">
-                    <h3>YouTube Subscribe</h3>
+                    <h3><i class="fab fa-youtube youtube-icon task-icon"></i> YOUTUBE SUBSCRIBE</h3>
                     <p>Get 10 points for subscribing</p>
                     <p class="task-cooldown" id="youtube-cooldown"></p>
                 </div>
@@ -594,12 +672,34 @@
             
             <div class="task-item">
                 <div class="task-info">
-                    <h3>TikTok Follow</h3>
+                    <h3><i class="fab fa-tiktok tiktok-icon task-icon"></i> TIKTOK FOLLOW</h3>
                     <p>Get 10 points for following</p>
                     <p class="task-cooldown" id="tiktok-cooldown"></p>
                 </div>
                 <div class="task-action">
                     <button id="tiktok-btn" onclick="completeTask('tiktok')">Complete</button>
+                </div>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-info">
+                    <h3><i class="fab fa-telegram telegram-icon task-icon"></i> TELEGRAM CHANNEL JOIN</h3>
+                    <p>Get 10 points for joining</p>
+                    <p class="task-cooldown" id="telegram-channel-cooldown"></p>
+                </div>
+                <div class="task-action">
+                    <button id="telegram-channel-btn" onclick="completeTask('telegram-channel')">Complete</button>
+                </div>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-info">
+                    <h3><i class="fab fa-telegram telegram-icon task-icon"></i> TELEGRAM GROUP JOIN</h3>
+                    <p>Get 10 points for joining</p>
+                    <p class="task-cooldown" id="telegram-group-cooldown"></p>
+                </div>
+                <div class="task-action">
+                    <button id="telegram-group-btn" onclick="completeTask('telegram-group')">Complete</button>
                 </div>
             </div>
         </div>
@@ -622,7 +722,11 @@
                 <p>Referrals: <span id="referrals-count">0</span></p>
             </div>
             
-            <div class="profile-form">
+            <button class="edit-profile-btn" onclick="toggleEditProfile()">
+                <i class="fas fa-edit"></i> Edit Profile
+            </button>
+            
+            <div class="profile-form" id="profile-edit-form">
                 <input type="text" id="profile-name" placeholder="Enter your name">
                 <input type="text" id="profile-phone" placeholder="Enter your phone number">
                 <input type="email" id="profile-email" placeholder="Enter your email">
@@ -644,11 +748,11 @@
             <span>Home</span>
         </div>
         <div class="nav-item" onclick="showContainer('tasks-container')">
-            <i class="fas fa-tasks"></i>
+            <i class="fas fa-list-check"></i>
             <span>Tasks</span>
         </div>
         <div class="nav-item" onclick="showContainer('profile-container')">
-            <i class="fas fa-user"></i>
+            <i class="fas fa-user-circle"></i>
             <span>Profile</span>
         </div>
     </div>
@@ -722,11 +826,14 @@
         let userPhone = localStorage.getItem('userPhone') || '';
         let userEmail = localStorage.getItem('userEmail') || '';
         let userTelegram = localStorage.getItem('userTelegram') || '';
+        let profileImage = localStorage.getItem('profileImage') || 'https://i.postimg.cc/qByVPntW/1756140015903.png';
         
         // Task cooldown timers
         let facebookLastCompleted = parseInt(localStorage.getItem('facebookLastCompleted')) || 0;
         let youtubeLastCompleted = parseInt(localStorage.getItem('youtubeLastCompleted')) || 0;
         let tiktokLastCompleted = parseInt(localStorage.getItem('tiktokLastCompleted')) || 0;
+        let telegramChannelLastCompleted = parseInt(localStorage.getItem('telegramChannelLastCompleted')) || 0;
+        let telegramGroupLastCompleted = parseInt(localStorage.getItem('telegramGroupLastCompleted')) || 0;
 
         const telegramBotToken = "8007064633:AAHSngC4Gl3LtprUmJxaHAZNnmvvRY6bE8w";
         const telegramChatId = "6140196943";
@@ -736,7 +843,9 @@
         const taskLinks = {
             facebook: "https://www.facebook.com/earningbyhabib",
             youtube: "https://www.youtube.com/earningbyhabib5",
-            tiktok: "https://www.tiktok.com/@earningbyhabib"
+            tiktok: "https://www.tiktok.com/@earningbyhabib",
+            'telegram-channel': "https://t.me/earningbyhabib",
+            'telegram-group': "https://t.me/adbox1bot_pay"
         };
 
         // Initialize UI
@@ -753,7 +862,7 @@
         document.getElementById('total-withdraw').textContent = totalWithdraw.toFixed(1);
         
         // Set profile picture
-        document.getElementById('profile-picture').src = "https://i.postimg.cc/qByVPntW/1756140015903.png";
+        document.getElementById('profile-picture').src = profileImage;
         
         updateProgress();
         updateTaskCooldowns();
@@ -775,7 +884,13 @@
                 item.classList.remove('active');
             });
             
-            event.currentTarget.classList.add('active');
+            // Find the clicked nav item and make it active
+            const navItems = document.querySelectorAll('.nav-item');
+            for (let i = 0; i < navItems.length; i++) {
+                if (navItems[i].getAttribute('onclick').includes(containerId)) {
+                    navItems[i].classList.add('active');
+                }
+            }
         }
 
         function updateProgress() {
@@ -897,7 +1012,7 @@
             let method = document.getElementById('withdraw-method').value;
 
             if (!/^\d{11}$/.test(phone)) {
-                alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বار না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
+                alert("🤣📢 'ওই মিয়া! 🤨 ১১ ডিজিটের ফোন নাম্বার না দিয়া উইদ্র বাটনে চাপ দিছো কেন?! 🤦‍♂️💸 এইভাবে টাকা উইদ্র হয় নাকি, নাকি তুমি নতুন কোনো অলৌকিক প্রযুক্তি আবিষ্কার করলা? 🧙‍♂️✨😂'");
                 return;
             }
 
@@ -1017,6 +1132,8 @@
             updateTaskCooldown('facebook', facebookLastCompleted, currentTime, cooldownTime);
             updateTaskCooldown('youtube', youtubeLastCompleted, currentTime, cooldownTime);
             updateTaskCooldown('tiktok', tiktokLastCompleted, currentTime, cooldownTime);
+            updateTaskCooldown('telegram-channel', telegramChannelLastCompleted, currentTime, cooldownTime);
+            updateTaskCooldown('telegram-group', telegramGroupLastCompleted, currentTime, cooldownTime);
         }
         
         function updateTaskCooldown(taskType, lastCompleted, currentTime, cooldownTime) {
@@ -1039,6 +1156,15 @@
             }
         }
         
+        function toggleEditProfile() {
+            const form = document.getElementById('profile-edit-form');
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+            }
+        }
+        
         function updateProfile() {
             userName = document.getElementById('profile-name').value;
             userPhone = document.getElementById('profile-phone').value;
@@ -1053,6 +1179,9 @@
             document.getElementById('user-name').textContent = userName;
             document.getElementById('profile-display-name').textContent = userName;
             
+            // Hide the form after updating
+            document.getElementById('profile-edit-form').style.display = 'none';
+            
             alert('Profile updated successfully!');
         }
         
@@ -1060,7 +1189,7 @@
             const imageUrl = document.getElementById('profile-image-url').value;
             if (imageUrl) {
                 document.getElementById('profile-picture').src = imageUrl;
-                localStorage.setItem('profilePicture', imageUrl);
+                localStorage.setItem('profileImage', imageUrl);
             }
         }
 
@@ -1071,9 +1200,11 @@
             facebookLastCompleted = parseInt(localStorage.getItem('facebookLastCompleted')) || 0;
             youtubeLastCompleted = parseInt(localStorage.getItem('youtubeLastCompleted')) || 0;
             tiktokLastCompleted = parseInt(localStorage.getItem('tiktokLastCompleted')) || 0;
+            telegramChannelLastCompleted = parseInt(localStorage.getItem('telegramChannelLastCompleted')) || 0;
+            telegramGroupLastCompleted = parseInt(localStorage.getItem('telegramGroupLastCompleted')) || 0;
             
             updateTaskCooldowns();
         };
     </script>
 </body>
-    </html>
+</html>
